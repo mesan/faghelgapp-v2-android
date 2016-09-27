@@ -27,16 +27,15 @@ public class ProgramService extends BaseService {
             try {
                 Response<Program> response = faghelgApi.getProgram().execute();
 
-                if (response.isSuccess()) {
+                if (response.isSuccessful()) {
                     subscriber.onNext(response.body().getEvents());
                 } else {
-
+                    subscriber.onError(new Throwable());
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+                subscriber.onError(e);
             }
-
-            // TODO: Error handling
 
             subscriber.onCompleted();
         });

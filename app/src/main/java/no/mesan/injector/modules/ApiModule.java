@@ -12,6 +12,7 @@ import no.mesan.faghelgapps.R;
 import no.mesan.service.api.FaghelgApi;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 import timber.log.Timber;
 
 @Module
@@ -36,6 +37,7 @@ public class ApiModule {
                 .client(clientBuilder.build())
                 .baseUrl(context.getString(R.string.default_product_base_url))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(JacksonConverterFactory.create())
                 .build();
 
         return restAdapter.create(FaghelgApi.class);

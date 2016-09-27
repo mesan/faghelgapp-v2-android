@@ -48,7 +48,10 @@ dependencies {
 
     // Network communications
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
+    compile 'com.squareup.retrofit2:converter-jackson:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'
+
+    // Database
     compile 'de.greenrobot:greendao:2.1.0'
 
     // View injection
