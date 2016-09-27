@@ -27,7 +27,8 @@ public class MainFragment extends BaseFragment {
 
     @OnClick(R.id.buttonPeople)
     public void onButtonPeopleClick(Button b) {
-        // Open peopleview
+        PeopleFragment fragment = new PeopleFragment();
+        loadFragment(fragment);
     }
 
 }
