@@ -5,6 +5,7 @@ import android.widget.Button;
 import butterknife.OnClick;
 import no.mesan.faghelgapps.R;
 import no.mesan.injector.components.AppComponent;
+import no.mesan.view.people.PeopleFragment;
 
 public class MainFragment extends BaseFragment {
 
