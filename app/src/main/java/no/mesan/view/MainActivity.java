@@ -19,24 +19,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        MainFragment fragment = new MainFragment();
+        loadFragment(fragment);
+
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.buttonProgram)
-    public void onButtonProgramClick(Button b) {
-        // Open programview
-        ProgramFragment fragment = new ProgramFragment();
+    private void loadFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.fragmentContainer, fragment)
+                .replace(R.id.fragmentContainer, fragment)
                 .addToBackStack(null)
                 .commit();
-    }
-
-
-    @OnClick(R.id.buttonPeople)
-    public void onButtonPeopleClick(Button b) {
-        // Open peopleview
     }
 
 }

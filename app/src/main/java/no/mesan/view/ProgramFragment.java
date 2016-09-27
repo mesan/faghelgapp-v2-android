@@ -1,20 +1,18 @@
 package no.mesan.view;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import no.mesan.faghelgapps.R;
+import no.mesan.injector.components.AppComponent;
 
-public class ProgramFragment extends Fragment {
+public class ProgramFragment extends BaseFragment {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_program, container, false);
+    protected int getContentViewId() {
+        return R.layout.fragment_program;
+    }
+
+    @Override
+    protected void inject(AppComponent appComponent) {
+
     }
 
 }
