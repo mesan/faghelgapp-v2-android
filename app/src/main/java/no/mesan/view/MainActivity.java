@@ -1,6 +1,9 @@
 package no.mesan.view;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
@@ -22,6 +25,12 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.buttonProgram)
     public void onButtonProgramClick(Button b) {
         // Open programview
+        ProgramFragment fragment = new ProgramFragment();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.fragmentContainer, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
 
