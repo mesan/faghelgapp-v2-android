@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.trello.rxlifecycle.components.support.RxFragment;
 
 import butterknife.ButterKnife;
 import no.mesan.FaghelgApplication;
+import no.mesan.faghelgapps.R;
 import no.mesan.injector.components.AppComponent;
 import rx.Observable;
 import timber.log.Timber;
@@ -33,6 +35,15 @@ public abstract class BaseFragment extends RxFragment {
         ButterKnife.bind(this, view);
 
         return view;
+    }
+
+    protected void loadFragment(Fragment fragment) {
+        getActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override
