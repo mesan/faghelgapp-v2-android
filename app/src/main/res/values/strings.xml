@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Faghelgapp</string>
+    <string name="program">Program</string>
+    <string name="folk">Folk</string>
 </resources>

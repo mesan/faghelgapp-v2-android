@@ -2,11 +2,15 @@ package no.mesan.view;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import no.mesan.faghelgapps.R;
 
 public class MainActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -14,4 +18,16 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
     }
+
+    @OnClick(R.id.buttonProgram)
+    public void onButtonProgramClick(Button b) {
+        // Open programview
+    }
+
+
+    @OnClick(R.id.buttonPeople)
+    public void onButtonPeopleClick(Button b) {
+        // Open peopleview
+    }
+
 }
