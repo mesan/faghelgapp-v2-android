@@ -1,0 +1,1 @@
+Dettane er ei Readme
