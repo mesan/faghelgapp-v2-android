@@ -17,6 +17,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import no.mesan.faghelgapps.R;
 import no.mesan.model.Person;
+import no.mesan.util.StringUtils;
 
 public class PeopleItemView extends LinearLayout {
 
@@ -57,17 +58,30 @@ public class PeopleItemView extends LinearLayout {
     }
 
     public void bindTo(Person person) {
-        textViewPersonFullName.setText(person.getFullName());
-        textViewPersonShortName.setText(getContext().getString(R.string.short_name, person.getShortName()));
+        if (person == null) {
+            return;
+        }
+
+        if (!StringUtils.isEmpty(person.getFullName())) {
+            textViewPersonFullName.setText(person.getFullName());
+        }
+
+        if (!StringUtils.isEmpty(person.getShortName())) {
+            textViewPersonShortName.setText(getContext().getString(R.string.short_name, person.getShortName()));
+        }
+
         imageViewPerson.setImageDrawable(null);
 
-        Transformation transformation = new RoundedTransformationBuilder()
-                .borderColor(borderColor)
-                .borderWidthDp(2)
-                .oval(true)
-                .build();
 
-        Picasso.with(getContext()).load(person.getProfileImageUrl()).transform(transformation).into(imageViewPerson);
+        if (!StringUtils.isEmpty(person.getProfileImageUrl())) {
+            Transformation transformation = new RoundedTransformationBuilder()
+                    .borderColor(borderColor)
+                    .borderWidthDp(2)
+                    .oval(true)
+                    .build();
+
+            Picasso.with(getContext()).load(person.getProfileImageUrl()).transform(transformation).into(imageViewPerson);
+        }
     }
 
     @Override
