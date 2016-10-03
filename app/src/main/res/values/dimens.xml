@@ -10,4 +10,6 @@
     <dimen name="action_bar_size">60dp</dimen>
     <dimen name="text_size_toast">22sp</dimen>
     <dimen name="product_cell_width">120dp</dimen>
+    <dimen name="person_image_size">60dp</dimen>
+    <dimen name="people_item_min_height">100dp</dimen>
 </resources>
