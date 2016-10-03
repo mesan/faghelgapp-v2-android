@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:minHeight="@dimen/people_item_min_height"
     android:orientation="horizontal"
-    android:padding="@dimen/padding_m">
+    android:padding="@dimen/padding_s">
 
     <ImageView
         android:id="@+id/imageViewPerson"
