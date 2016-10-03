@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,7 +18,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import no.mesan.faghelgapps.R;
 import no.mesan.model.Person;
-import no.mesan.util.StringUtils;
 
 public class PeopleItemView extends LinearLayout {
 
@@ -31,6 +31,7 @@ public class PeopleItemView extends LinearLayout {
     ImageView imageViewPerson;
 
     private int borderColor;
+    private int borderSize;
 
     public PeopleItemView(Context context) {
         super(context);
@@ -55,6 +56,7 @@ public class PeopleItemView extends LinearLayout {
 
     private void init(Context context) {
         borderColor = context.getResources().getColor(R.color.colorPrimary);
+        borderSize = context.getResources().getDimensionPixelSize(R.dimen.person_image_border_size);
     }
 
     public void bindTo(Person person) {
@@ -62,25 +64,31 @@ public class PeopleItemView extends LinearLayout {
             return;
         }
 
-        if (!StringUtils.isEmpty(person.getFullName())) {
+        if (!TextUtils.isEmpty(person.getFullName())) {
             textViewPersonFullName.setText(person.getFullName());
         }
 
-        if (!StringUtils.isEmpty(person.getShortName())) {
+        if (!TextUtils.isEmpty(person.getShortName())) {
             textViewPersonShortName.setText(getContext().getString(R.string.short_name, person.getShortName()));
         }
 
         imageViewPerson.setImageDrawable(null);
 
+        if (!TextUtils.isEmpty(person.getProfileImageUrl())) {
 
-        if (!StringUtils.isEmpty(person.getProfileImageUrl())) {
+            Transformation transformation2 = new RoundedTransformationBuilder()
+                    .borderColor(Color.WHITE)
+                    .borderWidthDp(4)
+                    .oval(true)
+                    .build();
+
             Transformation transformation = new RoundedTransformationBuilder()
                     .borderColor(borderColor)
                     .borderWidthDp(2)
                     .oval(true)
                     .build();
 
-            Picasso.with(getContext()).load(person.getProfileImageUrl()).transform(transformation).into(imageViewPerson);
+            Picasso.with(getContext()).load(person.getProfileImageUrl()).transform(transformation2).transform(transformation).into(imageViewPerson);
         }
     }
 
