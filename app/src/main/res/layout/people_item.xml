@@ -23,12 +23,16 @@
         <TextView
             android:id="@+id/textViewPersonFullName"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_m"
+            android:textColor="@color/mesanblue"
+            android:layout_marginBottom="@dimen/padding_s"/>
 
         <TextView
             android:id="@+id/textViewPersonShortName"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/greyish"/>
     </LinearLayout>
 
 </no.mesan.view.people.PeopleItemView>

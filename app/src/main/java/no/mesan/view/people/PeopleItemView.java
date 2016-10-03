@@ -55,7 +55,7 @@ public class PeopleItemView extends LinearLayout {
     }
 
     private void init(Context context) {
-        borderColor = context.getResources().getColor(R.color.colorPrimary);
+        borderColor = context.getResources().getColor(R.color.mesanblue);
         borderSize = context.getResources().getDimensionPixelSize(R.dimen.person_image_border_size);
     }
 
