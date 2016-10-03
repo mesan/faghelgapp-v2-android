@@ -74,4 +74,6 @@ dependencies {
     compile 'com.jakewharton.timber:timber:3.1.0'
 
     compile 'com.bignerdranch.android:expandablerecyclerview:1.0.3'
+
+    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
 }

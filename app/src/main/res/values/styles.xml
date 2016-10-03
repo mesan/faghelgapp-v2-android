@@ -10,10 +10,23 @@
         <item name="colorControlActivated">@color/dark_grey</item>
         <item name="colorControlHighlight">@color/dark_grey</item>
         <item name="android:textColorSecondary">@color/grey</item>
+        <item name="android:textViewStyle">@style/AppTheme.Widget.TextView</item>
+    </style>
+
+    <style name="AppTheme.Widget.TextView" parent="android:Widget.Holo.Light.TextView">
+        <item name="fontPath">fonts/ProximaNova-Light.otf</item>
     </style>
 
     <style name="ToolbarStyle" parent="@style/AppTheme">
         <item name="android:textColorSecondary">@color/white</item>
+    </style>
+
+    <style name="H1" >
+        <item name="android:textSize">36sp</item>
+    </style>
+
+    <style name="list_title" >
+        <item name="android:textSize">27sp</item>
     </style>
 
     <style name="Label">
