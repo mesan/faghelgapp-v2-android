@@ -20,6 +20,7 @@ import no.mesan.faghelgapps.R;
 import no.mesan.injector.components.AppComponent;
 import no.mesan.injector.components.DaggerProgramFragmentComponent;
 import no.mesan.model.Event;
+import no.mesan.model.Person;
 import no.mesan.service.ProgramService;
 import no.mesan.view.BaseFragment;
 import timber.log.Timber;
@@ -58,7 +59,21 @@ public class ProgramFragment extends BaseFragment {
             EventParent eventParent = new EventParent();
             eventParent.setTitle(event.getTitle());
             List<Object> childList = new ArrayList<>();
-            childList.add(new EventChild("", "", "Donald Duck", "donaldd", "Beskrivelse"));
+            Person person = event.getResponsible();
+            if (person == null) {
+                childList.add(new EventChild(event.getEventImageUrl(),
+                        "",
+                        "",
+                        "",
+                        ""));
+            } else {
+                childList.add(new EventChild(event.getEventImageUrl(),
+                        person.getProfileImageUrl(),
+                        person.getFullName(),
+                        person.getShortName(),
+                        event.getDescription()));
+            }
+
             eventParent.setChildObjectList(childList);
             parentObjects.add(eventParent);
         }
