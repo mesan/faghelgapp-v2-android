@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <View xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="2dip"
-        android:background="#FF00FF00"
-        android:layout_alignParentBottom="true"/>
+        android:layout_height="1dp"
+        android:background="@color/black"
+        android:layout_marginTop="@dimen/padding_m" />

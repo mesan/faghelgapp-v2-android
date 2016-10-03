@@ -30,6 +30,6 @@ public class EventChildViewHolder extends ChildViewHolder {
     public EventChildViewHolder(View itemView) {
         super(itemView);
 
-        ButterKnife.bind(itemView);
+        ButterKnife.bind(this, itemView);
     }
 }

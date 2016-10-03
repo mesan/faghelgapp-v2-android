@@ -20,7 +20,7 @@ public class EventParentViewHolder extends ParentViewHolder {
     public EventParentViewHolder(View itemView) {
         super(itemView);
 
-        ButterKnife.bind(itemView);
+        ButterKnife.bind(this, itemView);
     }
 
 }

@@ -7,7 +7,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/event_title"
-        android:layout_centerVertical="true"
         android:text="Tittel"/>
 
     <TextView
@@ -15,9 +14,16 @@
         android:layout_height="wrap_content"
         android:id="@+id/event_timestamp"
         android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
+        android:layout_alignTop="@id/event_title"
         android:text="Tid"/>
 
-    <include layout="@layout/horizontal_ruler" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/event_timestamp">
+
+        <include layout="@layout/horizontal_ruler" />
+
+    </RelativeLayout>
 
 </RelativeLayout>
