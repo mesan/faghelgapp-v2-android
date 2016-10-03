@@ -1,5 +1,6 @@
 package no.mesan.view.people;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +21,7 @@ import no.mesan.injector.modules.PeopleModule;
 import no.mesan.model.Person;
 import no.mesan.service.PeopleService;
 import no.mesan.view.BaseFragment;
+import no.mesan.view.common.DividerItemDecoration;
 
 public class PeopleFragment extends BaseFragment {
 
@@ -58,6 +60,9 @@ public class PeopleFragment extends BaseFragment {
         peopleAdapter = new PeopleAdapter();
 
         recyclerViewPeople.setLayoutManager(new LinearLayoutManager(getContext()));
+        Drawable dividerDrawable = getResources().getDrawable(R.drawable.divider);
+        int dividerPadding = getResources().getDimensionPixelSize(R.dimen.person_divider_padding);
+        recyclerViewPeople.addItemDecoration(new DividerItemDecoration(dividerDrawable, dividerPadding));
         recyclerViewPeople.setAdapter(peopleAdapter);
     }
 
