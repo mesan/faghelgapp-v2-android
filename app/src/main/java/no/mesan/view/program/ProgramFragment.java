@@ -1,5 +1,6 @@
 package no.mesan.view.program;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +24,7 @@ import no.mesan.model.Event;
 import no.mesan.model.Person;
 import no.mesan.service.ProgramService;
 import no.mesan.view.BaseFragment;
+import no.mesan.view.common.DividerItemDecoration;
 import timber.log.Timber;
 
 public class ProgramFragment extends BaseFragment {
@@ -40,9 +42,16 @@ public class ProgramFragment extends BaseFragment {
 
         getEvents();
 
-        recyclerViewEvents.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        setUpRecyclerView();
 
         return view;
+    }
+
+    private void setUpRecyclerView() {
+        recyclerViewEvents.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        Drawable dividerDrawable = getResources().getDrawable(R.drawable.divider);
+        int dividerPadding = getResources().getDimensionPixelSize(R.dimen.person_divider_padding);
+        recyclerViewEvents.addItemDecoration(new DividerItemDecoration(dividerDrawable, dividerPadding));
     }
 
     private void getEvents() {
