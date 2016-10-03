@@ -6,6 +6,7 @@ import butterknife.OnClick;
 import no.mesan.faghelgapps.R;
 import no.mesan.injector.components.AppComponent;
 import no.mesan.view.people.PeopleFragment;
+import no.mesan.view.program.ProgramFragment;
 
 public class MainFragment extends BaseFragment {
 

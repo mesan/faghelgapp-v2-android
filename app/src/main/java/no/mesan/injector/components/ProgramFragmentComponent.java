@@ -3,7 +3,7 @@ package no.mesan.injector.components;
 import dagger.Component;
 import no.mesan.injector.ActivityScope;
 import no.mesan.injector.modules.ProgramModule;
-import no.mesan.view.ProgramFragment;
+import no.mesan.view.program.ProgramFragment;
 
 @ActivityScope
 @Component(dependencies = AppComponent.class, modules = {ProgramModule.class})
