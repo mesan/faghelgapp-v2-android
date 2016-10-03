@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_l">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_launcher"
-        android:layout_marginStart="@dimen/padding_l"
         android:layout_marginTop="@dimen/padding_l"
         android:id="@+id/imgEvent" />
 
@@ -17,7 +17,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imgEvent"
         android:src="@mipmap/ic_launcher"
-        android:layout_marginStart="@dimen/padding_l"
         android:layout_marginTop="24dp"
         android:id="@+id/imgProfile" />
 
@@ -27,7 +26,6 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/imgProfile"
         android:layout_toEndOf="@+id/imgProfile"
-        android:layout_marginStart="@dimen/padding_l"
         android:id="@+id/txtName" />
 
     <TextView
@@ -39,12 +37,15 @@
         android:id="@+id/txtNick" />
 
     <TextView
-        android:text="TextView"
+        android:text="Tekst som beskriver eventet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtNick"
         android:layout_alignStart="@+id/txtNick"
         android:layout_marginTop="@dimen/padding_l"
         android:id="@+id/txtDescription" />
+
+    <include layout="@layout/horizontal_ruler"/>
+
 
 </RelativeLayout>
