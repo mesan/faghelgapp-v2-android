@@ -4,18 +4,27 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import no.mesan.faghelgapps.R;
 import no.mesan.model.Person;
 
-public class PeopleItemView extends FrameLayout {
+public class PeopleItemView extends LinearLayout {
 
-    @Bind(R.id.textViewPerson)
-    TextView textViewPerson;
+    @Bind(R.id.textViewPersonFullName)
+    TextView textViewPersonFullName;
+
+    @Bind(R.id.textViewPersonShortName)
+    TextView textViewPersonShortName;
+
+    @Bind(R.id.imageViewPerson)
+    ImageView imageViewPerson;
 
     public PeopleItemView(Context context) {
         super(context);
@@ -37,7 +46,10 @@ public class PeopleItemView extends FrameLayout {
 
 
     public void bindTo(Person person) {
-        textViewPerson.setText(person.getFullName());
+        textViewPersonFullName.setText(person.getFullName());
+        textViewPersonShortName.setText(getContext().getString(R.string.short_name, person.getShortName()));
+        imageViewPerson.setImageDrawable(null);
+        Picasso.with(getContext()).load(person.getProfileImageUrl()).into(imageViewPerson);
     }
 
     @Override

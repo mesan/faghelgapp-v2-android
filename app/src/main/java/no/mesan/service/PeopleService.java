@@ -1,5 +1,6 @@
 package no.mesan.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -25,6 +26,7 @@ public class PeopleService extends BaseService {
 
                 if (response.isSuccessful()) {
                     List<Person> persons = response.body();
+                    Collections.sort(persons, (person, otherPerson) -> person.getFullName().compareTo(otherPerson.getFullName()));
                     subscriber.onNext(persons);
                 } else {
                     subscriber.onError(new Throwable("Backend svarer ikke"));

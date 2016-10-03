@@ -2,16 +2,27 @@
 <no.mesan.view.people.PeopleItemView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:padding="@dimen/padding_m">
 
     <ImageView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content" />
+        android:id="@+id/imageViewPerson"
+        android:layout_width="@dimen/person_image_size"
+        android:layout_height="@dimen/person_image_size"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textViewPerson"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textViewPersonFullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textViewPersonShortName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </no.mesan.view.people.PeopleItemView>
