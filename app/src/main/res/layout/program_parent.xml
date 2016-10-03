@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:padding="@dimen/padding_l">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/event_title"
+        android:layout_centerVertical="true"
+        android:text="Tittel"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/event_timestamp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:text="Tid"/>
+
+    <include layout="@layout/horizontal_ruler" />
 
 </RelativeLayout>
