@@ -23,6 +23,7 @@ import no.mesan.model.Event;
 import no.mesan.model.Person;
 import no.mesan.service.ProgramService;
 import no.mesan.view.BaseFragment;
+import no.mesan.view.common.DividerItemDecoration;
 import timber.log.Timber;
 
 public class ProgramFragment extends BaseFragment {
@@ -41,6 +42,7 @@ public class ProgramFragment extends BaseFragment {
         getEvents();
 
         recyclerViewEvents.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerViewEvents.addItemDecoration(new DividerItemDecoration(getResources().getDrawable(R.drawable.divider), 40));
 
         return view;
     }
@@ -54,36 +56,9 @@ public class ProgramFragment extends BaseFragment {
     private void handleEventsSuccess(List<Event> events) {
         Timber.d("Size: " + events.size());
 
-        List<ParentObject> parentObjects = new ArrayList<>();
-        for (Event event : events) {
-            EventParent eventParent = new EventParent();
-            eventParent.setTitle(event.getTitle());
-            List<Object> childList = new ArrayList<>();
-            Person person = event.getResponsible();
-            if (person == null) {
-                childList.add(new EventChild(event.getEventImageUrl(),
-                        "",
-                        "",
-                        "",
-                        ""));
-            } else {
-                childList.add(new EventChild(event.getEventImageUrl(),
-                        person.getProfileImageUrl(),
-                        person.getFullName(),
-                        person.getShortName(),
-                        event.getDescription()));
-            }
+        EventAdapter eventAdapter = new EventAdapter(getApplicationContext(), events);
 
-            eventParent.setChildObjectList(childList);
-            parentObjects.add(eventParent);
-        }
-
-        EventExpandableAdapter eventExpandableAdapter = new EventExpandableAdapter(getActivity(), parentObjects);
-        //eventExpandableAdapter.setCustomParentAnimationViewId(R.id.parent_list_item_expand_arrow);
-        eventExpandableAdapter.setParentClickableViewAnimationDefaultDuration();
-        eventExpandableAdapter.setParentAndIconExpandOnClick(true);
-
-        recyclerViewEvents.setAdapter(eventExpandableAdapter);
+        recyclerViewEvents.setAdapter(eventAdapter);
     }
 
     private void handleEventsError(Throwable throwable) {
