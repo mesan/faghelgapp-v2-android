@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Event {
 
     private String title;
+    private String hostNames;
     private String description;
     private String eventImageUrl;
     private Person responsible;
@@ -16,6 +17,14 @@ public class Event {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getHostNames() {
+        return hostNames;
+    }
+
+    public void setHostNames(String hostNames) {
+        this.hostNames = hostNames;
     }
 
     public String getDescription() {

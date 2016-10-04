@@ -29,6 +29,10 @@
         <item name="android:textSize">27sp</item>
     </style>
 
+    <style name="undertext" >
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="Label">
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
