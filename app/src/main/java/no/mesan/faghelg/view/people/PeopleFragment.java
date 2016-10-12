@@ -14,14 +14,14 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import no.mesan.faghelg.view.common.DividerItemDecoration;
-import no.mesan.faghelgapps.R;
 import no.mesan.faghelg.injector.components.AppComponent;
-import no.mesan.injector.components.DaggerPeopleFragmentComponent;
 import no.mesan.faghelg.injector.modules.PeopleModule;
 import no.mesan.faghelg.model.Person;
 import no.mesan.faghelg.service.PeopleService;
 import no.mesan.faghelg.view.BaseFragment;
+import no.mesan.faghelg.view.common.DividerItemDecoration;
+import no.mesan.faghelgapps.R;
+import no.mesan.faghelg.injector.components.DaggerPeopleFragmentComponent;
 
 public class PeopleFragment extends BaseFragment {
 

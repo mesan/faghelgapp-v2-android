@@ -1,5 +1,6 @@
 package no.mesan.faghelg.view.program;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,14 +17,14 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import no.mesan.faghelgapps.R;
 import no.mesan.faghelg.injector.components.AppComponent;
-import no.mesan.injector.components.DaggerProgramFragmentComponent;
+import no.mesan.faghelg.injector.components.DaggerProgramFragmentComponent;
 import no.mesan.faghelg.model.Event;
 import no.mesan.faghelg.service.ProgramService;
 import no.mesan.faghelg.view.BaseFragment;
 import no.mesan.faghelg.view.common.DividerItemDecoration;
 import timber.log.Timber;
 
-public class ProgramFragment extends BaseFragment {
+public class ProgramFragment extends BaseFragment implements EventAdapter.ItemClickListener {
 
     @Inject
     ProgramService programService;
@@ -57,9 +58,7 @@ public class ProgramFragment extends BaseFragment {
     }
 
     private void handleEventsSuccess(List<Event> events) {
-        Timber.d("Size: " + events.size());
-
-        EventAdapter eventAdapter = new EventAdapter(getApplicationContext(), events);
+        EventAdapter eventAdapter = new EventAdapter(events, this);
 
         recyclerViewEvents.setAdapter(eventAdapter);
     }
@@ -78,5 +77,11 @@ public class ProgramFragment extends BaseFragment {
         DaggerProgramFragmentComponent.builder().appComponent(appComponent).build().inject(this);
     }
 
+    @Override
+    public void itemClick(Event event) {
+        Timber.d("Clicked " + event.getTitle());
+        Intent i = new Intent(getApplicationContext(), EventPagerActivity.class);
 
+        startActivity(i);
+    }
 }

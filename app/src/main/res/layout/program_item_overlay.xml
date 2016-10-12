@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_m">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/event_title"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/event_timestamp"
+        android:layout_marginEnd="@dimen/padding_m"
+        style="@style/list_title"
+        android:textColor="@color/mesanblue"
+        android:text="Tittel"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/event_timestamp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/event_title"
+        style="@style/H1"
+        android:textColor="@color/greyish"
+        android:text="Tid"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtHosts"
+        android:layout_below="@id/event_title"
+        style="@style/undertext"
+        android:textColor="@color/greyish"
+        android:text="Donald Duck og Mikke Mus"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtHosts"
+        android:minHeight="200dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginTop="@dimen/padding_m"
+        android:id="@+id/imgEvent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="80dp"
+        android:layout_below="@+id/imgEvent"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginTop="24dp"
+        android:id="@+id/imgProfile" />
+
+    <TextView
+        android:text="Navn Navnesen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imgProfile"
+        android:layout_toEndOf="@+id/imgProfile"
+        android:textColor="@color/mesanblue"
+        android:id="@+id/txtName" />
+
+    <TextView
+        android:text="navnn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtName"
+        android:layout_alignStart="@id/txtName"
+        android:textColor="@color/greyish"
+        android:id="@+id/txtNick" />
+
+    <TextView
+        android:text="Tekst som beskriver eventet"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_below="@+id/txtNick"
+        android:layout_alignStart="@+id/txtNick"
+        android:layout_marginTop="@dimen/padding_l"
+        android:textColor="@color/mesanblue"
+        android:id="@+id/txtDescription" />
+
+</RelativeLayout>
