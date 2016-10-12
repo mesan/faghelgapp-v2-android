@@ -1,6 +1,5 @@
-package no.mesan.faghelgapp;
+package no.mesan.faghelg;
 
-import de.greenrobot.daogenerator.Entity;
 import de.greenrobot.daogenerator.Schema;
 
 public class DaoGenerator {
@@ -14,8 +13,8 @@ public class DaoGenerator {
     }
 
     private static void generateNewDb() throws Exception {
-        Schema schema = new Schema(VERSION_NUMBER, "no.mesan.model.db");
-        schema.setDefaultJavaPackageDao("no.mesan.model.db.dao");
+        Schema schema = new Schema(VERSION_NUMBER, "no.mesan.faghelg.model.db");
+        schema.setDefaultJavaPackageDao("no.mesan.faghelg.model.db.dao");
         schema.enableKeepSectionsByDefault();
         generateNewEntities(schema);
         new de.greenrobot.daogenerator.DaoGenerator().generateAll(schema, "../app/src/main/java/");

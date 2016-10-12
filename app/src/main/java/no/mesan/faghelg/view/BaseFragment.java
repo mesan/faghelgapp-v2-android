@@ -13,7 +13,7 @@ import com.trello.rxlifecycle.FragmentEvent;
 import com.trello.rxlifecycle.components.support.RxFragment;
 
 import butterknife.ButterKnife;
-import no.mesan.FaghelgApplication;
+import no.mesan.faghelg.FaghelgApplication;
 import no.mesan.faghelgapps.R;
 import no.mesan.faghelg.injector.components.AppComponent;
 import rx.Observable;

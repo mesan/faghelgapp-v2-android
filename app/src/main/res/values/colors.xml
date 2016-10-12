@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/mesanblue</color>
-    <color name="colorPrimaryDark">#004470</color>
-    <color name="colorAccent">@color/mesanred</color>
+    <color name="colorPrimary">@color/mesanred</color>
+    <color name="colorPrimaryDark">@color/black</color>
+    <color name="colorAccent">@color/mesanblue</color>
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 
     <color name="mesanblue">#407795</color>
     <color name="mesanred">#ed3823</color>
@@ -12,5 +13,6 @@
     <color name="toast_success">@color/colorPrimary</color>
     <color name="toast_fail">@color/colorAccent</color>
     <color name="grey">#cccccc</color>
+    <color name="light_grey">#eeeeee</color>
     <color name="dark_grey">#777777</color>
 </resources>

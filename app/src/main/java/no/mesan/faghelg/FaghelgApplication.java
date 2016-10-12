@@ -1,4 +1,4 @@
-package no.mesan;
+package no.mesan.faghelg;
 
 import android.app.Application;
 
