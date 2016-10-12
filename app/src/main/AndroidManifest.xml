@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
         <activity
-            android:name="no.mesan.view.MainActivity"
+            android:name="no.mesan.faghelg.view.MainActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

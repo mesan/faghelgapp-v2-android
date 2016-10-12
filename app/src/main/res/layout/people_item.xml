@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<no.mesan.view.people.PeopleItemView xmlns:android="http://schemas.android.com/apk/res/android"
+<no.mesan.faghelg.view.people.PeopleItemView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="@dimen/people_item_min_height"
@@ -31,4 +31,4 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-</no.mesan.view.people.PeopleItemView>
+</no.mesan.faghelg.view.people.PeopleItemView>

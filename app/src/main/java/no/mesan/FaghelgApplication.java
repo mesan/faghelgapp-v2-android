@@ -3,10 +3,10 @@ package no.mesan;
 import android.app.Application;
 
 import no.mesan.faghelgapps.R;
-import no.mesan.injector.components.AppComponent;
+import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.injector.components.DaggerAppComponent;
-import no.mesan.injector.modules.ApiModule;
-import no.mesan.injector.modules.DatabaseModule;
+import no.mesan.faghelg.injector.modules.ApiModule;
+import no.mesan.faghelg.injector.modules.DatabaseModule;
 import timber.log.Timber;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
