@@ -19,4 +19,6 @@
     <dimen name="person_divider_padding">50dp</dimen>
     <dimen name="people_item_min_height">80dp</dimen>
     <dimen name="person_image_border_size">1dp</dimen>
+    <dimen name="image_menu_size">25dp</dimen>
+    <dimen name="image_menu_size_large">60dp</dimen>
 </resources>

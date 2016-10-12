@@ -13,6 +13,7 @@
     <color name="toast_success">@color/colorPrimary</color>
     <color name="toast_fail">@color/colorAccent</color>
     <color name="grey">#cccccc</color>
+    <color name="light_greyish">#dddddd</color>
     <color name="light_grey">#eeeeee</color>
     <color name="dark_grey">#777777</color>
 </resources>
