@@ -20,15 +20,15 @@ public class ProgramService extends BaseService {
         this.faghelgApi = faghelgApi;
     }
 
-    public Observable<List<Event>> getEventsFromApi() {
+    public Observable<Program> getProgram() {
 
-        Observable<List<Event>> observable = Observable.create(subscriber -> {
+        Observable<Program> observable = Observable.create(subscriber -> {
 
             try {
                 Response<Program> response = faghelgApi.getProgram().execute();
 
                 if (response.isSuccessful()) {
-                    subscriber.onNext(response.body().getEvents());
+                    subscriber.onNext(response.body());
                 } else {
                     subscriber.onError(new Throwable());
                 }

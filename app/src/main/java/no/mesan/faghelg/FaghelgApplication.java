@@ -2,6 +2,8 @@ package no.mesan.faghelg;
 
 import android.app.Application;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import no.mesan.faghelgapps.R;
 import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.faghelg.injector.components.DaggerAppComponent;
@@ -20,6 +22,7 @@ public class FaghelgApplication extends Application {
         initInjector();
         Timber.plant(new Timber.DebugTree());
         Timber.tag("TAG");
+        JodaTimeAndroid.init(this);
 
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                 .setDefaultFontPath("fonts/ProximaNova-Light.otf")

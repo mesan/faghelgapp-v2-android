@@ -21,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="no.mesan.faghelg.view.program.EventPagerActivity"/>
+        <activity android:name="no.mesan.faghelg.view.program.EventPagerActivity"
+            android:theme="@style/Theme.Transparent"/>
     </application>
 
 </manifest>

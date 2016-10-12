@@ -15,9 +15,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     private List<Event> events;
     private ItemClickListener itemClickListener;
 
-    public EventAdapter(List<Event> events, ItemClickListener itemClickListener) {
-        this.events = events;
+    public EventAdapter(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 
     @Override
@@ -52,12 +55,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            itemClickListener.itemClick(events.get(position));
+            itemClickListener.itemClick(position);
         }
     }
 
     public interface ItemClickListener {
-        void itemClick(Event event);
+        void itemClick(int position);
     }
 
 }

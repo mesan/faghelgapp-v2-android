@@ -10,19 +10,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import no.mesan.faghelgapps.R;
 import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.faghelg.injector.components.DaggerProgramFragmentComponent;
 import no.mesan.faghelg.model.Event;
+import no.mesan.faghelg.model.Program;
 import no.mesan.faghelg.service.ProgramService;
 import no.mesan.faghelg.view.BaseFragment;
 import no.mesan.faghelg.view.common.DividerItemDecoration;
-import timber.log.Timber;
+import no.mesan.faghelgapps.R;
 
 public class ProgramFragment extends BaseFragment implements EventAdapter.ItemClickListener {
 
@@ -31,6 +32,13 @@ public class ProgramFragment extends BaseFragment implements EventAdapter.ItemCl
 
     @Bind(R.id.recyclerviewEvents)
     RecyclerView recyclerViewEvents;
+
+    private Program program;
+    private List<Event> eventsForSelectedDay;
+    private int selectedDay;
+
+    public static final String ARGS_EVENTS = "ARGS_EVENTS";
+    public static final String ARGS_EVENT_POSITION = "ARGS_EVENT_POSITION";
 
     @Nullable
     @Override
@@ -52,13 +60,16 @@ public class ProgramFragment extends BaseFragment implements EventAdapter.ItemCl
     }
 
     private void getEvents() {
-        programService.getEventsFromApi().subscribe(
+        programService.getProgram().subscribe(
                 this::handleEventsSuccess,
                 this::handleEventsError);
     }
 
-    private void handleEventsSuccess(List<Event> events) {
-        EventAdapter eventAdapter = new EventAdapter(events, this);
+    private void handleEventsSuccess(Program program) {
+        this.program = program;
+        EventAdapter eventAdapter = new EventAdapter(this);
+        eventsForSelectedDay = program.getEventsForDay(4);
+        eventAdapter.setEvents(eventsForSelectedDay);
 
         recyclerViewEvents.setAdapter(eventAdapter);
     }
@@ -77,11 +88,14 @@ public class ProgramFragment extends BaseFragment implements EventAdapter.ItemCl
         DaggerProgramFragmentComponent.builder().appComponent(appComponent).build().inject(this);
     }
 
-    @Override
-    public void itemClick(Event event) {
-        Timber.d("Clicked " + event.getTitle());
-        Intent i = new Intent(getApplicationContext(), EventPagerActivity.class);
+    // TODO: OnDayChanged
 
+    @Override
+    public void itemClick(int position) {
+        Intent i = new Intent(getApplicationContext(), EventPagerActivity.class);
+        i.putParcelableArrayListExtra(ARGS_EVENTS, (ArrayList) eventsForSelectedDay);
+        i.putExtra(ARGS_EVENT_POSITION, position);
         startActivity(i);
     }
+
 }
