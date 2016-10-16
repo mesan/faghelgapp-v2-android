@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,15 +25,19 @@ import no.mesan.faghelg.model.Program;
 import no.mesan.faghelg.service.ProgramService;
 import no.mesan.faghelg.view.BaseFragment;
 import no.mesan.faghelg.view.common.DividerItemDecoration;
+import no.mesan.faghelg.view.slidingtabs.SlidingTabLayout;
 import no.mesan.faghelgapps.R;
 
-public class ProgramFragment extends BaseFragment implements EventAdapter.ItemClickListener {
+public class ProgramFragment extends BaseFragment {
 
     @Inject
     ProgramService programService;
 
-    @Bind(R.id.recyclerviewEvents)
-    RecyclerView recyclerViewEvents;
+    @Bind(R.id.pager)
+    ViewPager viewPager;
+
+    @Bind(R.id.slidingTabLayoutPrograms)
+    SlidingTabLayout slidingTabLayout;
 
     private Program program;
     private List<Event> eventsForSelectedDay;
@@ -47,16 +53,7 @@ public class ProgramFragment extends BaseFragment implements EventAdapter.ItemCl
 
         getEvents();
 
-        setUpRecyclerView();
-
         return view;
-    }
-
-    private void setUpRecyclerView() {
-        recyclerViewEvents.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        Drawable dividerDrawable = getResources().getDrawable(R.drawable.divider);
-        int dividerPadding = getResources().getDimensionPixelSize(R.dimen.program_divider_padding);
-        recyclerViewEvents.addItemDecoration(new DividerItemDecoration(dividerDrawable, dividerPadding));
     }
 
     private void getEvents() {
@@ -67,11 +64,16 @@ public class ProgramFragment extends BaseFragment implements EventAdapter.ItemCl
 
     private void handleEventsSuccess(Program program) {
         this.program = program;
-        EventAdapter eventAdapter = new EventAdapter(this);
+        //EventAdapter eventAdapter = new EventAdapter(this);
         eventsForSelectedDay = program.getEventsForDay(4);
-        eventAdapter.setEvents(eventsForSelectedDay);
+        //eventAdapter.setEvents(eventsForSelectedDay);
 
-        recyclerViewEvents.setAdapter(eventAdapter);
+        viewPager.setAdapter(new DaysAdapter(getActivity().getSupportFragmentManager(), getApplicationContext(), program));
+
+        slidingTabLayout.setSelectedIndicatorColors(ContextCompat.getColor(getApplicationContext(), R.color.mesanblue));
+        slidingTabLayout.setDividerColors(ContextCompat.getColor(getApplicationContext(), android.R.color.transparent));
+
+        slidingTabLayout.setViewPager(viewPager);
     }
 
     private void handleEventsError(Throwable throwable) {
@@ -89,13 +91,5 @@ public class ProgramFragment extends BaseFragment implements EventAdapter.ItemCl
     }
 
     // TODO: OnDayChanged
-
-    @Override
-    public void itemClick(int position) {
-        Intent i = new Intent(getApplicationContext(), EventPagerActivity.class);
-        i.putParcelableArrayListExtra(ARGS_EVENTS, (ArrayList) eventsForSelectedDay);
-        i.putExtra(ARGS_EVENT_POSITION, position);
-        startActivity(i);
-    }
 
 }
