@@ -20,8 +20,6 @@ import no.mesan.faghelg.view.BaseFragment;
 import no.mesan.faghelg.view.common.DividerItemDecoration;
 import no.mesan.faghelgapps.R;
 
-import static no.mesan.faghelgapps.R.string.program;
-
 public class ProgramDayFragment extends BaseFragment implements EventAdapter.ItemClickListener {
 
     @Bind(R.id.recyclerviewEvents)

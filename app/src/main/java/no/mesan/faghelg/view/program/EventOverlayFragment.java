@@ -13,6 +13,8 @@ import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
+import org.joda.time.DateTime;
+
 import butterknife.Bind;
 import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.faghelg.model.Event;
@@ -81,7 +83,7 @@ public class EventOverlayFragment extends BaseFragment {
 
     private void updateEventViews(Event event) {
         txtTitle.setText(event.getTitle());
-        txtTimestamp.setText("19:00");//TODO
+        txtTimestamp.setText(new DateTime(event.getStart()*1000).toString("HH:mm"));
         txtDescription.setText(event.getDescription());
         txtHosts.setText(event.getHostNames());
         Picasso.with(getApplicationContext()).load(event.getEventImageUrl()).into(imgEvent);
@@ -95,7 +97,7 @@ public class EventOverlayFragment extends BaseFragment {
 
     private void updateResponsibleViews(Event event) {
         txtName.setText(event.getResponsible().getFullName());
-        txtNick.setText(event.getResponsible().getShortName());
+        txtNick.setText(String.format(getString(R.string.nick), event.getResponsible().getShortName()));
 
         String profileImageUrl = event.getResponsible().getProfileImageUrl();
         if (!TextUtils.isEmpty(profileImageUrl)) {

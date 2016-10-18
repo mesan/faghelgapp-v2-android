@@ -5,6 +5,8 @@ import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.joda.time.DateTime;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import no.mesan.faghelg.model.Event;
@@ -35,7 +37,7 @@ public class EventItemView extends RelativeLayout {
 
     void bindTo(Event event) {
         txtTitle.setText(event.getTitle());
-        txtTimestamp.setText("19:00");//TODO
+        txtTimestamp.setText(new DateTime(event.getStart()*1000).toString("HH:mm"));
         txtHosts.setText(event.getHostNames());
     }
 

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import no.mesan.faghelg.model.Event;
 import no.mesan.faghelgapps.R;
 
@@ -41,8 +42,11 @@ public class EventPagerActivity extends AppCompatActivity {
     }
 
     private void showPreviewOfPages() {
-        viewPager.setClipToPadding(false);
-        viewPager.setPadding(50, 0, 50, 0);
-        viewPager.setPageMargin(10);
+        viewPager.setPageMargin(20);
+    }
+
+    @OnClick(R.id.background)
+    public void onClick() {
+
     }
 }
