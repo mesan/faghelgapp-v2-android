@@ -1,10 +1,16 @@
 package no.mesan.faghelg.view.people;
 
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.ChangeImageTransform;
+import android.transition.Fade;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +29,7 @@ import no.mesan.faghelg.service.PeopleService;
 import no.mesan.faghelg.view.BaseFragment;
 import no.mesan.faghelg.view.common.DividerItemDecoration;
 
-public class PeopleFragment extends BaseFragment {
+public class PeopleFragment extends BaseFragment implements PeopleAdapter.PersonClickListener {
 
     @Bind(R.id.recyclerViewPeople)
     RecyclerView recyclerViewPeople;
@@ -74,12 +80,33 @@ public class PeopleFragment extends BaseFragment {
     }
 
     private void handleGetPeopleSuccess(List<Person> people) {
-        peopleAdapter.setPeople(people);
+        peopleAdapter.setPeople(people, this);
     }
 
     private void handleGetPeopleFailure(Throwable throwable) {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public void personClicked(Person person, View view) {
+        //transition
+        ProfileFragment profileFragment = new ProfileFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("person", person);
+        profileFragment.setArguments(bundle);
 
+        //TODO share full name and image element between list element and profile page
+//        profileFragment.setSharedElementEnterTransition(new ChangeImageTransform());
+//        profileFragment.setEnterTransition(new Fade());
+//        setExitTransition(new Fade());
+//        profileFragment.setSharedElementReturnTransition(new ChangeImageTransform());
+        getActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+//                .addSharedElement(view, "profileImageTransition")
+                .replace(R.id.fragmentContainer, profileFragment)
+                .addToBackStack(null)
+                .commit();
+    }
 }

@@ -11,6 +11,7 @@
         android:layout_width="@dimen/person_image_size"
         android:layout_height="@dimen/person_image_size"
         android:layout_gravity="center_vertical"
+        android:transitionName="profileImageTransition"
         android:layout_marginStart="@dimen/padding_l" />
 
     <LinearLayout
