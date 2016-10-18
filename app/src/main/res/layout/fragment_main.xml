@@ -1,18 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:orientation="vertical">
 
-    <Button
-        android:text="@string/program"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPagerMenu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonProgram" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layoutMenu" />
 
-    <Button
-        android:text="@string/folk"
+    <LinearLayout
+        android:id="@id/layoutMenu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonPeople" />
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:baselineAligned="false"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:gravity="bottom"
+        android:weightSum="3">
 
-</LinearLayout>
+        <LinearLayout
+            android:id="@+id/tabProgram"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/padding_m"
+            android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageViewTabProgram"
+                android:layout_width="@dimen/image_menu_size"
+                android:layout_height="@dimen/image_menu_size"
+                android:src="@drawable/image_program" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_s"
+                android:text="@string/program" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/tabSocial"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="-7dp"
+            android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:padding="@dimen/padding_m">
+
+            <ImageView
+                android:id="@+id/imageViewTabSocial"
+                android:layout_width="@dimen/image_menu_size_large"
+                android:layout_height="@dimen/image_menu_size_large"
+                android:layout_gravity="top|center_horizontal"
+                android:clipToPadding="false"
+                android:src="@drawable/image_social" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/tabPeople"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/padding_m"
+            android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageViewTabPeople"
+                android:layout_width="@dimen/image_menu_size"
+                android:layout_height="@dimen/image_menu_size"
+                android:src="@drawable/image_people" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_s"
+                android:text="@string/people" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/imageViewEdge"
+        android:layout_width="match_parent"
+        android:layout_height="19dp"
+        android:layout_alignTop="@id/layoutMenu"
+        android:layout_marginTop="-19dp"
+        android:background="@drawable/image_edge" />
+
+    <!--<Button-->
+    <!--android:id="@+id/buttonProgram"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/program" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/buttonPeople"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/folk" />-->
+
+</RelativeLayout>

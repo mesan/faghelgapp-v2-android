@@ -1,5 +1,7 @@
 package no.mesan.faghelg.view.program;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -16,6 +18,7 @@ import com.squareup.picasso.Transformation;
 import org.joda.time.DateTime;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.faghelg.model.Event;
 import no.mesan.faghelg.model.Person;
@@ -30,8 +33,8 @@ public class EventOverlayFragment extends BaseFragment {
     @Bind(R.id.event_timestamp)
     TextView txtTimestamp;
 
-    @Bind(R.id.txtHosts)
-    TextView txtHosts;
+    /*@Bind(R.id.txtHosts)
+    TextView txtHosts;*/
 
     @Bind(R.id.imgEvent)
     ImageView imgEvent;
@@ -48,6 +51,11 @@ public class EventOverlayFragment extends BaseFragment {
     @Bind(R.id.txtDescription)
     TextView txtDescription;
 
+    @Bind(R.id.txtPosition)
+    TextView txtPosition;
+
+    private int eventDayPosition = 0;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,9 +63,16 @@ public class EventOverlayFragment extends BaseFragment {
 
         Event event = getArguments().getParcelable(EventPagerAdapter.ARGS_EVENT);
 
+        updatePagerView();
         updateViews(event);
 
         return view;
+    }
+
+    private void updatePagerView() {
+        int numberOfEvents = getArguments().getInt(EventPagerAdapter.ARGS_NUMBER_OF_EVENTS);
+        eventDayPosition = getArguments().getInt(EventPagerAdapter.ARGS_EVENT_DAY_POSITION);
+        txtPosition.setText(getString(R.string.position, eventDayPosition, numberOfEvents));
     }
 
     @Override
@@ -68,6 +83,18 @@ public class EventOverlayFragment extends BaseFragment {
     @Override
     protected void inject(AppComponent appComponent) {
 
+    }
+
+    @OnClick(R.id.btnClose)
+    public void onClick() {
+        onClose();
+    }
+
+    private void onClose() {
+        Intent data = new Intent();
+        data.putExtra(EventPagerAdapter.ARGS_SCROLLED_EVENT_POSITION, eventDayPosition-1);
+        getActivity().setResult(Activity.RESULT_OK, data);
+        getActivity().finish();
     }
 
     private void updateViews(Event event) {
@@ -85,8 +112,8 @@ public class EventOverlayFragment extends BaseFragment {
         txtTitle.setText(event.getTitle());
         txtTimestamp.setText(new DateTime(event.getStart()*1000).toString("HH:mm"));
         txtDescription.setText(event.getDescription());
-        txtHosts.setText(event.getHostNames());
-        Picasso.with(getApplicationContext()).load(event.getEventImageUrl()).into(imgEvent);
+        //txtHosts.setText(event.getHostNames());
+        //Picasso.with(getApplicationContext()).load(event.getEventImageUrl()).into(imgEvent);
     }
 
     private void updateNoResponsible() {
@@ -101,7 +128,11 @@ public class EventOverlayFragment extends BaseFragment {
 
         String profileImageUrl = event.getResponsible().getProfileImageUrl();
         if (!TextUtils.isEmpty(profileImageUrl)) {
+            int color = getApplicationContext().getResources().getColor(R.color.greyish);
+
             Transformation transformation = new RoundedTransformationBuilder()
+                    .borderColor(color)
+                    .borderWidthDp(1)
                     .oval(true)
                     .build();
 
@@ -111,4 +142,7 @@ public class EventOverlayFragment extends BaseFragment {
         }
     }
 
+    public void onBackPressed() {
+        onClose();
+    }
 }

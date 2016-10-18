@@ -9,15 +9,16 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import no.mesan.faghelg.model.DailyProgram;
 import no.mesan.faghelg.model.Event;
 import no.mesan.faghelg.model.Program;
 
 public class DaysAdapter extends FragmentPagerAdapter {
 
-    private Program program;
+    private List<DailyProgram> program;
     private Context context;
 
-    public DaysAdapter(FragmentManager fm, Context context, Program program) {
+    public DaysAdapter(FragmentManager fm, Context context, List<DailyProgram> program) {
         super(fm);
         this.program = program;
         this.context = context;
@@ -25,7 +26,7 @@ public class DaysAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        List<Event> eventsForDay = program.getEventsForDay(4+position);
+        List<Event> eventsForDay = program.get(position).getEvents();
 
         Bundle arguments = new Bundle();
         arguments.putParcelableArrayList(ProgramFragment.ARGS_EVENTS, (ArrayList)eventsForDay);
@@ -40,6 +41,6 @@ public class DaysAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return "FREDAG";
+        return program.get(position).getDay();
     }
 }

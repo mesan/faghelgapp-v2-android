@@ -1,5 +1,6 @@
 package no.mesan.faghelg.view.program;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -9,9 +10,9 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import no.mesan.faghelg.model.Event;
 import no.mesan.faghelgapps.R;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class EventPagerActivity extends AppCompatActivity {
 
@@ -31,6 +32,7 @@ public class EventPagerActivity extends AppCompatActivity {
         int position = getIntent().getIntExtra(ProgramFragment.ARGS_EVENT_POSITION, 0);
 
         setupAdapter(eventList, position);
+        setTitle("Lørdag");
 
         showPreviewOfPages();
     }
@@ -45,8 +47,15 @@ public class EventPagerActivity extends AppCompatActivity {
         viewPager.setPageMargin(20);
     }
 
-    @OnClick(R.id.background)
-    public void onClick() {
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
+    @Override
+    public void onBackPressed() {
+        EventOverlayFragment currentFragment = (EventOverlayFragment)pagerAdapter.getCurrentFragment();
+
+        currentFragment.onBackPressed();
     }
 }

@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +22,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.faghelg.injector.components.DaggerProgramFragmentComponent;
+import no.mesan.faghelg.model.DailyProgram;
 import no.mesan.faghelg.model.Event;
 import no.mesan.faghelg.model.Program;
 import no.mesan.faghelg.service.ProgramService;
@@ -40,8 +43,6 @@ public class ProgramFragment extends BaseFragment {
     SlidingTabLayout slidingTabLayout;
 
     private Program program;
-    private List<Event> eventsForSelectedDay;
-    private int selectedDay;
 
     public static final String ARGS_EVENTS = "ARGS_EVENTS";
     public static final String ARGS_EVENT_POSITION = "ARGS_EVENT_POSITION";
@@ -64,16 +65,7 @@ public class ProgramFragment extends BaseFragment {
 
     private void handleEventsSuccess(Program program) {
         this.program = program;
-        //EventAdapter eventAdapter = new EventAdapter(this);
-        eventsForSelectedDay = program.getEventsForDay(4);
-        //eventAdapter.setEvents(eventsForSelectedDay);
-
-        viewPager.setAdapter(new DaysAdapter(getActivity().getSupportFragmentManager(), getApplicationContext(), program));
-
-        slidingTabLayout.setSelectedIndicatorColors(ContextCompat.getColor(getApplicationContext(), R.color.mesanblue));
-        slidingTabLayout.setDividerColors(ContextCompat.getColor(getApplicationContext(), android.R.color.transparent));
-
-        slidingTabLayout.setViewPager(viewPager);
+        distributeProgramToDays();
     }
 
     private void handleEventsError(Throwable throwable) {
@@ -90,6 +82,68 @@ public class ProgramFragment extends BaseFragment {
         DaggerProgramFragmentComponent.builder().appComponent(appComponent).build().inject(this);
     }
 
-    // TODO: OnDayChanged
+    private void distributeProgramToDays() {
+        List<DailyProgram> programs = new ArrayList<>();
+        String[] weekdays = getContext().getResources().getStringArray(R.array.weekdays);
+
+        int weekDay = -1;
+        ArrayList<Event> eventForDay = new ArrayList<>();
+        int i = 0;
+        int currentPage = 0;
+        int page = 0;
+
+        boolean newDay;
+        boolean lastItem;
+
+        // TODO: Rewrite..! This I am not in any way proud of.. O_o
+        for (Event event : program.getEvents()) {
+            lastItem = i == program.getEvents().size() - 1;
+            DateTime eventDate = new DateTime(event.getStart()*1000);
+            newDay = weekDay > -1 && weekDay != eventDate.getDayOfWeek();
+
+            if (newDay && !lastItem) {
+                page++;
+                boolean isToday = eventDate.getDayOfYear() == new DateTime().getDayOfYear();
+                if (isToday) {
+                    currentPage = page;
+                }
+                programs.add(new DailyProgram(weekdays[weekDay], new ArrayList<>(eventForDay)));
+                eventForDay.clear();
+            }
+
+            if (lastItem) {
+                if (!newDay) {
+                    eventForDay.add(event);
+                }
+
+                // Add events for now
+                programs.add(new DailyProgram(weekdays[weekDay], new ArrayList<>(eventForDay)));
+                eventForDay.clear();
+
+                if (newDay) {
+                    // Add the last event
+                    eventForDay.add(event);
+                    programs.add(new DailyProgram(weekdays[eventDate.getDayOfWeek()],
+                            new ArrayList<>(eventForDay)));
+                }
+            }
+
+            i++;
+            weekDay = eventDate.getDayOfWeek();
+            eventForDay.add(event);
+        }
+
+        initPager(programs, currentPage);
+    }
+
+    private void initPager(List<DailyProgram> events, int currentPage) {
+        viewPager.setAdapter(new DaysAdapter(getActivity().getSupportFragmentManager(), getApplicationContext(), events));
+
+        slidingTabLayout.setSelectedIndicatorColors(ContextCompat.getColor(getApplicationContext(), R.color.mesanblue));
+        slidingTabLayout.setDividerColors(ContextCompat.getColor(getApplicationContext(), android.R.color.transparent));
+        slidingTabLayout.setViewPager(viewPager);
+
+        viewPager.setCurrentItem(currentPage);
+    }
 
 }
