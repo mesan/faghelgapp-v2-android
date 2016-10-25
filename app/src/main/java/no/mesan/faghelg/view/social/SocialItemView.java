@@ -17,12 +17,7 @@ import com.squareup.picasso.Transformation;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import no.mesan.faghelg.model.Message;
-import no.mesan.faghelg.model.Person;
 import no.mesan.faghelgapps.R;
-
-/**
- * Created by toskje9 on 25.10.2016.
- */
 
 public class SocialItemView extends RelativeLayout {
     @Bind(R.id.textViewPersonFullName)

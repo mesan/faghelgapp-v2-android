@@ -23,9 +23,8 @@ public class SocialAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //View socialItemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.social_item, parent, false);
-        //return new SocialAdapter.SocialViewHolder((SocialItemView) socialItemView);
-        return null;
+        View socialItemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.social_item, parent, false);
+        return new SocialAdapter.SocialViewHolder((SocialItemView) socialItemView);
     }
 
     @Override
@@ -35,6 +34,16 @@ public class SocialAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return messages.size();
+    }
+
+    class SocialViewHolder extends RecyclerView.ViewHolder {
+        public final SocialItemView socialItemView;
+
+        public SocialViewHolder(SocialItemView socialItemView) {
+            super(socialItemView);
+            this.socialItemView = socialItemView;
+        }
+
     }
 }

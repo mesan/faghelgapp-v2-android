@@ -85,4 +85,7 @@ dependencies {
 
     // JodaTime
     compile 'net.danlew:android.joda:2.9.4.2'
+
+    // Card view
+    compile 'com.android.support:cardview-v7:24.0.0'
 }
