@@ -20,15 +20,4 @@ public class Program {
     public void setEvents(List<Event> events) {
         this.events = events;
     }
-
-    public List<Event> getEventsForDay(int day) {
-        List<Event> eventsForDay = new ArrayList<>();
-        for (Event event : events) {
-            DateTime start = new DateTime(event.getStart()*1000);
-            if (start.getDayOfWeek() == day) {
-                eventsForDay.add(event);
-            }
-        }
-        return eventsForDay;
-    }
 }

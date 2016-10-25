@@ -32,7 +32,6 @@ public class EventPagerActivity extends AppCompatActivity {
         int position = getIntent().getIntExtra(ProgramFragment.ARGS_EVENT_POSITION, 0);
 
         setupAdapter(eventList, position);
-        setTitle("Lørdag");
 
         showPreviewOfPages();
     }

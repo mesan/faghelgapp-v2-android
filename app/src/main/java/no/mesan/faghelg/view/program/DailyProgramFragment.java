@@ -23,12 +23,12 @@ import no.mesan.faghelg.view.BaseFragment;
 import no.mesan.faghelg.view.common.DividerItemDecoration;
 import no.mesan.faghelgapps.R;
 
-public class ProgramDayFragment extends BaseFragment implements EventAdapter.ItemClickListener {
+public class DailyProgramFragment extends BaseFragment implements EventAdapter.ItemClickListener {
 
     @Bind(R.id.recyclerviewEvents)
     RecyclerView recyclerViewEvents;
 
-    private List<Event> eventsForSelectedDay;
+    private List<Event> eventsForDay;
 
     public static final String ARGS_EVENTS = "ARGS_EVENTS";
     public static final String ARGS_EVENT_POSITION = "ARGS_EVENT_POSITION";
@@ -39,22 +39,8 @@ public class ProgramDayFragment extends BaseFragment implements EventAdapter.Ite
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         setUpRecyclerView();
-
-        EventAdapter eventAdapter = new EventAdapter(this);
-        eventsForSelectedDay = getArguments().getParcelableArrayList(ProgramFragment.ARGS_EVENTS);
-        eventAdapter.setEvents(eventsForSelectedDay);
-
-        recyclerViewEvents.setAdapter(eventAdapter);
-        int i = 0;
-        for (Event event : eventsForSelectedDay) {
-            DateTime start = new DateTime(event.getStart()*1000);
-            DateTime end = new DateTime(event.getEnd()*1000);
-            if (start.isBeforeNow() && end.isAfterNow()) {
-                recyclerViewEvents.scrollToPosition(i);
-                break;
-            }
-            i++;
-        }
+        setUpAdapter();
+        scrollToCurrentEvent();
 
         return view;
     }
@@ -64,6 +50,26 @@ public class ProgramDayFragment extends BaseFragment implements EventAdapter.Ite
         Drawable dividerDrawable = getResources().getDrawable(R.drawable.divider);
         int dividerPadding = getResources().getDimensionPixelSize(R.dimen.program_divider_padding);
         recyclerViewEvents.addItemDecoration(new DividerItemDecoration(dividerDrawable, dividerPadding));
+    }
+
+    private void setUpAdapter() {
+        EventAdapter eventAdapter = new EventAdapter(this);
+        eventsForDay = getArguments().getParcelableArrayList(ProgramFragment.ARGS_EVENTS);
+        eventAdapter.setEvents(eventsForDay);
+        recyclerViewEvents.setAdapter(eventAdapter);
+    }
+
+    private void scrollToCurrentEvent() {
+        int i = 0;
+        for (Event event : eventsForDay) {
+            DateTime start = event.getStartTime();
+            DateTime end = event.getEndTime();
+            if (start.isBeforeNow() && end.isAfterNow()) {
+                recyclerViewEvents.scrollToPosition(i);
+                break;
+            }
+            i++;
+        }
     }
 
     @Override
@@ -79,7 +85,7 @@ public class ProgramDayFragment extends BaseFragment implements EventAdapter.Ite
     @Override
     public void itemClick(int position) {
         Intent i = new Intent(getApplicationContext(), EventPagerActivity.class);
-        i.putParcelableArrayListExtra(ARGS_EVENTS, (ArrayList) eventsForSelectedDay);
+        i.putParcelableArrayListExtra(ARGS_EVENTS, (ArrayList) eventsForDay);
         i.putExtra(ARGS_EVENT_POSITION, position);
         startActivityForResult(i, 0);
     }
@@ -87,7 +93,8 @@ public class ProgramDayFragment extends BaseFragment implements EventAdapter.Ite
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
-            recyclerViewEvents.scrollToPosition(data.getIntExtra(EventPagerAdapter.ARGS_SCROLLED_EVENT_POSITION, 0));
+            int closedEventPosition = data.getIntExtra(EventPagerAdapter.ARGS_SCROLLED_EVENT_POSITION, 0);
+            recyclerViewEvents.scrollToPosition(closedEventPosition);
         }
     }
 }

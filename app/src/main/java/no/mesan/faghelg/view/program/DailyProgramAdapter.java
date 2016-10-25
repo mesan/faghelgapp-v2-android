@@ -11,36 +11,35 @@ import java.util.List;
 
 import no.mesan.faghelg.model.DailyProgram;
 import no.mesan.faghelg.model.Event;
-import no.mesan.faghelg.model.Program;
 
-public class DaysAdapter extends FragmentPagerAdapter {
+public class DailyProgramAdapter extends FragmentPagerAdapter {
 
-    private List<DailyProgram> program;
+    private List<DailyProgram> dailyPrograms;
     private Context context;
 
-    public DaysAdapter(FragmentManager fm, Context context, List<DailyProgram> program) {
+    public DailyProgramAdapter(FragmentManager fm, Context context, List<DailyProgram> dailyPrograms) {
         super(fm);
-        this.program = program;
+        this.dailyPrograms = dailyPrograms;
         this.context = context;
     }
 
     @Override
     public Fragment getItem(int position) {
-        List<Event> eventsForDay = program.get(position).getEvents();
+        List<Event> eventsForDay = dailyPrograms.get(position).getEvents();
 
         Bundle arguments = new Bundle();
         arguments.putParcelableArrayList(ProgramFragment.ARGS_EVENTS, (ArrayList)eventsForDay);
 
-        return Fragment.instantiate(context, ProgramDayFragment.class.getName(), arguments);
+        return Fragment.instantiate(context, DailyProgramFragment.class.getName(), arguments);
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return dailyPrograms.size();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return program.get(position).getDay();
+        return dailyPrograms.get(position).getDay();
     }
 }

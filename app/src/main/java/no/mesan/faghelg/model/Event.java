@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import org.joda.time.DateTime;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Event implements Parcelable {
 
@@ -66,12 +68,20 @@ public class Event implements Parcelable {
         this.start = start;
     }
 
+    public DateTime getStartTime() {
+        return new DateTime(start*1000);
+    }
+
     public long getEnd() {
         return end;
     }
 
     public void setEnd(long end) {
         this.end = end;
+    }
+
+    public DateTime getEndTime() {
+        return new DateTime(end*1000);
     }
 
     protected Event(Parcel in) {

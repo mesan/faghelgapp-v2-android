@@ -1,13 +1,9 @@
 package no.mesan.faghelg.view.program;
 
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +23,6 @@ import no.mesan.faghelg.model.Event;
 import no.mesan.faghelg.model.Program;
 import no.mesan.faghelg.service.ProgramService;
 import no.mesan.faghelg.view.BaseFragment;
-import no.mesan.faghelg.view.common.DividerItemDecoration;
 import no.mesan.faghelg.view.slidingtabs.SlidingTabLayout;
 import no.mesan.faghelgapps.R;
 
@@ -98,7 +93,7 @@ public class ProgramFragment extends BaseFragment {
         // TODO: Rewrite..! This I am not in any way proud of.. O_o
         for (Event event : program.getEvents()) {
             lastItem = i == program.getEvents().size() - 1;
-            DateTime eventDate = new DateTime(event.getStart()*1000);
+            DateTime eventDate = event.getStartTime();
             newDay = weekDay > -1 && weekDay != eventDate.getDayOfWeek();
 
             if (newDay && !lastItem) {
@@ -137,7 +132,7 @@ public class ProgramFragment extends BaseFragment {
     }
 
     private void initPager(List<DailyProgram> events, int currentPage) {
-        viewPager.setAdapter(new DaysAdapter(getActivity().getSupportFragmentManager(), getApplicationContext(), events));
+        viewPager.setAdapter(new DailyProgramAdapter(getActivity().getSupportFragmentManager(), getApplicationContext(), events));
 
         slidingTabLayout.setSelectedIndicatorColors(ContextCompat.getColor(getApplicationContext(), R.color.mesanblue));
         slidingTabLayout.setDividerColors(ContextCompat.getColor(getApplicationContext(), android.R.color.transparent));
@@ -145,5 +140,4 @@ public class ProgramFragment extends BaseFragment {
 
         viewPager.setCurrentItem(currentPage);
     }
-
 }
