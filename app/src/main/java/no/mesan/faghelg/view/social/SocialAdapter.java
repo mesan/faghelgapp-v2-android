@@ -38,7 +38,7 @@ public class SocialAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        if(!TextUtils.isEmpty(messages.get(position).getImageUrl())) {
+        if(TextUtils.isEmpty(messages.get(position).getImageUrl())) {
             return VIEW_TYPE_TEXT;
         }
         return VIEW_TYPE_IMAGE;
