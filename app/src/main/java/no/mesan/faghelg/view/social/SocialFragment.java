@@ -1,9 +1,11 @@
 package no.mesan.faghelg.view.social;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -14,9 +16,9 @@ import javax.inject.Inject;
 import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.faghelg.injector.components.DaggerSocialFragmentComponent;
 import no.mesan.faghelg.model.Message;
-import no.mesan.faghelg.model.MessageOutput;
 import no.mesan.faghelg.service.SocialService;
 import no.mesan.faghelg.view.BaseFragment;
+import no.mesan.faghelg.view.message.MessageFragment;
 import no.mesan.faghelgapps.R;
 import timber.log.Timber;
 
@@ -30,8 +32,9 @@ public class SocialFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
+        setHasOptionsMenu(true);
+
         getPeople();
-        postMessage();
 
         return view;
     }
@@ -51,24 +54,20 @@ public class SocialFragment extends BaseFragment {
 
     }
 
-    private void postMessage() {
-        String token = getActivity().getPreferences(Context.MODE_PRIVATE).getString(getString(R.string.apptoken), "");
-
-        MessageOutput message = new MessageOutput();
-        message.setTitle("Hei");
-        message.setContent("Masse innhold");
-        message.setImageUrl("");
-
-        bindToLifecycle(socialService.postMessage(token, message)).subscribe(
-                this::handlePostMessageSuccess,
-                this::handlePostMessageFailure
-        );
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_social, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
-    private void handlePostMessageSuccess(Void aVoid) {
-    }
-
-    private void handlePostMessageFailure(Throwable throwable) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_send:
+                loadFragment(new MessageFragment());
+                break;
+        }
+        return true;
     }
 
     @Override
