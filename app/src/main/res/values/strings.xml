@@ -6,15 +6,16 @@
     <string name="nick">\@%s</string>
     <string name="people">Folk</string>
     <string name="position">%1$d av %2$d</string>
+    <string name="apptoken">apptoken</string>
 
     <string-array name="weekdays">
-        <item >nulldag</item>
-        <item >Mandag</item>
-        <item >Tirsdag</item>
-        <item >Onsdag</item>
-        <item >Torsdag</item>
-        <item >Fredag</item>
-        <item >Lørdag</item>
-        <item >Søndag</item>
+        <item>nulldag</item>
+        <item>Mandag</item>
+        <item>Tirsdag</item>
+        <item>Onsdag</item>
+        <item>Torsdag</item>
+        <item>Fredag</item>
+        <item>Lørdag</item>
+        <item>Søndag</item>
     </string-array>
 </resources>
