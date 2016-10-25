@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import no.mesan.faghelg.model.Message;
-import no.mesan.faghelg.view.people.PeopleAdapter;
 import no.mesan.faghelgapps.R;
 
 public class SocialAdapter extends RecyclerView.Adapter {

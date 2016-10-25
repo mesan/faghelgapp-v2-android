@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<no.mesan.faghelg.view.social.ImageSocialItemView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <android.support.v7.widget.CardView
@@ -19,4 +19,4 @@
 
     </android.support.v7.widget.CardView>
 
-</RelativeLayout>
+</no.mesan.faghelg.view.social.ImageSocialItemView>
