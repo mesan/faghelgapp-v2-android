@@ -13,16 +13,19 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
-        <activity
-            android:name="no.mesan.faghelg.view.MainActivity"
-            android:launchMode="singleTask">
+        <activity android:name="no.mesan.faghelg.view.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="no.mesan.faghelg.view.program.EventPagerActivity"
-            android:theme="@style/Theme.Transparent"/>
+        <activity
+            android:name="no.mesan.faghelg.view.MainActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name="no.mesan.faghelg.view.program.EventPagerActivity"
+            android:theme="@style/Theme.Transparent" />
     </application>
 
 </manifest>
