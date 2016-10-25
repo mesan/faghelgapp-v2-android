@@ -11,6 +11,10 @@ public class Person implements Parcelable {
     private String shortName;
     private String profileImageUrl;
 
+    public Person() {
+
+    }
+
     public String getFullName() {
         return fullName;
     }
@@ -35,13 +39,15 @@ public class Person implements Parcelable {
         this.profileImageUrl = profileImageUrl;
     }
 
-    public Person() {
-    }
-
     protected Person(Parcel in) {
         fullName = in.readString();
         shortName = in.readString();
         profileImageUrl = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     @Override
@@ -51,12 +57,8 @@ public class Person implements Parcelable {
         dest.writeString(profileImageUrl);
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Creator<Person> CREATOR = new Creator<Person>() {
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Person> CREATOR = new Parcelable.Creator<Person>() {
         @Override
         public Person createFromParcel(Parcel in) {
             return new Person(in);
@@ -67,5 +69,4 @@ public class Person implements Parcelable {
             return new Person[size];
         }
     };
-
 }

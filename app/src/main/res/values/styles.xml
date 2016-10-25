@@ -10,11 +10,6 @@
         <item name="colorControlActivated">@color/dark_grey</item>
         <item name="colorControlHighlight">@color/dark_grey</item>
         <item name="android:textColorSecondary">@color/grey</item>
-        <item name="android:textViewStyle">@style/AppTheme.Widget.TextView</item>
-    </style>
-
-    <style name="AppTheme.Widget.TextView" parent="android:Widget.Holo.Light.TextView">
-        <item name="fontPath">fonts/ProximaNova-Light.otf</item>
     </style>
 
     <style name="ToolbarStyle" parent="@style/AppTheme">
@@ -22,11 +17,48 @@
     </style>
 
     <style name="H1" >
+        <item name="fontPath">fonts/Roboto-Light.ttf</item>
         <item name="android:textSize">36sp</item>
     </style>
 
     <style name="list_title" >
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
         <item name="android:textSize">27sp</item>
+    </style>
+
+    <style name="title_tab" >
+        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="p" >
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="undertext" >
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="subtitle" >
+        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="breadtext" >
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="timestamp" >
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="below_icon" >
+        <item name="fontPath">fonts/Roboto-Light.ttf</item>
+        <item name="android:textSize">11sp</item>
     </style>
 
     <style name="Label">
@@ -48,5 +80,12 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:padding">@dimen/padding_l</item>
+    </style>
+
+    <style name="Theme.Transparent" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimAmount">0.05</item>
+        <item name="android:backgroundDimEnabled">true</item>
     </style>
 </resources>

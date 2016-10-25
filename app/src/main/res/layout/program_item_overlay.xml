@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:layout_below="@id/txtHosts"
+            android:src="@drawable/event_default"
+            android:id="@+id/imgEvent" />
+
+        <ImageButton
+            android:src="@drawable/image_close"
+            android:padding="5dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitCenter"
+            android:tint="@color/white"
+            android:background="@drawable/button_close"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/white"
+            style="@style/list_title"
+            android:id="@+id/btnClose" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/event_title"
+            android:layout_above="@id/event_timestamp"
+            android:layout_marginBottom="@dimen/padding_s"
+            android:layout_marginStart="@dimen/padding_m"
+            style="@style/list_title"
+            android:textColor="@color/white"
+            android:text="Tittel" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/event_timestamp"
+            android:layout_alignBottom="@id/imgEvent"
+            android:layout_marginBottom="@dimen/padding_s"
+            android:layout_marginStart="@dimen/padding_m"
+            style="@style/undertext"
+            android:textColor="@color/white"
+            android:text="Tid"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgEvent"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="@dimen/padding_m"
+            android:id="@+id/layout">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@mipmap/ic_launcher"
+                android:id="@+id/imgProfile" />
+
+            <RelativeLayout
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/imgProfile"
+                android:layout_toEndOf="@+id/imgProfile">
+
+                <TextView
+                    android:text="Navn Navnesen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="@dimen/padding_m"
+                    android:textColor="@color/mesanblue"
+                    style="@style/breadtext"
+                    android:id="@+id/txtName" />
+
+                <TextView
+                    android:text="navnn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtName"
+                    android:layout_alignStart="@id/txtName"
+                    android:textColor="@color/greyish"
+                    style="@style/breadtext"
+                    android:id="@+id/txtNick" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:text="Tekst som beskriver eventet"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_below="@+id/layout"
+            android:layout_marginStart="@dimen/padding_m"
+            android:layout_marginEnd="@dimen/padding_m"
+            android:layout_marginTop="@dimen/padding_l"
+            android:textColor="@color/mesanblue"
+            android:lineSpacingExtra="5dp"
+            style="@style/breadtext"
+            android:id="@+id/txtDescription" />
+
+        <TextView
+            android:text="1 av 5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/padding_m"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            style="@style/breadtext"
+            android:id="@+id/txtPosition" />
+
+    </RelativeLayout>
+
+</ScrollView>
