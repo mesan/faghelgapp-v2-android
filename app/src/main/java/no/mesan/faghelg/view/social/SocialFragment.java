@@ -2,6 +2,8 @@ package no.mesan.faghelg.view.social;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,6 +15,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.Bind;
 import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.faghelg.injector.components.DaggerSocialFragmentComponent;
 import no.mesan.faghelg.model.Message;
@@ -24,8 +27,13 @@ import timber.log.Timber;
 
 public class SocialFragment extends BaseFragment {
 
+    @Bind(R.id.recycler_view_social)
+    RecyclerView recyclerViewSocial;
+
     @Inject
     SocialService socialService;
+
+    private SocialAdapter socialAdapter;
 
     @Nullable
     @Override
@@ -34,12 +42,20 @@ public class SocialFragment extends BaseFragment {
 
         setHasOptionsMenu(true);
 
-        getPeople();
+        setupRecyclerView();
+        getMessages();
 
         return view;
     }
 
-    private void getPeople() {
+    private void setupRecyclerView() {
+        socialAdapter = new SocialAdapter();
+
+        recyclerViewSocial.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewSocial.setAdapter(socialAdapter);
+    }
+
+    private void getMessages() {
         bindToLifecycle(socialService.getMessages()).subscribe(
                 this::handleGetMessagesSuccess,
                 this::handleGetMessagesFailure
@@ -47,7 +63,7 @@ public class SocialFragment extends BaseFragment {
     }
 
     private void handleGetMessagesSuccess(List<Message> messages) {
-        Timber.d("#meldinger: " + messages.size());
+        socialAdapter.setMessages(messages);
     }
 
     private void handleGetMessagesFailure(Throwable throwable) {
