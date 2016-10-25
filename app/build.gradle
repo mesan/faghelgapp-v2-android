@@ -73,8 +73,10 @@ dependencies {
     //For logging
     compile 'com.jakewharton.timber:timber:3.1.0'
 
-    // For ExpandableRecyclerview
-    compile 'com.bignerdranch.android:expandablerecyclerview:1.0.3'
+    // For authentication
+    compile('com.microsoft.aad:adal:1.0.9') {
+        exclude group: 'com.android.support'
+    }
 
     // For fonts
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
