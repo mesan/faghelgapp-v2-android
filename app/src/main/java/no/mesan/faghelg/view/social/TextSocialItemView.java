@@ -6,8 +6,6 @@ import android.graphics.Color;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
@@ -19,33 +17,31 @@ import butterknife.ButterKnife;
 import no.mesan.faghelg.model.Message;
 import no.mesan.faghelgapps.R;
 
-public class SocialItemView extends RelativeLayout {
-    @Bind(R.id.textViewPersonFullName)
-    TextView textViewPersonFullName;
+public class TextSocialItemView extends SocialItemAuthorInfoView {
 
     @Bind(R.id.imageViewPerson)
-    ImageView imageViewPerson;
+    TextView textViewMessageText;
 
     private int borderColor;
     private int borderSize;
 
-    public SocialItemView(Context context) {
+    public TextSocialItemView(Context context) {
         super(context);
         init(context);
     }
 
-    public SocialItemView(Context context, AttributeSet attrs) {
+    public TextSocialItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public SocialItemView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public TextSocialItemView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public SocialItemView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public TextSocialItemView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context);
     }
@@ -59,14 +55,14 @@ public class SocialItemView extends RelativeLayout {
         if (message == null) {
             return;
         }
-/*
-        if (!TextUtils.isEmpty(message.getAuthor().getFullName())) {
-            textViewPersonFullName.setText(message.getAuthor().getFullName());
+
+        if (!TextUtils.isEmpty(message.getSender())) {
+            textViewAuthorShortname.setText(message.getSender());
         }
 
-        imageViewPerson.setImageDrawable(null);
+        imageViewAuthor.setImageDrawable(null);
 
-        if (!TextUtils.isEmpty(message.getAuthor().getProfileImageUrl())) {
+        if (!TextUtils.isEmpty(message.getSenderImageUrl())) {
 
             Transformation transformation2 = new RoundedTransformationBuilder()
                     .borderColor(Color.WHITE)
@@ -80,9 +76,13 @@ public class SocialItemView extends RelativeLayout {
                     .oval(true)
                     .build();
 
-            Picasso.with(getContext()).load(message.getAuthor().getProfileImageUrl())
-                    .transform(transformation2).transform(transformation).into(imageViewPerson);
-        }*/
+            Picasso.with(getContext()).load(message.getSenderImageUrl())
+                    .transform(transformation2).transform(transformation).into(imageViewAuthor);
+        }
+
+        if (!TextUtils.isEmpty(message.getContent())) {
+            textViewMessageText.setText(message.getContent());
+        }
     }
 
     @Override

@@ -69,4 +69,8 @@ public class Message {
     public void setTimestamp(DateTime timestamp) {
         this.timestamp = timestamp;
     }
+
+    public String getSenderImageUrl(){
+        return "https://s3-eu-west-1.amazonaws.com/faghelg/" + this.sender + ".png";
+    }
 }
