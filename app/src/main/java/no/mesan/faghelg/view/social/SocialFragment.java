@@ -5,6 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -18,7 +21,9 @@ import no.mesan.faghelg.injector.components.DaggerSocialFragmentComponent;
 import no.mesan.faghelg.model.Message;
 import no.mesan.faghelg.service.SocialService;
 import no.mesan.faghelg.view.BaseFragment;
+import no.mesan.faghelg.view.message.MessageFragment;
 import no.mesan.faghelgapps.R;
+import timber.log.Timber;
 
 public class SocialFragment extends BaseFragment {
 
@@ -34,6 +39,8 @@ public class SocialFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
+
+        setHasOptionsMenu(true);
 
         setupRecyclerView();
         getMessages();
@@ -63,15 +70,21 @@ public class SocialFragment extends BaseFragment {
 
     }
 
-    /*
-    private void postMessage() {
-        String token = getActivity().getPreferences(Context.MODE_PRIVATE).getString(getString(R.string.))
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_social, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
-        bindToLifecycle(socialService.postMessage(token, message)).subscribe(
-                this::handlePostMessageSuccess,
-                this::handlePostMessageFailure
-        );
-    }*/
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_send:
+                loadFragment(new MessageFragment());
+                break;
+        }
+        return true;
+    }
 
     @Override
     protected int getContentViewId() {

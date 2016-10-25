@@ -3,6 +3,7 @@ package no.mesan.faghelg.service.api;
 import java.util.List;
 
 import no.mesan.faghelg.model.Message;
+import no.mesan.faghelg.model.MessageOutput;
 import no.mesan.faghelg.model.Person;
 import no.mesan.faghelg.model.Program;
 import retrofit2.Call;
@@ -24,5 +25,5 @@ public interface FaghelgApi {
 
     @POST("/messages")
     Call<Void> postMessage(@Header("Authorization") String token,
-                           @Body Message message);
+                           @Body MessageOutput message);
 }
