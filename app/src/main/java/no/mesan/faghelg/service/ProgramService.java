@@ -1,11 +1,9 @@
 package no.mesan.faghelg.service;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.inject.Inject;
 
-import no.mesan.faghelg.model.Event;
 import no.mesan.faghelg.model.Program;
 import no.mesan.faghelg.service.api.FaghelgApi;
 import retrofit2.Response;
