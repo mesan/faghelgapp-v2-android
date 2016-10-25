@@ -1,5 +1,6 @@
 package no.mesan.faghelg.view.social;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -47,6 +48,16 @@ public class SocialFragment extends BaseFragment {
     private void handleGetMessagesFailure(Throwable throwable) {
 
     }
+
+    /*
+    private void postMessage() {
+        String token = getActivity().getPreferences(Context.MODE_PRIVATE).getString(getString(R.string.))
+
+        bindToLifecycle(socialService.postMessage(token, message)).subscribe(
+                this::handlePostMessageSuccess,
+                this::handlePostMessageFailure
+        );
+    }*/
 
     @Override
     protected int getContentViewId() {
