@@ -19,7 +19,7 @@ import no.mesan.faghelgapps.R;
 
 public class TextSocialItemView extends SocialItemAuthorInfoView {
 
-    @Bind(R.id.imageViewPerson)
+    @Bind(R.id.message_text)
     TextView textViewMessageText;
 
     private int borderColor;
