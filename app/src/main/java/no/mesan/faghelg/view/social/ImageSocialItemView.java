@@ -12,12 +12,14 @@ import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import no.mesan.faghelg.model.Message;
 import no.mesan.faghelgapps.R;
 
 public class ImageSocialItemView extends SocialItemAuthorInfoView {
 
+    @Bind(R.id.message_image)
     ImageView imageViewMessageImage;
 
     private int borderColor;
