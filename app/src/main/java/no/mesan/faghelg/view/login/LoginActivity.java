@@ -21,8 +21,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private AuthenticationContext authenticationContext;
 
-    private ProgressDialog loginProgressDialog;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,17 +59,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         authenticationContext.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        if (loginProgressDialog != null) {
-            // to test session cookie behavior
-            loginProgressDialog.dismiss();
-            loginProgressDialog = null;
-        }
     }
 
     private AuthenticationCallback<AuthenticationResult> getCallback() {
