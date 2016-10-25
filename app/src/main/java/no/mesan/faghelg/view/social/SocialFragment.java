@@ -23,7 +23,6 @@ import no.mesan.faghelg.service.SocialService;
 import no.mesan.faghelg.view.BaseFragment;
 import no.mesan.faghelg.view.message.MessageFragment;
 import no.mesan.faghelgapps.R;
-import timber.log.Timber;
 
 public class SocialFragment extends BaseFragment {
 
@@ -34,6 +33,12 @@ public class SocialFragment extends BaseFragment {
     SocialService socialService;
 
     private SocialAdapter socialAdapter;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Nullable
     @Override
