@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import no.mesan.faghelg.model.Message;
+import no.mesan.faghelg.model.MessageOutput;
 import no.mesan.faghelg.service.api.FaghelgApi;
 import retrofit2.Response;
 import rx.Observable;
@@ -41,7 +42,7 @@ public class SocialService extends BaseService {
         return observable.compose(applyAndroidSchedulers());
     }
 
-    public Observable<Void> postMessage(String token, Message message) {
+    public Observable<Void> postMessage(String token, MessageOutput message) {
         Observable<Void> observable = Observable.create(subscriber -> {
             try {
                 Response<Void> response = faghelgApi.postMessage(token, message).execute();

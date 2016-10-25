@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.faghelg.injector.components.DaggerSocialFragmentComponent;
 import no.mesan.faghelg.model.Message;
+import no.mesan.faghelg.model.MessageOutput;
 import no.mesan.faghelg.service.SocialService;
 import no.mesan.faghelg.view.BaseFragment;
 import no.mesan.faghelgapps.R;
@@ -30,6 +31,7 @@ public class SocialFragment extends BaseFragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         getPeople();
+        postMessage();
 
         return view;
     }
@@ -49,15 +51,25 @@ public class SocialFragment extends BaseFragment {
 
     }
 
-    /*
     private void postMessage() {
-        String token = getActivity().getPreferences(Context.MODE_PRIVATE).getString(getString(R.string.))
+        String token = getActivity().getPreferences(Context.MODE_PRIVATE).getString(getString(R.string.apptoken), "");
+
+        MessageOutput message = new MessageOutput();
+        message.setTitle("Hei");
+        message.setContent("Masse innhold");
+        message.setImageUrl("");
 
         bindToLifecycle(socialService.postMessage(token, message)).subscribe(
                 this::handlePostMessageSuccess,
                 this::handlePostMessageFailure
         );
-    }*/
+    }
+
+    private void handlePostMessageSuccess(Void aVoid) {
+    }
+
+    private void handlePostMessageFailure(Throwable throwable) {
+    }
 
     @Override
     protected int getContentViewId() {
