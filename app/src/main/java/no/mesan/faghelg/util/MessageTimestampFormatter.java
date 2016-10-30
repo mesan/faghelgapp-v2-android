@@ -12,7 +12,7 @@ public class MessageTimestampFormatter {
         if(messageTimestamp.isBefore(midnightToday)) {
             return message.getTimestamp().toString("EEE, dd MMM yyyy HH:mm");
         } else {
-            return message.getTimestamp().toString("HH:mm");
+            return message.getTimestamp().toString("'kl.' HH:mm");
         }
     }
 }
