@@ -1,22 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/author_image"/>
+        android:layout_width="@dimen/person_image_size"
+        android:layout_height="@dimen/person_image_size"
+        android:id="@+id/author_image"
+        android:layout_marginLeft="@dimen/social_author_image_left_margin"
+        android:layout_marginRight="@dimen/social_author_image_right_margin"/>
 
-    <TextView
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/author_image"
-        android:id="@+id/author_shortname"/>
+        android:layout_marginTop="@dimen/social_author_text_top_margin"
+        android:layout_marginRight="@dimen/social_edge_padding">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/message_timestamp"/>
-</RelativeLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:id="@+id/author_ruler"
+            android:background="@color/greyish"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/author_shortname"
+            android:layout_below="@id/author_ruler"
+            android:layout_marginTop="@dimen/social_author_shortname_top_margin"
+            android:textColor="@color/mesanblue"
+            style="@style/p"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/author_ruler"
+            android:id="@+id/message_timestamp"
+            android:layout_marginTop="@dimen/social_author_timestamp_top_margin"
+            style="@style/subtitle"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

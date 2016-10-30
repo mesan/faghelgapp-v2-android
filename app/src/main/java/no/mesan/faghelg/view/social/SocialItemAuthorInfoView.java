@@ -18,6 +18,9 @@ public class SocialItemAuthorInfoView extends RelativeLayout {
     @Bind(R.id.author_image)
     ImageView imageViewAuthor;
 
+    @Bind(R.id.message_timestamp)
+    TextView timestampView;
+
     public SocialItemAuthorInfoView(Context context) {
         super(context);
     }

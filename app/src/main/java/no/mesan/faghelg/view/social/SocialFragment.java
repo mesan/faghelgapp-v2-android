@@ -1,5 +1,6 @@
 package no.mesan.faghelg.view.social;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ import no.mesan.faghelg.injector.components.DaggerSocialFragmentComponent;
 import no.mesan.faghelg.model.Message;
 import no.mesan.faghelg.service.SocialService;
 import no.mesan.faghelg.view.BaseFragment;
+import no.mesan.faghelg.view.common.DividerItemDecoration;
 import no.mesan.faghelg.view.message.MessageFragment;
 import no.mesan.faghelgapps.R;
 import timber.log.Timber;
@@ -52,6 +54,11 @@ public class SocialFragment extends BaseFragment {
         socialAdapter = new SocialAdapter();
 
         recyclerViewSocial.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        Drawable dividerDrawable = getResources().getDrawable(R.drawable.social_divider);
+        int dividerPadding = getResources().getDimensionPixelSize(R.dimen.social_divider_padding);
+        recyclerViewSocial.addItemDecoration(new DividerItemDecoration(dividerDrawable, dividerPadding));
+
         recyclerViewSocial.setAdapter(socialAdapter);
     }
 

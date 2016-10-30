@@ -15,6 +15,7 @@ import com.squareup.picasso.Transformation;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import no.mesan.faghelg.model.Message;
+import no.mesan.faghelg.util.MessageTimestampFormatter;
 import no.mesan.faghelgapps.R;
 
 public class ImageSocialItemView extends SocialItemAuthorInfoView {
@@ -71,8 +72,8 @@ public class ImageSocialItemView extends SocialItemAuthorInfoView {
                     .build();
 
             Transformation transformation = new RoundedTransformationBuilder()
-                    .borderColor(borderColor)
-                    .borderWidthDp(2)
+                    .borderColor(Color.WHITE)
+                    .borderWidthDp(1)
                     .oval(true)
                     .build();
 
@@ -83,6 +84,10 @@ public class ImageSocialItemView extends SocialItemAuthorInfoView {
         if (!TextUtils.isEmpty(message.getImageUrl())) {
             Picasso.with(getContext()).load(message.getImageUrl())
                     .into(imageViewMessageImage);
+        }
+        if (!TextUtils.isEmpty(message.getTimestamp().toString())) {
+            String formattedTimestamp = MessageTimestampFormatter.formatTimestamp(message);
+            timestampView.setText(formattedTimestamp);
         }
     }
 
