@@ -113,7 +113,7 @@ public class EventOverlayFragment extends BaseFragment {
         txtTimestamp.setText(event.getStartTime().toString("HH:mm"));
         txtDescription.setText(event.getDescription());
         //txtHosts.setText(event.getHostNames());
-        //Picasso.with(getApplicationContext()).load(event.getEventImageUrl()).into(imgEvent);
+        Picasso.with(getApplicationContext()).load(event.getEventImageUrl()).into(imgEvent);
     }
 
     private void updateNoResponsible() {
