@@ -12,12 +12,18 @@
         android:hint="@string/message"
         android:ems="10"
         android:gravity="top"
+        android:textColorHint="@color/mesanbluelight"
+        android:textSize="@dimen/text_size_xl"
+        android:textColor="@color/mesanblue"
         android:id="@+id/editContent" />
 
     <Button
         android:text="@string/send"
+        android:background="@drawable/button_send"
+        android:textAllCaps="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:id="@+id/btnSend" />
 
 </LinearLayout>

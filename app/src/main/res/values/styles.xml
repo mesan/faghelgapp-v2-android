@@ -7,8 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <!--<item name="colorControlNormal">@color/dark_grey</item>-->
-        <item name="colorControlActivated">@color/dark_grey</item>
-        <item name="colorControlHighlight">@color/dark_grey</item>
+        <item name="colorControlActivated">@color/mesanblue</item>
+        <item name="colorControlHighlight">@color/mesanblue</item>
         <item name="android:textColorSecondary">@color/grey</item>
     </style>
 

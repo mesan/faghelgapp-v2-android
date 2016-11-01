@@ -1,5 +1,6 @@
 package no.mesan.faghelg.view.message;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import no.mesan.faghelgapps.R;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MessageActivity extends AppCompatActivity {
 
@@ -31,6 +33,7 @@ public class MessageActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         imageViewLogo.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
@@ -61,5 +64,10 @@ public class MessageActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

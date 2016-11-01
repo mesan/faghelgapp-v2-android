@@ -105,6 +105,12 @@ public class SocialFragment extends BaseFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getMessages();
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_social, menu);
         super.onCreateOptionsMenu(menu, inflater);
