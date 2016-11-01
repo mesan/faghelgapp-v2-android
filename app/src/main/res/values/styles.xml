@@ -23,7 +23,7 @@
 
     <style name="list_title" >
         <item name="fontPath">fonts/Roboto-Regular.ttf</item>
-        <item name="android:textSize">27sp</item>
+        <item name="android:textSize">23sp</item>
     </style>
 
     <style name="title_tab" >
