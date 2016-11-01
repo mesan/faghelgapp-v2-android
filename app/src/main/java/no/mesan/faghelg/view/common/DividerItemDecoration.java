@@ -6,6 +6,8 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import no.mesan.faghelg.view.social.ImageSocialItemView;
+
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private final Drawable divider;
@@ -20,7 +22,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
 
-        if (parent.getChildAdapterPosition(view) == 0) {
+        if (parent.getChildAdapterPosition(view) == 0 || view instanceof ImageSocialItemView) {
             return;
         }
 

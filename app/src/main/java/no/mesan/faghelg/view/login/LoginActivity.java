@@ -1,13 +1,11 @@
 package no.mesan.faghelg.view.login;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.Window;
 
 import com.microsoft.aad.adal.AuthenticationCallback;
 import com.microsoft.aad.adal.AuthenticationContext;
@@ -25,7 +23,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String token = getPreferences(Context.MODE_PRIVATE).getString(getString(R.string.apptoken), "");
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String token = preferences.getString(getString(R.string.apptoken), "");
         if (TextUtils.isEmpty(token)) {
             showLogin();
         } else {
@@ -78,8 +77,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void saveTokenToPrefs(String token) {
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
         editor.putString(getString(R.string.apptoken), token);
         editor.apply();
     }

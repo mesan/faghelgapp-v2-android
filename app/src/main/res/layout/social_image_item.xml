@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<no.mesan.faghelg.view.social.ImageSocialItemView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/social_card_side_margin"
+        android:layout_marginRight="@dimen/social_card_side_margin"
+        android:layout_marginTop="@dimen/social_card_margin"
+        android:layout_marginBottom="@dimen/social_card_margin"
+        card_view:cardCornerRadius="@dimen/social_card_corner_radius"
+        card_view:contentPaddingLeft="@dimen/social_card_side_padding"
+        card_view:contentPaddingRight="@dimen/social_card_side_padding"
+        card_view:contentPaddingTop="@dimen/social_card_side_padding"
+        card_view:contentPaddingBottom="@dimen/social_card_bottom_padding">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/message_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:minHeight="@dimen/person_image_size" />
+
+            <include
+                layout="@layout/social_item_author_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/message_image"
+                android:layout_marginTop="@dimen/social_author_image_half_height" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</no.mesan.faghelg.view.social.ImageSocialItemView>

@@ -22,4 +22,19 @@
     <dimen name="person_image_border_size">1dp</dimen>
     <dimen name="image_menu_size">25dp</dimen>
     <dimen name="image_menu_size_large">60dp</dimen>
+    <dimen name="social_divider_padding">30dp</dimen>
+    <dimen name="social_author_side_margin">15dp</dimen>
+    <dimen name="social_edge_padding">30dp</dimen>
+    <dimen name="social_author_shortname_top_margin">7dp</dimen>
+    <dimen name="social_author_timestamp_top_margin">11dp</dimen>
+    <dimen name="social_author_image_right_margin">7dp</dimen>
+    <dimen name="social_author_text_top_margin">34dp</dimen>
+    <dimen name="social_message_margin_bottom">25dp</dimen>
+    <dimen name="social_author_image_half_height">-35dp</dimen>
+    <dimen name="social_card_top_padding">15dp</dimen>
+    <dimen name="social_card_bottom_padding">20dp</dimen>
+    <dimen name="social_card_side_padding">10dp</dimen>
+    <dimen name="social_card_side_margin">5dp</dimen>
+    <dimen name="social_card_margin">2.5dp</dimen>
+    <dimen name="social_card_corner_radius">2dp</dimen>
 </resources>
