@@ -53,7 +53,7 @@ public class PeopleAdapter extends RecyclerView.Adapter {
         @Override
         public void onClick(View view) {
             int position = getAdapterPosition();
-            personClickListener.personClicked(people.get(position), peopleItemView.imageViewPerson);
+//            personClickListener.personClicked(people.get(position), peopleItemView.imageViewPerson);
 
         }
     }
