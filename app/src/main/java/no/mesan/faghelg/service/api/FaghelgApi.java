@@ -23,7 +23,7 @@ public interface FaghelgApi {
     @GET("/messages")
     Call<List<Message>> getMessages();
 
-    @POST("/messages")
+    @POST("/push")
     Call<Void> postMessage(@Header("Authorization") String token,
                            @Body MessageOutput message);
 }

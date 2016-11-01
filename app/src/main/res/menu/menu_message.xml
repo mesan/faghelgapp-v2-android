@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_send"
-        android:title="@string/menu_send"
+        android:id="@+id/menu_close"
+        android:title="@string/menu_close"
         app:showAsAction="always"
-        android:icon="@drawable/ic_announcement"/>
+        android:icon="@drawable/ic_close" />
 </menu>

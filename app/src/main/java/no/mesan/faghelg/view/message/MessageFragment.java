@@ -1,6 +1,8 @@
 package no.mesan.faghelg.view.message;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.widget.EditText;
 
@@ -30,7 +32,8 @@ public class MessageFragment extends BaseFragment {
 
     @OnClick(R.id.btnSend)
     public void sendMessage() {
-        String token = getActivity().getPreferences(Context.MODE_PRIVATE).getString(getString(R.string.apptoken), "");
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String token = preferences.getString(getString(R.string.apptoken), "");
 
         MessageOutput message = createMessage();
 
@@ -52,6 +55,7 @@ public class MessageFragment extends BaseFragment {
     }
 
     private void handlePostMessageSuccess(Void aVoid) {
+        getActivity().finish();
     }
 
     private void handlePostMessageFailure(Throwable throwable) {

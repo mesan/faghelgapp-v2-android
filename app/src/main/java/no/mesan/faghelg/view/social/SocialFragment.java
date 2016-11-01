@@ -1,5 +1,6 @@
 package no.mesan.faghelg.view.social;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,7 +24,7 @@ import no.mesan.faghelg.model.Message;
 import no.mesan.faghelg.service.SocialService;
 import no.mesan.faghelg.view.BaseFragment;
 import no.mesan.faghelg.view.common.DividerItemDecoration;
-import no.mesan.faghelg.view.message.MessageFragment;
+import no.mesan.faghelg.view.message.MessageActivity;
 import no.mesan.faghelgapps.R;
 
 public class SocialFragment extends BaseFragment {
@@ -47,7 +48,7 @@ public class SocialFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        setHasOptionsMenu(true);
+ //       setHasOptionsMenu(true);
 
         setupRecyclerView();
         getMessages();
@@ -92,7 +93,8 @@ public class SocialFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_send:
-                loadFragment(new MessageFragment());
+                Intent i = new Intent(getApplicationContext(), MessageActivity.class);
+                startActivity(i);
                 break;
         }
         return true;

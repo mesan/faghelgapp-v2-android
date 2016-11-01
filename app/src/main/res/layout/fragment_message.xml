@@ -2,19 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_l">
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:inputType="textPersonName"
-        android:text="Melding..."
+        android:hint="@string/message"
         android:ems="10"
         android:gravity="top"
         android:id="@+id/editContent" />
 
     <Button
-        android:text="Send"
+        android:text="@string/send"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnSend" />
