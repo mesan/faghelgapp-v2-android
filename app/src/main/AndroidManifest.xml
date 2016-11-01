@@ -32,6 +32,19 @@
             android:name="no.mesan.faghelg.view.program.EventPagerActivity"
             android:theme="@style/Theme.Transparent" />
         <activity android:name="no.mesan.faghelg.view.message.MessageActivity" />
+
+        <!-- GCM -->
+        <receiver
+            android:name="no.mesan.faghelg.service.push.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="no.mesan.thomasp.faghelg.android" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="no.mesan.faghelg.service.push.GcmIntentService" />
     </application>
 
 </manifest>
