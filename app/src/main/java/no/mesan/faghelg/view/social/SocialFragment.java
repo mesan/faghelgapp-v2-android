@@ -12,6 +12,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -28,6 +32,12 @@ import no.mesan.faghelg.view.message.MessageActivity;
 import no.mesan.faghelgapps.R;
 
 public class SocialFragment extends BaseFragment {
+
+    @Bind(R.id.social_progress_bar)
+    ProgressBar progressBarView;
+
+    @Bind(R.id.social_progress_bar_text)
+    TextView progressBarTextView;
 
     @Bind(R.id.recycler_view_social)
     RecyclerView recyclerViewSocial;
@@ -59,13 +69,22 @@ public class SocialFragment extends BaseFragment {
     private void setupRecyclerView() {
         socialAdapter = new SocialAdapter();
 
+        showProgressBarIfAdapterEmpty();
+
         recyclerViewSocial.setLayoutManager(new LinearLayoutManager(getContext()));
 
         Drawable dividerDrawable = getResources().getDrawable(R.drawable.social_divider);
         int dividerPadding = getResources().getDimensionPixelSize(R.dimen.social_divider_padding);
-        recyclerViewSocial.addItemDecoration(new DividerItemDecoration(dividerDrawable, dividerPadding));
+//        recyclerViewSocial.addItemDecoration(new DividerItemDecoration(dividerDrawable, dividerPadding));
 
         recyclerViewSocial.setAdapter(socialAdapter);
+    }
+
+    private void showProgressBarIfAdapterEmpty() {
+        if (socialAdapter.getItemCount() == 0) {
+            progressBarView.setVisibility(View.VISIBLE);
+            progressBarTextView.setVisibility(View.VISIBLE);
+        }
     }
 
     private void getMessages() {
@@ -76,6 +95,8 @@ public class SocialFragment extends BaseFragment {
     }
 
     private void handleGetMessagesSuccess(List<Message> messages) {
+        progressBarView.setVisibility(View.GONE);
+        progressBarTextView.setVisibility(View.GONE);
         socialAdapter.setMessages(messages);
     }
 

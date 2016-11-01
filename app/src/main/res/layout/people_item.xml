@@ -25,7 +25,7 @@
             android:id="@+id/textViewPersonFullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_m"
+            style="@style/p"
             android:textColor="@color/mesanblue"
             android:layout_marginBottom="@dimen/padding_s"/>
 
@@ -33,6 +33,7 @@
             android:id="@+id/textViewPersonShortName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/undertext"
             android:textColor="@color/greyish"/>
     </LinearLayout>
 
