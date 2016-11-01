@@ -68,7 +68,7 @@ public class SocialFragment extends BaseFragment {
 
         Drawable dividerDrawable = getResources().getDrawable(R.drawable.social_divider);
         int dividerPadding = getResources().getDimensionPixelSize(R.dimen.social_divider_padding);
-        recyclerViewSocial.addItemDecoration(new DividerItemDecoration(dividerDrawable, dividerPadding));
+//        recyclerViewSocial.addItemDecoration(new DividerItemDecoration(dividerDrawable, dividerPadding));
 
         recyclerViewSocial.setAdapter(socialAdapter);
     }
