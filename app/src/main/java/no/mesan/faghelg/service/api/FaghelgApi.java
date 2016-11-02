@@ -21,8 +21,9 @@ public interface FaghelgApi {
     @GET("/persons")
     Call<List<Person>> getPersons();
 
-    @POST("/register")
-    Call<Void> registerForPush(@Header("Authorization") String authToken, PushDevice pushDevice);
+    @POST("/push/register")
+    Call<Void> registerForPush(@Header("Authorization") String authToken,
+                               @Body PushDevice pushDevice);
 
     @GET("/messages")
     Call<List<Message>> getMessages();

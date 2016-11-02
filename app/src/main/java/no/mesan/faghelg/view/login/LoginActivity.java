@@ -14,6 +14,7 @@ import com.microsoft.aad.adal.AuthenticationResult;
 import no.mesan.faghelg.model.Constants;
 import no.mesan.faghelg.view.MainActivity;
 import no.mesan.faghelgapps.R;
+import timber.log.Timber;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -78,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void saveTokenToPrefs(String token) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Timber.d(token);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(getString(R.string.apptoken), token);
         editor.apply();

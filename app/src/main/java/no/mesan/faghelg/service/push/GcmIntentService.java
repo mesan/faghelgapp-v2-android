@@ -16,7 +16,9 @@ import android.util.Log;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import no.mesan.faghelg.view.MainActivity;
+import no.mesan.faghelg.view.login.LoginActivity;
 import no.mesan.faghelgapps.R;
+import timber.log.Timber;
 
 public class GcmIntentService extends IntentService {
 	public static final int NOTIFICATION_ID = 1;
@@ -35,6 +37,8 @@ public class GcmIntentService extends IntentService {
 		GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
 		String messageType = gcm.getMessageType(intent);
 
+		Timber.d(messageType);
+
 		if (!extras.isEmpty()) {
 			if (GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
 				// sendNotification("Send error: " + extras.toString());
@@ -45,6 +49,9 @@ public class GcmIntentService extends IntentService {
 
 				String title = extras.getString("title");
 				String content = extras.getString("content");
+
+				Timber.d(title);
+				Timber.d(content);
 
 				// Post notification of received message.
 				Log.d(this.getClass().getSimpleName(), "Title: " + title + " -- Content: " + content);
@@ -71,7 +78,7 @@ public class GcmIntentService extends IntentService {
 	private void sendNotification(String title, String content) {
 		mNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 
-		Intent intent = new Intent(this, MainActivity.class);
+		Intent intent = new Intent(this, LoginActivity.class);
 		intent.setAction("android.intent.action.MAIN");
 		intent.addCategory("android.intent.category.LAUNCHER");
 		intent.putExtra("from.notification", 1);

@@ -31,6 +31,7 @@ import no.mesan.faghelg.injector.components.DaggerMainActivityComponent;
 import no.mesan.faghelg.injector.modules.PushModule;
 import no.mesan.faghelg.service.PushService;
 import no.mesan.faghelgapps.R;
+import timber.log.Timber;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
@@ -171,8 +172,9 @@ public class MainActivity extends AppCompatActivity {
                     // The request to your server should be authenticated if
                     // your app
                     // is using accounts.
-                    String token = getPreferences(Context.MODE_PRIVATE)
+                    String token = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
                             .getString(getString(R.string.apptoken), "");
+                    Timber.d("Async task " + token);
                     pushService.registerForPush(token, regid).subscribe(
                             this::handleLoginSuccess,
                             this::handleLoginError);
