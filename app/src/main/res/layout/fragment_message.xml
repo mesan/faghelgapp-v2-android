@@ -8,9 +8,10 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:inputType="textPersonName"
+        android:inputType="textCapSentences|textMultiLine"
         android:hint="@string/message"
         android:ems="10"
+        android:maxLength="140"
         android:gravity="top"
         android:textColorHint="@color/mesanbluelight"
         android:textSize="@dimen/text_size_xl"
