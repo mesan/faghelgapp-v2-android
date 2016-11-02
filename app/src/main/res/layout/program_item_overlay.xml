@@ -46,6 +46,7 @@
                 android:layout_marginTop="@dimen/padding_m"
                 android:layout_marginBottom="@dimen/padding_s"
                 android:layout_marginStart="@dimen/padding_m"
+                android:layout_marginEnd="@dimen/padding_m"
                 style="@style/list_title"
                 android:textColor="@color/white"
                 android:text="Tittel" />
@@ -56,6 +57,7 @@
                 android:id="@+id/event_timestamp"
                 android:layout_marginBottom="@dimen/padding_s"
                 android:layout_marginStart="@dimen/padding_m"
+                android:layout_marginEnd="@dimen/padding_m"
                 style="@style/undertext"
                 android:textColor="@color/white"
                 android:text="Tid"/>
@@ -108,7 +110,7 @@
         <TextView
             android:text="Tekst som beskriver eventet"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/layout"
             android:layout_marginStart="@dimen/padding_m"
             android:layout_marginEnd="@dimen/padding_m"
