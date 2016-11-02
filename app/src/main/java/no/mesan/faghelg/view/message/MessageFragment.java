@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import javax.inject.Inject;
 
@@ -34,6 +35,9 @@ public class MessageFragment extends BaseFragment {
     @Bind(R.id.btnSend)
     Button sendButton;
 
+    @Bind(R.id.textCharacterCount)
+    TextView characterCountText;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,12 +55,24 @@ public class MessageFragment extends BaseFragment {
 
     @OnTextChanged(R.id.editContent)
     public void textChanged(CharSequence s) {
-
         if(s.toString().trim().length()==0){
             sendButton.setEnabled(false);
+            setEmptyCount();
         } else {
             sendButton.setEnabled(true);
+            int count = s.toString().length();
+            characterCountText.setText(getString(R.string.character_count, count));
         }
+    }
+
+    private void setEmptyCount() {
+        characterCountText.setText(getString(R.string.character_count, 0));
+    }
+
+    @OnClick(R.id.buttonReset)
+    public void resetMessage() {
+        editContent.setText("");
+        setEmptyCount();
     }
 
     @OnClick(R.id.btnSend)

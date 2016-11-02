@@ -12,6 +12,7 @@
     <string name="menu_send">Send melding</string>
     <string name="menu_close">Lukk</string>
     <string name="loading_text">Laster..</string>
+    <string name="character_count">%1$d/140</string>
 
     <string-array name="weekdays">
         <item>nulldag</item>
