@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,8 +16,6 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,7 +26,6 @@ import no.mesan.faghelg.injector.components.DaggerSocialFragmentComponent;
 import no.mesan.faghelg.model.Message;
 import no.mesan.faghelg.service.SocialService;
 import no.mesan.faghelg.view.BaseFragment;
-import no.mesan.faghelg.view.common.DividerItemDecoration;
 import no.mesan.faghelg.view.message.MessageActivity;
 import no.mesan.faghelgapps.R;
 
@@ -41,6 +39,9 @@ public class SocialFragment extends BaseFragment {
 
     @Bind(R.id.recycler_view_social)
     RecyclerView recyclerViewSocial;
+
+    @Bind(R.id.swipeRefreshFeed)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Inject
     SocialService socialService;
@@ -59,6 +60,13 @@ public class SocialFragment extends BaseFragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
  //       setHasOptionsMenu(true);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getMessages();
+            }
+        });
 
         setupRecyclerView();
         getMessages();
@@ -98,10 +106,11 @@ public class SocialFragment extends BaseFragment {
         progressBarView.setVisibility(View.GONE);
         progressBarTextView.setVisibility(View.GONE);
         socialAdapter.setMessages(messages);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     private void handleGetMessagesFailure(Throwable throwable) {
-
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
