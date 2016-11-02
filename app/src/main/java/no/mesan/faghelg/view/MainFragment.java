@@ -17,6 +17,7 @@ import butterknife.Bind;
 import butterknife.BindColor;
 import butterknife.OnClick;
 import no.mesan.faghelg.view.menu.MenuPagerAdapter;
+import no.mesan.faghelg.view.social.SocialFragment;
 import no.mesan.faghelgapps.R;
 import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.faghelg.view.people.PeopleFragment;
@@ -39,6 +40,8 @@ public class MainFragment extends BaseFragment {
     @BindColor(R.color.colorPrimary)
     int colorPrimary;
 
+    private MenuPagerAdapter menuPagerAdapter;
+
     @Override
     protected int getContentViewId() {
         return R.layout.fragment_main;
@@ -59,9 +62,14 @@ public class MainFragment extends BaseFragment {
         return view;
     }
 
+    public void reloadFromPush() {
+        viewPagerMenu.setCurrentItem(1);
+        ((SocialFragment)menuPagerAdapter.getItem(1)).reload();
+    }
+
     private void setViewPager() {
 
-        MenuPagerAdapter menuPagerAdapter = new MenuPagerAdapter(getActivity().getSupportFragmentManager(), getContext());
+        menuPagerAdapter = new MenuPagerAdapter(getActivity().getSupportFragmentManager(), getContext());
         viewPagerMenu.setOffscreenPageLimit(3);
         viewPagerMenu.setAdapter(menuPagerAdapter);
         onTabSocialClick();

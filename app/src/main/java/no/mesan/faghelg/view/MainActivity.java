@@ -1,6 +1,9 @@
 package no.mesan.faghelg.view;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -12,6 +15,7 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -58,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private GoogleCloudMessaging gcm;
     private String regid;
     private Context context;
+    private MainFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         FaghelgApplication application = (FaghelgApplication)getApplication();
         inject(application.getAppComponent());
 
-        MainFragment fragment = new MainFragment();
+        fragment = new MainFragment();
         loadFragment(fragment);
 
         ButterKnife.bind(this);
@@ -80,6 +85,12 @@ public class MainActivity extends AppCompatActivity {
         registerForPush();
 
         imageViewLogo.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        fragment.reloadFromPush();
     }
 
     public void showSnackbar(String text) {

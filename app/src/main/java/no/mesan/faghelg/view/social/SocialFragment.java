@@ -60,7 +60,7 @@ public class SocialFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
- //       setHasOptionsMenu(true);
+        setHasOptionsMenu(true);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -81,10 +81,6 @@ public class SocialFragment extends BaseFragment {
         showProgressBarIfAdapterEmpty();
 
         recyclerViewSocial.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        Drawable dividerDrawable = getResources().getDrawable(R.drawable.social_divider);
-        int dividerPadding = getResources().getDimensionPixelSize(R.dimen.social_divider_padding);
-//        recyclerViewSocial.addItemDecoration(new DividerItemDecoration(dividerDrawable, dividerPadding));
 
         recyclerViewSocial.setAdapter(socialAdapter);
     }
@@ -146,5 +142,9 @@ public class SocialFragment extends BaseFragment {
     @Override
     protected void inject(AppComponent appComponent) {
         DaggerSocialFragmentComponent.builder().appComponent(appComponent).build().inject(this);
+    }
+
+    public void reload() {
+        getMessages();
     }
 }

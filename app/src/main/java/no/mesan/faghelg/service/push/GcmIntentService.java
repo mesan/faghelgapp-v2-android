@@ -11,12 +11,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.util.List;
 
+import no.mesan.faghelg.view.MainActivity;
 import no.mesan.faghelg.view.login.LoginActivity;
 import no.mesan.faghelgapps.R;
 
@@ -24,8 +26,6 @@ public class GcmIntentService extends IntentService {
 	public static final int NOTIFICATION_ID = 1;
 	private NotificationManager mNotificationManager;
 	protected NotificationCompat.Builder builder;
-	private final Handler mainThread = new Handler(Looper.getMainLooper());
-	public static boolean hasReceived = false;
 
 	public GcmIntentService() {
 		super("GcmIntentService");
@@ -44,22 +44,12 @@ public class GcmIntentService extends IntentService {
 				// sendNotification("Deleted messages on server: " +
 				// extras.toString());
 			} else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
-
 				String title = extras.getString("title");
 				String content = extras.getString("content");
 
-				// Post notification of received message.
 				Log.d(this.getClass().getSimpleName(), "Title: " + title + " -- Content: " + content);
 
-				if (!hasReceived) {
-					hasReceived = true;
-					//SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-					//boolean shouldShowNotification = sharedPref.getBoolean(getApplicationContext().getString(R.string.settings_push_key), true);
-					boolean shouldShowNotification = true;
-					if (shouldShowNotification) {
-						sendNotification(title, content);
-					}
-				}
+				sendNotification(title, content);
 			}
 		}
 
@@ -67,22 +57,48 @@ public class GcmIntentService extends IntentService {
 		GcmBroadcastReceiver.completeWakefulIntent(intent);
 	}
 
-	// Put the message into a notification and post it.
 	private void sendNotification(String title, String content) {
 		mNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 
+		Intent intent;
+
+		ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+		List<ActivityManager.RunningTaskInfo> runningTaskInfo = manager.getRunningTasks(1);
+
+		if (runningTaskInfo.size() > 0) {
+			ComponentName componentInfo = runningTaskInfo.get(0).topActivity;
+			String activityName = componentInfo.getClassName();
+
+			if (MainActivity.class.getName().equals(activityName)) {
+				intent = new Intent(this, MainActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+			} else {
+				intent = getLoginIntent();
+			}
+		} else {
+			intent = getLoginIntent();
+		}
+
+		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
+				.setSmallIcon(R.mipmap.ic_launcher)
+				.setContentTitle(title)
+				.setStyle(new NotificationCompat.BigTextStyle().bigText(content))
+				.setContentText(content)
+				.setTicker(title)
+				.setAutoCancel(true);
+
+		PendingIntent contentIntent = PendingIntent.getActivity(this, NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		mBuilder.setContentIntent(contentIntent);
+
+		mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+	}
+
+	private Intent getLoginIntent() {
 		Intent intent = new Intent(this, LoginActivity.class);
 		intent.setAction("android.intent.action.MAIN");
 		intent.addCategory("android.intent.category.LAUNCHER");
 		intent.putExtra("from.notification", 1);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-		PendingIntent contentIntent = PendingIntent.getActivity(this, NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this).setSmallIcon(R.mipmap.ic_launcher)
-				.setContentTitle(title).setStyle(new NotificationCompat.BigTextStyle().bigText(content)).setContentText(content).setTicker(title).setAutoCancel(true);
-
-		mBuilder.setContentIntent(contentIntent);
-		mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+		return intent;
 	}
 }
