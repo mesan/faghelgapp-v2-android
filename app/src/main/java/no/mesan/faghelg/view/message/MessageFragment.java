@@ -113,6 +113,7 @@ public class MessageFragment extends BaseFragment {
 
     private void handlePostMessageFailure(Throwable throwable) {
         sendButton.setEnabled(true);
+        ((MessageActivity)getActivity()).showSnackbar(getString(R.string.error_message));
     }
 
     @Override

@@ -9,6 +9,8 @@ import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -38,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
+
+    @Bind(R.id.rootLayout)
+    CoordinatorLayout rootLayout;
 
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     public static final String PROPERTY_REG_ID = "registration_id";
@@ -75,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
         registerForPush();
 
         imageViewLogo.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+    }
+
+    public void showSnackbar(String text) {
+        Snackbar.make(rootLayout, text, Snackbar.LENGTH_LONG).show();
     }
 
     private void loadFragment(Fragment fragment) {

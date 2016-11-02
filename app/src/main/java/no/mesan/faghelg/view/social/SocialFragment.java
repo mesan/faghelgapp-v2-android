@@ -26,6 +26,7 @@ import no.mesan.faghelg.injector.components.DaggerSocialFragmentComponent;
 import no.mesan.faghelg.model.Message;
 import no.mesan.faghelg.service.SocialService;
 import no.mesan.faghelg.view.BaseFragment;
+import no.mesan.faghelg.view.MainActivity;
 import no.mesan.faghelg.view.message.MessageActivity;
 import no.mesan.faghelgapps.R;
 
@@ -111,6 +112,7 @@ public class SocialFragment extends BaseFragment {
 
     private void handleGetMessagesFailure(Throwable throwable) {
         swipeRefreshLayout.setRefreshing(false);
+        ((MainActivity)getActivity()).showSnackbar(getString(R.string.error_feed));
     }
 
     @Override

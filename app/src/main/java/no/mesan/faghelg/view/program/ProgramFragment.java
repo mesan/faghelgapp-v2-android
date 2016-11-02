@@ -23,6 +23,7 @@ import no.mesan.faghelg.model.Event;
 import no.mesan.faghelg.model.Program;
 import no.mesan.faghelg.service.ProgramService;
 import no.mesan.faghelg.view.BaseFragment;
+import no.mesan.faghelg.view.MainActivity;
 import no.mesan.faghelg.view.slidingtabs.SlidingTabLayout;
 import no.mesan.faghelgapps.R;
 
@@ -64,7 +65,7 @@ public class ProgramFragment extends BaseFragment {
     }
 
     private void handleEventsError(Throwable throwable) {
-        // TODO: Show error toast etc.
+        ((MainActivity)getActivity()).showSnackbar(getString(R.string.error_program));
     }
 
     @Override

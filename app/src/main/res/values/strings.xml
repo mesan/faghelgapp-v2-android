@@ -13,6 +13,10 @@
     <string name="menu_close">Lukk</string>
     <string name="loading_text">Laster..</string>
     <string name="character_count">%1$d/140</string>
+    <string name="error_feed">Kan ikke hente meldinger. Prøv igjen senere.</string>
+    <string name="error_program">Kunne ikke hente program. Prøv igjen senere.</string>
+    <string name="error_people">Kunne ikke hente folk. Prøv igjen senere.</string>
+    <string name="error_message">Kunne ikke sende melding. Prøv igjen senere.</string>
 
     <string-array name="weekdays">
         <item>nulldag</item>
