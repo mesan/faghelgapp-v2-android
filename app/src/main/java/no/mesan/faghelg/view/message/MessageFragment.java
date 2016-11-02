@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -38,6 +39,9 @@ public class MessageFragment extends BaseFragment {
     @Bind(R.id.textCharacterCount)
     TextView characterCountText;
 
+    @Bind(R.id.buttonReset)
+    ImageButton resetButton;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,12 +64,14 @@ public class MessageFragment extends BaseFragment {
             setEmptyCount();
         } else {
             sendButton.setEnabled(true);
+            resetButton.setVisibility(View.VISIBLE);
             int count = s.toString().length();
             characterCountText.setText(getString(R.string.character_count, count));
         }
     }
 
     private void setEmptyCount() {
+        resetButton.setVisibility(View.INVISIBLE);
         characterCountText.setText(getString(R.string.character_count, 0));
     }
 
@@ -77,6 +83,8 @@ public class MessageFragment extends BaseFragment {
 
     @OnClick(R.id.btnSend)
     public void sendMessage() {
+        sendButton.setEnabled(false);
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String token = preferences.getString(getString(R.string.apptoken), "");
 
@@ -104,6 +112,7 @@ public class MessageFragment extends BaseFragment {
     }
 
     private void handlePostMessageFailure(Throwable throwable) {
+        sendButton.setEnabled(true);
     }
 
     @Override

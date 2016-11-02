@@ -36,6 +36,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerVertical="true"
                 android:tint="@color/mesanbluedark"
+                android:visibility="invisible"
                 android:background="@drawable/transparent_ripple_button"
                 android:src="@drawable/ic_close" />
 
