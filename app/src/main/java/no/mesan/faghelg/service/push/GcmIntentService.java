@@ -1,24 +1,26 @@
 package no.mesan.faghelg.service.push;
 
+import android.app.ActivityManager;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import java.util.List;
+
 import no.mesan.faghelg.view.MainActivity;
 import no.mesan.faghelg.view.login.LoginActivity;
 import no.mesan.faghelgapps.R;
-import timber.log.Timber;
 
 public class GcmIntentService extends IntentService {
 	public static final int NOTIFICATION_ID = 1;
@@ -37,8 +39,6 @@ public class GcmIntentService extends IntentService {
 		GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
 		String messageType = gcm.getMessageType(intent);
 
-		Timber.d(messageType);
-
 		if (!extras.isEmpty()) {
 			if (GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
 				// sendNotification("Send error: " + extras.toString());
@@ -50,15 +50,12 @@ public class GcmIntentService extends IntentService {
 				String title = extras.getString("title");
 				String content = extras.getString("content");
 
-				Timber.d(title);
-				Timber.d(content);
-
 				// Post notification of received message.
 				Log.d(this.getClass().getSimpleName(), "Title: " + title + " -- Content: " + content);
-				if (!hasReceived) {
 
+				if (!hasReceived) {
 					hasReceived = true;
-					SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+					//SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 					//boolean shouldShowNotification = sharedPref.getBoolean(getApplicationContext().getString(R.string.settings_push_key), true);
 					boolean shouldShowNotification = true;
 					if (shouldShowNotification) {
@@ -73,23 +70,34 @@ public class GcmIntentService extends IntentService {
 	}
 
 	// Put the message into a notification and post it.
-	// This is just one simple example of what you might choose to do with
-	// a GCM message.
 	private void sendNotification(String title, String content) {
 		mNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 
-		Intent intent = new Intent(this, LoginActivity.class);
-		intent.setAction("android.intent.action.MAIN");
-		intent.addCategory("android.intent.category.LAUNCHER");
-		intent.putExtra("from.notification", 1);
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-		PendingIntent contentIntent = PendingIntent.getActivity(this, NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
+		Intent intent;
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this).setSmallIcon(R.mipmap.ic_launcher)
 				.setContentTitle(title).setStyle(new NotificationCompat.BigTextStyle().bigText(content)).setContentText(content).setTicker(title).setAutoCancel(true);
 
-		mBuilder.setContentIntent(contentIntent);
+		ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+		List<ActivityManager.RunningTaskInfo> runningTaskInfo = manager.getRunningTasks(1);
+		if (runningTaskInfo.size() > 0) {
+			ComponentName componentInfo = runningTaskInfo.get(0).topActivity;
+			String activityName = componentInfo.getClassName();
+			if (MainActivity.class.getName().equals(activityName)) {
+				Intent i = new Intent("UPDATE");
+				LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(this);
+				localBroadcastManager.sendBroadcast(i);
+			}
+		} else {
+			intent = new Intent(this, LoginActivity.class);
+			intent.setAction("android.intent.action.MAIN");
+			intent.addCategory("android.intent.category.LAUNCHER");
+			intent.putExtra("from.notification", 1);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+			PendingIntent contentIntent = PendingIntent.getActivity(this, NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+			mBuilder.setContentIntent(contentIntent);
+		}
+
 		mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
 	}
 }
