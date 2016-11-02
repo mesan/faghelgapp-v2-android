@@ -1,9 +1,6 @@
 package no.mesan.faghelg.view;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -13,7 +10,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -57,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
     private GoogleCloudMessaging gcm;
     private String regid;
     private Context context;
-    private BroadcastReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,29 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
         registerForPush();
 
-        receiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Log.d("HEI", "Jada");
-                // TODO: Make Fragment reload
-            }
-        };
-
         imageViewLogo.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        LocalBroadcastManager.getInstance(this).registerReceiver((receiver),
-                new IntentFilter("UPDATE")
-        );
-    }
-
-    @Override
-    protected void onStop() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
-        super.onStop();
     }
 
     private void loadFragment(Fragment fragment) {
@@ -201,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                     // is using accounts.
                     String token = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
                             .getString(getString(R.string.apptoken), "");
-                    Timber.d("Async task " + token);
+
                     pushService.registerForPush(token, regid).subscribe(
                             this::handleLoginSuccess,
                             this::handleLoginError);
