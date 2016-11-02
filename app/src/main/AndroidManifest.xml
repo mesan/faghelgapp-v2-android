@@ -7,10 +7,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-    <meta-data
-        android:name="com.google.android.gms.version"
-        android:value="@integer/google_play_services_version" />
-
     <application
         android:name="no.mesan.faghelg.FaghelgApplication"
         android:allowBackup="false"
@@ -57,6 +53,15 @@
         </receiver>
 
         <service android:name="no.mesan.faghelg.service.push.GcmIntentService" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="f050be13fe81907b41f0db98e604b954e6425c9e"
+            />
     </application>
 
 </manifest>
