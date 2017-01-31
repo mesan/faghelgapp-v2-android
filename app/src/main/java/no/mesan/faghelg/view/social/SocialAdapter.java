@@ -28,10 +28,12 @@ public class SocialAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if(viewType == VIEW_TYPE_TEXT) {
-            View socialTextItemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.social_text_item, parent, false);
+            View socialTextItemView = LayoutInflater
+                    .from(parent.getContext()).inflate(R.layout.social_text_item, parent, false);
             return new SocialAdapter.TextSocialViewHolder((TextSocialItemView) socialTextItemView);
         } else {
-            View socialImageItemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.social_image_item, parent, false);
+            View socialImageItemView = LayoutInflater
+                    .from(parent.getContext()).inflate(R.layout.social_image_item, parent, false);
             return new SocialAdapter.ImageSocialViewHolder((ImageSocialItemView) socialImageItemView);
         }
     }

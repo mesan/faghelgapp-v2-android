@@ -5,6 +5,7 @@ public class MessageOutput {
     private String title;
     private String content;
     private String imageUrl;
+    private String image;
 
     public String getTitle() {
         return title;
@@ -28,5 +29,13 @@ public class MessageOutput {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
