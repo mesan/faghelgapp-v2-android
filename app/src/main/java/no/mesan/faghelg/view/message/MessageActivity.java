@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,6 +27,9 @@ public class MessageActivity extends AppCompatActivity {
     @Bind(R.id.imageViewLogo)
     ImageView imageViewLogo;
 
+    @Bind(R.id.rootLayout)
+    CoordinatorLayout rootLayout;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +45,10 @@ public class MessageActivity extends AppCompatActivity {
         MessageFragment messageFragment =
                 (MessageFragment) Fragment.instantiate(getApplicationContext(), MessageFragment.class.getName());
         loadFragment(messageFragment);
+    }
+
+    public void showSnackbar(String text) {
+        Snackbar.make(rootLayout, text, Snackbar.LENGTH_LONG).show();
     }
 
     private void loadFragment(Fragment fragment) {

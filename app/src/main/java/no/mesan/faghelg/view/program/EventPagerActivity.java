@@ -46,6 +46,7 @@ public class EventPagerActivity extends AppCompatActivity {
         viewPager.setPageMargin(20);
     }
 
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));

@@ -8,6 +8,7 @@
 
     <color name="mesanbluelight">#7fa8be</color>
     <color name="mesanblue">#407795</color>
+    <color name="mesanbluedark">#1f4c60</color>
     <color name="mesanred">#ed3823</color>
     <color name="greyish">#b4b4b4</color>
 
@@ -17,4 +18,6 @@
     <color name="light_greyish">#dddddd</color>
     <color name="light_grey">#eeeeee</color>
     <color name="dark_grey">#777777</color>
+    <color name="scrim">#60000000</color>
+
 </resources>

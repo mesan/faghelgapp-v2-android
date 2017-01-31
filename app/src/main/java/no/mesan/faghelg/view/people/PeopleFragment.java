@@ -20,6 +20,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import no.mesan.faghelg.view.MainActivity;
 import no.mesan.faghelgapps.R;
 import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.faghelg.injector.components.DaggerPeopleFragmentComponent;
@@ -84,7 +85,7 @@ public class PeopleFragment extends BaseFragment implements PeopleAdapter.Person
     }
 
     private void handleGetPeopleFailure(Throwable throwable) {
-
+        ((MainActivity)getActivity()).showSnackbar(getString(R.string.error_people));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

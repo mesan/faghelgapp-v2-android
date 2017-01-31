@@ -6,6 +6,7 @@ import no.mesan.faghelg.model.Message;
 import no.mesan.faghelg.model.MessageOutput;
 import no.mesan.faghelg.model.Person;
 import no.mesan.faghelg.model.Program;
+import no.mesan.faghelg.model.PushDevice;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -19,6 +20,10 @@ public interface FaghelgApi {
 
     @GET("/persons")
     Call<List<Person>> getPersons();
+
+    @POST("/push/register")
+    Call<Void> registerForPush(@Header("Authorization") String authToken,
+                               @Body PushDevice pushDevice);
 
     @GET("/messages")
     Call<List<Message>> getMessages();

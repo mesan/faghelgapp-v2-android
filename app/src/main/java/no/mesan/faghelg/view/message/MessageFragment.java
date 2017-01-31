@@ -4,17 +4,23 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +29,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.faghelg.injector.components.DaggerMessageFragmentComponent;
 import no.mesan.faghelg.model.MessageOutput;
@@ -55,6 +62,25 @@ public class MessageFragment extends BaseFragment {
     @Bind(R.id.discardCameraImage)
     ImageView discardCameraImageImgView;
 
+    @Bind(R.id.btnSend)
+    Button sendButton;
+
+    @Bind(R.id.textCharacterCount)
+    TextView characterCountText;
+
+    @Bind(R.id.buttonReset)
+    ImageButton resetButton;
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
+
+        sendButton.setEnabled(false);
+
+        return view;
+    }
+
     @Override
     protected int getContentViewId() {
         return R.layout.fragment_message;
@@ -67,8 +93,34 @@ public class MessageFragment extends BaseFragment {
         imageEncodedBase64 = null;
     }
 
+    @OnTextChanged(R.id.editContent)
+    public void textChanged(CharSequence s) {
+        if(s.toString().trim().length()==0){
+            sendButton.setEnabled(false);
+            setEmptyCount();
+        } else {
+            sendButton.setEnabled(true);
+            resetButton.setVisibility(View.VISIBLE);
+            int count = s.toString().length();
+            characterCountText.setText(getString(R.string.character_count, count));
+        }
+    }
+
+    private void setEmptyCount() {
+        resetButton.setVisibility(View.INVISIBLE);
+        characterCountText.setText(getString(R.string.character_count, 0));
+    }
+
+    @OnClick(R.id.buttonReset)
+    public void resetMessage() {
+        editContent.setText("");
+        setEmptyCount();
+    }
+
     @OnClick(R.id.btnSend)
     public void sendMessage() {
+        sendButton.setEnabled(false);
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String token = preferences.getString(getString(R.string.apptoken), "");
 
@@ -143,6 +195,8 @@ public class MessageFragment extends BaseFragment {
     }
 
     private void handlePostMessageFailure(Throwable throwable) {
+        sendButton.setEnabled(true);
+        ((MessageActivity)getActivity()).showSnackbar(getString(R.string.error_message));
     }
 
 
