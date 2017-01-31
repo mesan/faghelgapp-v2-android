@@ -27,11 +27,11 @@
                 android:id="@+id/message_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxHeight="@dimen/social_image_max_height"
                 android:minHeight="@dimen/person_image_size"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
-                android:cropToPadding="false" />
+                android:cropToPadding="false"
+                android:visibility="gone" />
 
             <include
                 layout="@layout/social_item_author_info"

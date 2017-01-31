@@ -91,19 +91,26 @@ public class MessageFragment extends BaseFragment {
         mImageView.setVisibility(View.GONE);
         discardCameraImageImgView.setVisibility(View.GONE);
         imageEncodedBase64 = null;
+        checkIfDisableSendButton(editContent.getText().toString());
+    }
+
+    private void checkIfDisableSendButton(String text){
+        if(text.trim().length()==0) {
+            setEmptyCount();
+        }
+        if(text.trim().length()==0 && imageEncodedBase64 == null){
+            sendButton.setEnabled(false);
+        } else {
+            sendButton.setEnabled(true);
+            resetButton.setVisibility(View.VISIBLE);
+            int count = text.length();
+            characterCountText.setText(getString(R.string.character_count, count));
+        }
     }
 
     @OnTextChanged(R.id.editContent)
     public void textChanged(CharSequence s) {
-        if(s.toString().trim().length()==0){
-            sendButton.setEnabled(false);
-            setEmptyCount();
-        } else {
-            sendButton.setEnabled(true);
-            resetButton.setVisibility(View.VISIBLE);
-            int count = s.toString().length();
-            characterCountText.setText(getString(R.string.character_count, count));
-        }
+        checkIfDisableSendButton(s.toString());
     }
 
     private void setEmptyCount() {
@@ -153,6 +160,7 @@ public class MessageFragment extends BaseFragment {
             mImageView.setVisibility(View.VISIBLE);
             discardCameraImageImgView.setVisibility(View.VISIBLE);
             imageEncodedBase64 = imgService.encodeBitmapToString(imageBitmap);
+            checkIfDisableSendButton(editContent.getText().toString());
         }
     }
 

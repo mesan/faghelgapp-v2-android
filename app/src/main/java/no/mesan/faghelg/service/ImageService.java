@@ -42,17 +42,14 @@ public class ImageService {
             if (resizedImage != image) {
                 image.recycle();
             }
-            Bitmap rotatedImage = rotateBitmap(resizedImage);
-            if (rotatedImage != resizedImage) {
-                resizedImage.recycle();
-            }
             parcelFileDescriptor.close();
-            return rotatedImage;
+            return resizedImage;
         } catch (Exception ex) {
             //TODO Handle exception
         }
         return null;
     }
+
     private Bitmap rotateBitmap(Bitmap resizedImage) {
         final int width = resizedImage.getWidth();
         final int height = resizedImage.getHeight();
