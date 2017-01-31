@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:fillViewport="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -49,7 +50,7 @@
                 android:layout_marginEnd="@dimen/padding_m"
                 style="@style/list_title"
                 android:textColor="@color/white"
-                android:text="Tittel" />
+                tools:text="Tittel" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -60,7 +61,7 @@
                 android:layout_marginEnd="@dimen/padding_m"
                 style="@style/undertext"
                 android:textColor="@color/white"
-                android:text="Tid"/>
+                tools:text="Tid"/>
 
         </LinearLayout>
 
@@ -85,24 +86,25 @@
                 android:layout_toEndOf="@+id/imgProfile">
 
                 <TextView
-                    android:text="Navn Navnesen"
+                    tools:text="Navn Navnesen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_marginStart="@dimen/padding_m"
                     android:textColor="@color/mesanblue"
                     style="@style/breadtext"
-                    android:id="@+id/txtName" />
+                    android:id="@+id/txtName"
+                    android:textSize="18sp"/>
 
                 <TextView
-                    android:text="navnn"
+                    tools:text="navnn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtName"
                     android:layout_alignStart="@id/txtName"
                     android:textColor="@color/greyish"
                     style="@style/breadtext"
-                    android:id="@+id/txtNick" />
+                    android:id="@+id/txtNick"
+                    android:textSize="16sp"/>
             </RelativeLayout>
 
         </LinearLayout>
@@ -118,7 +120,8 @@
             android:textColor="@color/mesanblue"
             android:lineSpacingExtra="5dp"
             style="@style/breadtext"
-            android:id="@+id/txtDescription" />
+            android:id="@+id/txtDescription"
+            android:textSize="18sp"/>
 
         <TextView
             android:text="1 av 5"

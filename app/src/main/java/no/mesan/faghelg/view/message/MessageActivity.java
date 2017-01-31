@@ -1,8 +1,6 @@
 package no.mesan.faghelg.view.message;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -39,8 +37,6 @@ public class MessageActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        imageViewLogo.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
         MessageFragment messageFragment =
                 (MessageFragment) Fragment.instantiate(getApplicationContext(), MessageFragment.class.getName());

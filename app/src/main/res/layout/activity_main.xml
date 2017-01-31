@@ -21,16 +21,17 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/mesanred"
+                android:background="@color/netcompanyblue"
                 app:contentInsetLeft="0dp"
                 app:contentInsetStart="0dp" />
 
             <ImageView
                 android:id="@+id/imageViewLogo"
-                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/logo" />
+                android:src="@drawable/ncheader"
+                android:layout_width="150dp"
+                android:contentDescription="@string/content_desc_netcompany_logo"/>
 
         </FrameLayout>
 

@@ -1,27 +1,20 @@
 package no.mesan.faghelg.view;
 
-import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import butterknife.Bind;
 import butterknife.BindColor;
 import butterknife.OnClick;
+import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.faghelg.view.menu.MenuPagerAdapter;
 import no.mesan.faghelg.view.social.SocialFragment;
 import no.mesan.faghelgapps.R;
-import no.mesan.faghelg.injector.components.AppComponent;
-import no.mesan.faghelg.view.people.PeopleFragment;
-import no.mesan.faghelg.view.program.ProgramFragment;
 
 public class MainFragment extends BaseFragment {
 
@@ -75,9 +68,7 @@ public class MainFragment extends BaseFragment {
         onTabSocialClick();
         viewPagerMenu.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
 
             @Override
             public void onPageSelected(int position) {
@@ -85,9 +76,7 @@ public class MainFragment extends BaseFragment {
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
+            public void onPageScrollStateChanged(int state) {}
         });
     }
 
@@ -109,9 +98,9 @@ public class MainFragment extends BaseFragment {
     private void setupViews(int page) {
         viewPagerMenu.setCurrentItem(page, true);
 
-        imageViewTabProgram.setImageResource(page == 0 ? R.drawable.image_program_active : R.drawable.image_program);
-        imageViewTabSocial.setImageResource(page == 1 ? R.drawable.image_social_active : R.drawable.image_social);
-        imageViewTabPeople.setImageResource(page == 2 ? R.drawable.image_people_active : R.drawable.image_people);
+        imageViewTabProgram.setImageResource(page == 0 ? R.drawable.ic_program_active : R.drawable.ic_program_passive);
+        imageViewTabSocial.setImageResource(page == 1 ? R.drawable.ic_feed_active : R.drawable.ic_feed_passive);
+        imageViewTabPeople.setImageResource(page == 2 ? R.drawable.ic_people_active : R.drawable.ic_people_passive);
     }
 
 }

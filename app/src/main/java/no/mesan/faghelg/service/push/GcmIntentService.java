@@ -80,7 +80,7 @@ public class GcmIntentService extends IntentService {
 		}
 
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-				.setSmallIcon(R.mipmap.ic_launcher)
+				.setSmallIcon(R.mipmap.ic_app_icon)
 				.setContentTitle(title)
 				.setStyle(new NotificationCompat.BigTextStyle().bigText(content))
 				.setContentText(content)

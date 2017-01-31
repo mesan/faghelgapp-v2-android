@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/mesanred</color>
-    <color name="colorPrimaryDark">@color/black</color>
+    <color name="colorPrimary">@color/netcompanyblue</color>
+    <color name="colorPrimaryDark">@color/netcompanybluedark</color>
     <color name="colorAccent">@color/mesanblue</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 
     <color name="mesanbluelight">#7fa8be</color>
     <color name="mesanblue">#407795</color>
-    <color name="mesanbluedark">#1f4c60</color>
+    <color name="netcompanybluedark">#2C4960</color>
     <color name="mesanred">#ed3823</color>
+    <color name="netcompanyblue">#395B73</color>
     <color name="greyish">#b4b4b4</color>
 
     <color name="toast_success">@color/colorPrimary</color>
@@ -19,5 +20,6 @@
     <color name="light_grey">#eeeeee</color>
     <color name="dark_grey">#777777</color>
     <color name="scrim">#60000000</color>
+    <color name="transparent">#00000000</color>
 
 </resources>

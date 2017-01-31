@@ -1,21 +1,16 @@
 package no.mesan.faghelg.view;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -37,7 +32,6 @@ import no.mesan.faghelg.injector.components.DaggerMainActivityComponent;
 import no.mesan.faghelg.injector.modules.PushModule;
 import no.mesan.faghelg.service.PushService;
 import no.mesan.faghelgapps.R;
-import timber.log.Timber;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
@@ -84,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
 
         registerForPush();
 
-        imageViewLogo.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
     }
 
     @Override

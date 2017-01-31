@@ -35,7 +35,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
                 android:layout_centerVertical="true"
-                android:tint="@color/mesanbluedark"
+                android:tint="@color/netcompanybluedark"
                 android:visibility="invisible"
                 android:background="@drawable/transparent_ripple_button"
                 android:src="@drawable/ic_close" />
