@@ -28,7 +28,6 @@ import no.mesan.faghelg.injector.components.DaggerMessageFragmentComponent;
 import no.mesan.faghelg.model.MessageOutput;
 import no.mesan.faghelg.service.ImageService;
 import no.mesan.faghelg.service.SocialService;
-import no.mesan.faghelg.service.api.FaghelgApi;
 import no.mesan.faghelg.view.BaseFragment;
 import no.mesan.faghelgapps.R;
 
@@ -59,6 +58,13 @@ public class MessageFragment extends BaseFragment {
     @Override
     protected int getContentViewId() {
         return R.layout.fragment_message;
+    }
+
+    @OnClick(R.id.discardCameraImage)
+    public void discardCameraImage() {
+        mImageView.setVisibility(View.GONE);
+        discardCameraImageImgView.setVisibility(View.GONE);
+        imageEncodedBase64 = null;
     }
 
     @OnClick(R.id.btnSend)

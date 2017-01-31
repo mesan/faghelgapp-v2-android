@@ -91,6 +91,7 @@ public class ImageSocialItemView extends SocialItemAuthorInfoView {
             Picasso.with(getContext()).load(message.getImageUrl())
                     .into(imageViewMessageImage);
         }
+
         if (!TextUtils.isEmpty(message.getTimestamp().toString())) {
             String formattedTimestamp = MessageTimestampFormatter.formatTimestamp(message);
             timestampView.setText(formattedTimestamp);
