@@ -8,6 +8,17 @@
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/padding_l">
 
+
+        <ImageView
+            android:id="@+id/message_image_blurred"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:minHeight="@dimen/person_image_size"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
+
         <ImageView
             android:id="@+id/message_image"
             android:layout_width="match_parent"

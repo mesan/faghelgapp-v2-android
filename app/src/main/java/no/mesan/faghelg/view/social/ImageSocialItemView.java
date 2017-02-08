@@ -9,6 +9,7 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
@@ -19,6 +20,7 @@ import com.squareup.picasso.Transformation;
 import butterknife.Bind;
 import butterknife.BindDimen;
 import butterknife.ButterKnife;
+import jp.wasabeef.blurry.Blurry;
 import no.mesan.faghelg.model.Message;
 import no.mesan.faghelg.util.MessageTimestampFormatter;
 import no.mesan.faghelgapps.R;
@@ -27,6 +29,9 @@ public class ImageSocialItemView extends SocialItemAuthorInfoView {
 
     @Bind(R.id.message_image)
     ImageView imageViewMessageImage;
+
+    @Bind(R.id.message_image_blurred)
+    ImageView imageViewMessageImageBlurred;
 
     @BindDimen(R.dimen.social_image_max_height)
     int socialImageMaxHeight;
@@ -72,6 +77,8 @@ public class ImageSocialItemView extends SocialItemAuthorInfoView {
         timestampView.setText("");
         imageViewMessageImage.setImageBitmap(null);
         imageViewMessageImage.setVisibility(View.GONE);
+        imageViewMessageImageBlurred.setImageBitmap(null);
+        imageViewMessageImageBlurred.setVisibility(View.GONE);
 
         if (!TextUtils.isEmpty(message.getSender())) {
             textViewAuthorShortname.setText("@" + message.getSender());
@@ -110,6 +117,11 @@ public class ImageSocialItemView extends SocialItemAuthorInfoView {
                         int height = bitmap.getHeight();
                         if (height > width) {
                             imageViewMessageImage.setMaxHeight(socialImageMaxHeight);
+                            imageViewMessageImageBlurred.setMaxHeight(socialImageMaxHeight);
+                            imageViewMessageImageBlurred.setVisibility(VISIBLE);
+                            imageViewMessageImageBlurred.setImageBitmap(bitmap);
+//                            Blurry.with(getContext()).radius(50).async().onto(viewBlur);
+                            Blurry.with(getContext()).radius(50).async().from(bitmap).into(imageViewMessageImageBlurred);
                         } else {
                             imageViewMessageImage.setMaxHeight(123456);
                         }

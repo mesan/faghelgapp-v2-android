@@ -104,13 +104,14 @@ dependencies {
     //For images
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.makeramen:roundedimageview:2.2.1'
+    compile 'jp.wasabeef:blurry:2.1.0'
 
     // JodaTime
     compile 'net.danlew:android.joda:2.9.4.2'
 
     //Google Play Services
-    compile 'com.google.android.gms:play-services-base:9.8.0'
-    compile 'com.google.android.gms:play-services-gcm:9.8.0'
+    compile 'com.google.android.gms:play-services-base:10.0.1'
+    compile 'com.google.android.gms:play-services-gcm:10.0.1'
 
     // Crashlytics
     compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
