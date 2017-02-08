@@ -27,8 +27,11 @@
                 android:id="@+id/message_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="@dimen/person_image_size"
+                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
-                android:minHeight="@dimen/person_image_size" />
+                android:cropToPadding="false"
+                android:visibility="gone" />
 
             <include
                 layout="@layout/social_item_author_info"
