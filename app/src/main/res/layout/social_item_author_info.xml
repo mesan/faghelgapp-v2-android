@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/social_author_side_margin"
-    android:layout_marginRight="@dimen/social_author_side_margin"
-    android:paddingRight="@dimen/social_card_side_padding"
-    android:paddingLeft="@dimen/social_card_side_padding"
-    >
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/social_padding"
+    android:paddingRight="@dimen/social_padding">
 
     <ImageView
+        android:id="@+id/author_image"
         android:layout_width="@dimen/person_image_size"
         android:layout_height="@dimen/person_image_size"
-        android:id="@+id/author_image"
-        android:layout_marginRight="@dimen/social_author_image_right_margin" />
+        android:layout_marginRight="@dimen/social_padding" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -20,28 +19,29 @@
         android:layout_marginTop="@dimen/social_author_text_top_margin">
 
         <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
             android:id="@+id/author_ruler"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
             android:background="@color/greyish"/>
 
         <TextView
+            android:id="@+id/author_shortname"
+            style="@style/p"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/author_shortname"
             android:layout_below="@id/author_ruler"
-            android:layout_marginTop="@dimen/social_author_shortname_top_margin"
             android:textColor="@color/mesanblue"
-            style="@style/p"/>
+            tools:text="\@thomasp"/>
 
         <TextView
+            android:id="@+id/message_timestamp"
+            style="@style/subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@id/author_ruler"
-            android:id="@+id/message_timestamp"
-            android:layout_marginTop="@dimen/social_author_timestamp_top_margin"
-            style="@style/subtitle"/>
+            android:layout_alignBaseline="@id/author_shortname"
+            tools:text="5. februar kl 13:30"/>
 
     </RelativeLayout>
 

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.TextView;
 
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
@@ -57,8 +58,14 @@ public class TextSocialItemView extends SocialItemAuthorInfoView {
             return;
         }
 
+
+        textViewAuthorShortname.setText("");
+        imageViewAuthor.setImageDrawable(null);
+        timestampView.setText("");
+        textViewMessageText.setText("");
+
         if (!TextUtils.isEmpty(message.getSender())) {
-            textViewAuthorShortname.setText(message.getSender());
+            textViewAuthorShortname.setText("@" + message.getSender());
         }
 
         imageViewAuthor.setImageDrawable(null);

@@ -18,6 +18,17 @@ public class SocialAdapter extends RecyclerView.Adapter {
     private static int VIEW_TYPE_TEXT = 0;
     private static int VIEW_TYPE_IMAGE = 1;
 
+    public interface ImageListener {
+        void imageWasClicked(String url);
+    }
+
+    private final ImageListener imageListener;
+
+
+    public SocialAdapter(ImageListener imageListener) {
+        this.imageListener = imageListener;
+    }
+
     public void setMessages(List<Message> messages) {
         this.messages.clear();
         this.messages.addAll(messages);
@@ -27,7 +38,7 @@ public class SocialAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(viewType == VIEW_TYPE_TEXT) {
+        if (viewType == VIEW_TYPE_TEXT) {
             View socialTextItemView = LayoutInflater
                     .from(parent.getContext()).inflate(R.layout.social_text_item, parent, false);
             return new SocialAdapter.TextSocialViewHolder((TextSocialItemView) socialTextItemView);
@@ -40,7 +51,7 @@ public class SocialAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        if(TextUtils.isEmpty(messages.get(position).getImageUrl())) {
+        if (TextUtils.isEmpty(messages.get(position).getImageUrl())) {
             return VIEW_TYPE_TEXT;
         }
         return VIEW_TYPE_IMAGE;
@@ -48,10 +59,9 @@ public class SocialAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if(getItemViewType(position) == VIEW_TYPE_IMAGE) {
-            ((ImageSocialViewHolder) holder).imageSocialItemView.bindTo(messages.get(position));
-        }
-        else {
+        if (getItemViewType(position) == VIEW_TYPE_IMAGE) {
+            ((ImageSocialViewHolder) holder).imageSocialItemView.bindTo(messages.get(position), imageListener);
+        } else {
             ((TextSocialViewHolder) holder).textSocialItemView.bindTo(messages.get(position));
         }
     }

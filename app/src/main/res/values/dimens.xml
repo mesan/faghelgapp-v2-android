@@ -6,6 +6,8 @@
     <dimen name="padding_m">10dp</dimen>
     <dimen name="padding_l">20dp</dimen>
     <dimen name="padding_xl">30dp</dimen>
+    <dimen name="padding_xxl">40dp</dimen>
+    <dimen name="padding_xxxl">50dp</dimen>
     <dimen name="progress_size">40dp</dimen>
     <dimen name="action_bar_size">60dp</dimen>
     <dimen name="text_size_xs">13sp</dimen>
@@ -26,8 +28,8 @@
     <dimen name="social_divider_padding">30dp</dimen>
     <dimen name="social_author_side_margin">15dp</dimen>
     <dimen name="social_edge_padding">30dp</dimen>
-    <dimen name="social_author_shortname_top_margin">7dp</dimen>
-    <dimen name="social_author_timestamp_top_margin">11dp</dimen>
+    <dimen name="social_author_shortname_top_margin">4dp</dimen>
+    <dimen name="social_author_timestamp_top_margin">7dp</dimen>
     <dimen name="social_author_image_right_margin">7dp</dimen>
     <dimen name="social_author_text_top_margin">34dp</dimen>
     <dimen name="social_message_margin_bottom">25dp</dimen>
@@ -38,4 +40,6 @@
     <dimen name="social_card_side_margin">5dp</dimen>
     <dimen name="social_card_margin">2.5dp</dimen>
     <dimen name="social_card_corner_radius">2dp</dimen>
+    <dimen name="social_padding">20dp</dimen>
+    <dimen name="button_size">48dp</dimen>
 </resources>

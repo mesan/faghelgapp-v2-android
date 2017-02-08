@@ -1,7 +1,6 @@
 package no.mesan.faghelg.view.social;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -27,10 +26,11 @@ import no.mesan.faghelg.model.Message;
 import no.mesan.faghelg.service.SocialService;
 import no.mesan.faghelg.view.BaseFragment;
 import no.mesan.faghelg.view.MainActivity;
+import no.mesan.faghelg.view.common.FullScreenImageActivity;
 import no.mesan.faghelg.view.message.MessageActivity;
 import no.mesan.faghelgapps.R;
 
-public class SocialFragment extends BaseFragment {
+public class SocialFragment extends BaseFragment implements SocialAdapter.ImageListener {
 
     @Bind(R.id.social_progress_bar)
     ProgressBar progressBarView;
@@ -76,7 +76,7 @@ public class SocialFragment extends BaseFragment {
     }
 
     private void setupRecyclerView() {
-        socialAdapter = new SocialAdapter();
+        socialAdapter = new SocialAdapter(this);
 
         showProgressBarIfAdapterEmpty();
 
@@ -108,7 +108,7 @@ public class SocialFragment extends BaseFragment {
 
     private void handleGetMessagesFailure(Throwable throwable) {
         swipeRefreshLayout.setRefreshing(false);
-        ((MainActivity)getActivity()).showSnackbar(getString(R.string.error_feed));
+        ((MainActivity) getActivity()).showSnackbar(getString(R.string.error_feed));
     }
 
     @Override
@@ -146,5 +146,13 @@ public class SocialFragment extends BaseFragment {
 
     public void reload() {
         getMessages();
+    }
+
+    @Override
+    public void imageWasClicked(String url) {
+
+        Intent intent = new Intent(getContext(), FullScreenImageActivity.class);
+        intent.putExtra(FullScreenImageActivity.PHOTO_URI, url);
+        startActivity(intent);
     }
 }

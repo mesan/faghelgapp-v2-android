@@ -36,6 +36,7 @@ import no.mesan.faghelg.model.MessageOutput;
 import no.mesan.faghelg.service.ImageService;
 import no.mesan.faghelg.service.SocialService;
 import no.mesan.faghelg.view.BaseFragment;
+import no.mesan.faghelg.view.common.FullScreenImageActivity;
 import no.mesan.faghelgapps.R;
 
 import static android.app.Activity.RESULT_OK;
@@ -57,7 +58,7 @@ public class MessageFragment extends BaseFragment {
     ImageButton btnCamera;
 
     @Bind(R.id.cameraImage)
-    ImageView mImageView;
+    ImageView imageView;
 
     @Bind(R.id.discardCameraImage)
     ImageView discardCameraImageImgView;
@@ -88,17 +89,17 @@ public class MessageFragment extends BaseFragment {
 
     @OnClick(R.id.discardCameraImage)
     public void discardCameraImage() {
-        mImageView.setVisibility(View.GONE);
+        imageView.setVisibility(View.GONE);
         discardCameraImageImgView.setVisibility(View.GONE);
         imageEncodedBase64 = null;
         checkIfDisableSendButton(editContent.getText().toString());
     }
 
-    private void checkIfDisableSendButton(String text){
-        if(text.trim().length()==0) {
+    private void checkIfDisableSendButton(String text) {
+        if (text.trim().length() == 0) {
             setEmptyCount();
         }
-        if(text.trim().length()==0 && imageEncodedBase64 == null){
+        if (text.trim().length() == 0 && imageEncodedBase64 == null) {
             sendButton.setEnabled(false);
         } else {
             sendButton.setEnabled(true);
@@ -117,6 +118,13 @@ public class MessageFragment extends BaseFragment {
         resetButton.setVisibility(View.INVISIBLE);
         characterCountText.setText(getString(R.string.character_count, 0));
     }
+
+//    @OnClick(R.id.cameraImage)
+//    public void imageClicked() {
+//        Intent intent = new Intent(getContext(), FullScreenImageActivity.class);
+//        intent.putExtra(FullScreenImageActivity.PHOTO_URI, photoUri);
+//        startActivity(intent);
+//    }
 
     @OnClick(R.id.buttonReset)
     public void resetMessage() {
@@ -143,7 +151,7 @@ public class MessageFragment extends BaseFragment {
     public void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         photoUri = createTempImageWithUri();
-        if(photoUri != null) {
+        if (photoUri != null) {
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
             if (takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
@@ -156,8 +164,8 @@ public class MessageFragment extends BaseFragment {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             ImageService imgService = new ImageService(getContext());
             Bitmap imageBitmap = imgService.getScaledBitmapFromUri(photoUri);
-            mImageView.setImageBitmap(imageBitmap);
-            mImageView.setVisibility(View.VISIBLE);
+            imageView.setImageBitmap(imageBitmap);
+            imageView.setVisibility(View.VISIBLE);
             discardCameraImageImgView.setVisibility(View.VISIBLE);
             imageEncodedBase64 = imgService.encodeBitmapToString(imageBitmap);
             checkIfDisableSendButton(editContent.getText().toString());
@@ -172,7 +180,7 @@ public class MessageFragment extends BaseFragment {
                     ".jpg",
                     outputDir
             );
-                return FileProvider.getUriForFile(getActivity(),
+            return FileProvider.getUriForFile(getActivity(),
                     "no.mesan.faghelgapp.fileprovider",
                     imageFile);
         } catch (IOException ioE) {
@@ -189,7 +197,7 @@ public class MessageFragment extends BaseFragment {
 
         String content = editContent.getText().toString();
         message.setContent(content);
-        if(!TextUtils.isEmpty(imageEncodedBase64)) {
+        if (!TextUtils.isEmpty(imageEncodedBase64)) {
             message.setImage(imageEncodedBase64);
             Log.d("base64img", message.getImage());
         } else {
@@ -204,9 +212,8 @@ public class MessageFragment extends BaseFragment {
 
     private void handlePostMessageFailure(Throwable throwable) {
         sendButton.setEnabled(true);
-        ((MessageActivity)getActivity()).showSnackbar(getString(R.string.error_message));
+        ((MessageActivity) getActivity()).showSnackbar(getString(R.string.error_message));
     }
-
 
 
     @Override

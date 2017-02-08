@@ -3,15 +3,11 @@ package no.mesan.faghelg.view.social;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -20,13 +16,10 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.squareup.picasso.Transformation;
 
-import java.io.InputStream;
-
 import butterknife.Bind;
 import butterknife.BindDimen;
 import butterknife.ButterKnife;
 import no.mesan.faghelg.model.Message;
-import no.mesan.faghelg.service.ImageService;
 import no.mesan.faghelg.util.MessageTimestampFormatter;
 import no.mesan.faghelgapps.R;
 
@@ -69,16 +62,25 @@ public class ImageSocialItemView extends SocialItemAuthorInfoView {
         borderSize = context.getResources().getDimensionPixelSize(R.dimen.person_image_border_size);
     }
 
-    public void bindTo(Message message) {
+    public void bindTo(Message message, SocialAdapter.ImageListener imageListener) {
         if (message == null) {
             return;
         }
 
+        textViewAuthorShortname.setText("");
+        imageViewAuthor.setImageDrawable(null);
+        timestampView.setText("");
+        imageViewMessageImage.setImageBitmap(null);
+        imageViewMessageImage.setVisibility(View.GONE);
+
         if (!TextUtils.isEmpty(message.getSender())) {
-            textViewAuthorShortname.setText(message.getSender());
+            textViewAuthorShortname.setText("@" + message.getSender());
         }
 
-        imageViewAuthor.setImageDrawable(null);
+        imageViewMessageImage.setOnClickListener(view -> {
+            imageListener.imageWasClicked(message.getImageUrl());
+        });
+
 
         if (!TextUtils.isEmpty(message.getSenderImageUrl())) {
 
@@ -100,30 +102,32 @@ public class ImageSocialItemView extends SocialItemAuthorInfoView {
 
         if (!TextUtils.isEmpty(message.getImageUrl())) {
 
-            if (loadtarget == null) loadtarget = new Target() {
-                @Override
-                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                    int width = bitmap.getWidth();
-                    int height = bitmap.getHeight();
-                    if(height > width) {
-                        imageViewMessageImage.setMaxHeight(socialImageMaxHeight);
-                    } else {
-                        imageViewMessageImage.setMaxHeight(width);
+            if (loadtarget == null) {
+                loadtarget = new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        int width = bitmap.getWidth();
+                        int height = bitmap.getHeight();
+                        if (height > width) {
+                            imageViewMessageImage.setMaxHeight(socialImageMaxHeight);
+                        } else {
+                            imageViewMessageImage.setMaxHeight(123456);
+                        }
+                        imageViewMessageImage.setImageBitmap(bitmap);
+                        imageViewMessageImage.setVisibility(View.VISIBLE);
                     }
-                    imageViewMessageImage.setImageBitmap(bitmap);
-                    imageViewMessageImage.setVisibility(View.VISIBLE);
-                }
 
-                @Override
-                public void onBitmapFailed(Drawable errorDrawable) {
+                    @Override
+                    public void onBitmapFailed(Drawable errorDrawable) {
 
-                }
+                    }
 
-                @Override
-                public void onPrepareLoad(Drawable placeHolderDrawable) {
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
 
-                }
-            };
+                    }
+                };
+            }
 
             Picasso.with(getContext()).load(message.getImageUrl())
                     .into(loadtarget);
