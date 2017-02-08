@@ -11,6 +11,28 @@
         android:padding="@dimen/padding_l">
 
         <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/cameraImage"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/discardCameraImage"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignEnd="@id/cameraImage"
+                android:layout_alignTop="@id/cameraImage"
+                android:layout_marginEnd="50dp"
+                android:src="@drawable/image_close"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -51,14 +73,27 @@
 
         </RelativeLayout>
 
-        <Button
-            android:text="@string/send"
-            android:background="@drawable/button_send"
-            android:textAllCaps="false"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:id="@+id/btnSend" />
+            android:layout_height="wrap_content" >
+
+            <ImageButton
+                android:id="@+id/btnCamera"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_camera" />
+
+            <Button
+                android:id="@+id/btnSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/button_send"
+                android:text="@string/send"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+        </RelativeLayout>
 
     </LinearLayout>
 

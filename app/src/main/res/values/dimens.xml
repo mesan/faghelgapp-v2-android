@@ -16,6 +16,7 @@
     <dimen name="text_size_toast">22sp</dimen>
     <dimen name="product_cell_width">120dp</dimen>
     <dimen name="person_image_size">70dp</dimen>
+    <dimen name="social_image_max_height">250dp</dimen>
     <dimen name="person_divider_padding">50dp</dimen>
     <dimen name="program_divider_padding">25dp</dimen>
     <dimen name="people_item_min_height">80dp</dimen>
