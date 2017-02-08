@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipChildren="false"
-    android:clipToPadding="false"
-    android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:orientation="vertical">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPagerMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/layoutMenu" />
+        android:layout_above="@+id/layoutMenu"/>
 
     <LinearLayout
         android:id="@id/layoutMenu"
@@ -39,13 +39,14 @@
                 android:id="@+id/imageViewTabProgram"
                 android:layout_width="@dimen/image_menu_size"
                 android:layout_height="@dimen/image_menu_size"
-                android:src="@drawable/image_program" />
+                android:contentDescription="@string/icon_for_program_tab"
+                android:src="@drawable/ic_program_passive"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_s"
-                android:text="@string/program" />
+                android:text="@string/program"/>
         </LinearLayout>
 
         <FrameLayout
@@ -66,7 +67,8 @@
                 android:layout_height="@dimen/image_menu_size_large"
                 android:layout_gravity="top|center_horizontal"
                 android:clipToPadding="false"
-                android:src="@drawable/image_social" />
+                android:contentDescription="@string/icon_for_social_tab"
+                android:src="@drawable/ic_feed_passive"/>
         </FrameLayout>
 
         <LinearLayout
@@ -84,17 +86,17 @@
                 android:id="@+id/imageViewTabPeople"
                 android:layout_width="@dimen/image_menu_size"
                 android:layout_height="@dimen/image_menu_size"
-                android:src="@drawable/image_people" />
+                android:contentDescription="@string/icon_for_people_tab"
+                android:src="@drawable/ic_people_passive"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_s"
-                android:text="@string/people" />
+                android:text="@string/people"/>
         </LinearLayout>
 
     </LinearLayout>
-
 
     <View
         android:id="@+id/imageViewEdge"
@@ -102,18 +104,6 @@
         android:layout_height="19dp"
         android:layout_alignTop="@id/layoutMenu"
         android:layout_marginTop="-19dp"
-        android:background="@drawable/image_edge" />
-
-    <!--<Button-->
-    <!--android:id="@+id/buttonProgram"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="@string/program" />-->
-
-    <!--<Button-->
-    <!--android:id="@+id/buttonPeople"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="@string/folk" />-->
+        android:background="@drawable/image_edge"/>
 
 </RelativeLayout>

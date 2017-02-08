@@ -17,6 +17,10 @@
     <string name="error_program">Kunne ikke hente program. Prøv igjen senere.</string>
     <string name="error_people">Kunne ikke hente folk. Prøv igjen senere.</string>
     <string name="error_message">Kunne ikke sende melding. Prøv igjen senere.</string>
+    <string name="content_desc_netcompany_logo">Netcompany logo</string>
+    <string name="icon_for_social_tab">Icon for social-tab</string>
+    <string name="icon_for_people_tab">Icon for people-tab</string>
+    <string name="icon_for_program_tab">Icon for program-tab</string>
 
     <string-array name="weekdays">
         <item>nulldag</item>

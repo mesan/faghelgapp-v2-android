@@ -88,7 +88,7 @@ public class PeopleItemView extends LinearLayout {
                     .oval(true)
                     .build();
 
-            Picasso.with(getContext()).load(person.getProfileImageUrl()).transform(transformation2).transform(transformation).into(imageViewPerson);
+            Picasso.with(getContext()).load(person.getProfileImageUrl()).placeholder(R.drawable.circle).transform(transformation2).transform(transformation).into(imageViewPerson);
         }
     }
 

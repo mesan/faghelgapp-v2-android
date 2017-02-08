@@ -37,7 +37,7 @@
                 layout="@layout/social_item_author_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/message_image"
+                android:layout_below="@id/message_image"
                 android:layout_marginTop="@dimen/social_author_image_half_height" />
 
         </RelativeLayout>
