@@ -107,6 +107,8 @@ public class ImageSocialItemView extends SocialItemAuthorInfoView {
                     int height = bitmap.getHeight();
                     if(height > width) {
                         imageViewMessageImage.setMaxHeight(socialImageMaxHeight);
+                    } else {
+                        imageViewMessageImage.setMaxHeight(width);
                     }
                     imageViewMessageImage.setImageBitmap(bitmap);
                     imageViewMessageImage.setVisibility(View.VISIBLE);
