@@ -15,15 +15,11 @@ import no.mesan.faghelgapps.R;
 public class SocialAdapter extends RecyclerView.Adapter {
     private List<Message> messages = new ArrayList<>();
 
-    private static int VIEW_TYPE_TEXT = 0;
-    private static int VIEW_TYPE_IMAGE = 1;
-
     public interface ImageListener {
         void imageWasClicked(String url);
     }
 
     private final ImageListener imageListener;
-
 
     public SocialAdapter(ImageListener imageListener) {
         this.imageListener = imageListener;
@@ -32,38 +28,20 @@ public class SocialAdapter extends RecyclerView.Adapter {
     public void setMessages(List<Message> messages) {
         this.messages.clear();
         this.messages.addAll(messages);
-
         notifyDataSetChanged();
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == VIEW_TYPE_TEXT) {
-            View socialTextItemView = LayoutInflater
-                    .from(parent.getContext()).inflate(R.layout.social_text_item, parent, false);
-            return new SocialAdapter.TextSocialViewHolder((TextSocialItemView) socialTextItemView);
-        } else {
-            View socialImageItemView = LayoutInflater
-                    .from(parent.getContext()).inflate(R.layout.social_image_item, parent, false);
-            return new SocialAdapter.ImageSocialViewHolder((ImageSocialItemView) socialImageItemView);
-        }
-    }
+        View socialMessageItemView = LayoutInflater
+                .from(parent.getContext()).inflate(R.layout.social_message_item, parent, false);
+        return new SocialAdapter.SocialMessageViewHolder((SocialMessageItemView) socialMessageItemView);
 
-    @Override
-    public int getItemViewType(int position) {
-        if (TextUtils.isEmpty(messages.get(position).getImageUrl())) {
-            return VIEW_TYPE_TEXT;
-        }
-        return VIEW_TYPE_IMAGE;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (getItemViewType(position) == VIEW_TYPE_IMAGE) {
-            ((ImageSocialViewHolder) holder).imageSocialItemView.bindTo(messages.get(position), imageListener);
-        } else {
-            ((TextSocialViewHolder) holder).textSocialItemView.bindTo(messages.get(position));
-        }
+        ((SocialMessageViewHolder) holder).socialMessageItemView.bindTo(messages.get(position), imageListener);
     }
 
     @Override
@@ -71,22 +49,12 @@ public class SocialAdapter extends RecyclerView.Adapter {
         return messages.size();
     }
 
-    class TextSocialViewHolder extends RecyclerView.ViewHolder {
-        public final TextSocialItemView textSocialItemView;
+    class SocialMessageViewHolder extends RecyclerView.ViewHolder {
+        public final SocialMessageItemView socialMessageItemView;
 
-        public TextSocialViewHolder(TextSocialItemView textSocialItemView) {
-            super(textSocialItemView);
-            this.textSocialItemView = textSocialItemView;
-        }
-
-    }
-
-    class ImageSocialViewHolder extends RecyclerView.ViewHolder {
-        public final ImageSocialItemView imageSocialItemView;
-
-        public ImageSocialViewHolder(ImageSocialItemView imageSocialItemView) {
-            super(imageSocialItemView);
-            this.imageSocialItemView = imageSocialItemView;
+        public SocialMessageViewHolder(SocialMessageItemView socialMessageItemView) {
+            super(socialMessageItemView);
+            this.socialMessageItemView = socialMessageItemView;
         }
 
     }

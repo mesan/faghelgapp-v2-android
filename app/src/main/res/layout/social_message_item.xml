@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<no.mesan.faghelg.view.social.TextSocialItemView xmlns:android="http://schemas.android.com/apk/res/android"
+<no.mesan.faghelg.view.social.SocialMessageItemView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -19,12 +19,30 @@
             android:layout_marginBottom="@dimen/padding_xl"
             android:background="@color/mesanblue" />
 
+        <ImageView
+            android:id="@+id/message_image_blurred"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:minHeight="@dimen/person_image_size"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/message_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:minHeight="@dimen/person_image_size"
+            android:scaleType="fitCenter" />
+
         <TextView
             android:id="@+id/message_text"
             style="@style/list_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/viewLineTop"
+            android:layout_below="@id/message_image"
             android:layout_marginBottom="@dimen/padding_m"
             android:layout_marginLeft="@dimen/social_padding"
             android:layout_marginRight="@dimen/social_padding"
@@ -38,4 +56,4 @@
 
     </RelativeLayout>
 
-</no.mesan.faghelg.view.social.TextSocialItemView>
+</no.mesan.faghelg.view.social.SocialMessageItemView>
