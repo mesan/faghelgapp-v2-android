@@ -201,6 +201,7 @@ public class MessageFragment extends BaseFragment {
             message.setImage(imageEncodedBase64);
             Log.d("base64img", message.getImage());
         } else {
+            message.setImage("");
             Log.d("isnull", "den var null, folkens! :(");
         }
         return message;

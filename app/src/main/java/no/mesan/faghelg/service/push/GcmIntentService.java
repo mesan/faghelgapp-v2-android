@@ -80,10 +80,10 @@ public class GcmIntentService extends IntentService {
 		}
 
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-				.setSmallIcon(R.mipmap.ic_app_icon)
+				.setSmallIcon(R.mipmap.ic_stat_icon_notif)
 				.setContentTitle(title)
 				.setStyle(new NotificationCompat.BigTextStyle().bigText(content))
-				.setContentText(content)
+				.setContentText("@" + content)
 				.setTicker(title)
 				.setAutoCancel(true);
 
