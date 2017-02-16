@@ -151,7 +151,6 @@ public class SocialMessageItemView extends SocialItemAuthorInfoView {
                             imageViewMessageImage.setMaxHeight(socialImageMaxHeight);
                             imageViewMessageImageBlurred.setMaxHeight(socialImageMaxHeight);
                             imageViewMessageImageBlurred.setVisibility(VISIBLE);
-//                            createBlurredBitmap(bitmap);
                             new BlurImageAsyncTask().execute(bitmap);
                         } else {
                             imageViewMessageImage.setMaxHeight(123456);
