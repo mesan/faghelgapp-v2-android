@@ -68,9 +68,9 @@ public class MessageFragment extends BaseFragment {
 
     @Bind(R.id.textCharacterCount)
     TextView characterCountText;
-
-    @Bind(R.id.buttonReset)
-    ImageButton resetButton;
+//
+//    @Bind(R.id.buttonReset)
+//    ImageButton resetButton;
 
     @Nullable
     @Override
@@ -103,7 +103,7 @@ public class MessageFragment extends BaseFragment {
             sendButton.setEnabled(false);
         } else {
             sendButton.setEnabled(true);
-            resetButton.setVisibility(View.VISIBLE);
+//            resetButton.setVisibility(View.VISIBLE);
             int count = text.length();
             characterCountText.setText(getString(R.string.character_count, count));
         }
@@ -115,7 +115,7 @@ public class MessageFragment extends BaseFragment {
     }
 
     private void setEmptyCount() {
-        resetButton.setVisibility(View.INVISIBLE);
+//        resetButton.setVisibility(View.INVISIBLE);
         characterCountText.setText(getString(R.string.character_count, 0));
     }
 
@@ -125,12 +125,12 @@ public class MessageFragment extends BaseFragment {
 //        intent.putExtra(FullScreenImageActivity.PHOTO_URI, photoUri);
 //        startActivity(intent);
 //    }
-
-    @OnClick(R.id.buttonReset)
-    public void resetMessage() {
-        editContent.setText("");
-        setEmptyCount();
-    }
+//
+//    @OnClick(R.id.buttonReset)
+//    public void resetMessage() {
+//        editContent.setText("");
+//        setEmptyCount();
+//    }
 
     @OnClick(R.id.btnSend)
     public void sendMessage() {
