@@ -40,6 +40,6 @@
     <dimen name="social_card_side_margin">5dp</dimen>
     <dimen name="social_card_margin">2.5dp</dimen>
     <dimen name="social_card_corner_radius">2dp</dimen>
-    <dimen name="social_padding">20dp</dimen>
+    <dimen name="social_padding">16dp</dimen>
     <dimen name="button_size">48dp</dimen>
 </resources>
