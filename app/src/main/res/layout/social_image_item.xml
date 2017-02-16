@@ -26,8 +26,7 @@
             android:adjustViewBounds="true"
             android:cropToPadding="false"
             android:minHeight="@dimen/person_image_size"
-            android:scaleType="fitCenter"
-            android:visibility="gone" />
+            android:scaleType="fitCenter" />
 
         <include
             layout="@layout/social_item_author_info"

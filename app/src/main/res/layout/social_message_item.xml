@@ -3,59 +3,109 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:paddingBottom="@dimen/padding_l">
 
         <View
             android:id="@+id/viewLineTop"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/padding_xl"
             android:layout_marginEnd="@dimen/social_padding"
+            android:layout_marginStart="@dimen/social_padding"
             android:layout_marginLeft="@dimen/social_padding"
             android:layout_marginRight="@dimen/social_padding"
-            android:layout_marginStart="@dimen/social_padding"
-            android:layout_marginBottom="@dimen/padding_xl"
             android:background="@color/mesanblue" />
 
-        <ImageView
-            android:id="@+id/message_image_blurred"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:cropToPadding="false"
-            android:minHeight="@dimen/person_image_size"
-            android:scaleType="centerCrop" />
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/message_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:cropToPadding="false"
-            android:layout_marginBottom="@dimen/padding_m"
-            android:minHeight="@dimen/person_image_size"
-            android:scaleType="fitCenter" />
+            <ImageView
+                android:id="@+id/message_image_blurred"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:cropToPadding="false"
+                android:minHeight="@dimen/person_image_size"
+                android:scaleType="centerCrop" />
 
-        <TextView
-            android:id="@+id/message_text"
-            style="@style/list_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/message_image"
-            android:layout_marginBottom="@dimen/padding_m"
-            android:layout_marginLeft="@dimen/social_padding"
-            android:layout_marginRight="@dimen/social_padding"
-            android:textColor="@color/mesanblue" />
+            <ImageView
+                android:id="@+id/message_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/padding_m"
+                android:adjustViewBounds="true"
+                android:cropToPadding="false"
+                android:minHeight="@dimen/person_image_size"
+                android:scaleType="fitCenter" />
+        </FrameLayout>
 
-        <include
-            layout="@layout/social_item_author_info"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/author_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/message_text" />
+            android:layout_marginLeft="@dimen/social_padding"
+            android:layout_marginRight="@dimen/social_padding"
+            android:gravity="center|bottom"
+            android:orientation="horizontal">
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/author_image"
+                android:layout_width="@dimen/person_image_size"
+                android:layout_height="@dimen/person_image_size"
+                android:layout_marginEnd="@dimen/padding_s" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/message_text"
+                    style="@style/list_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/padding_m"
+                    android:layout_marginEnd="@dimen/social_padding"
+                    android:textColor="@color/mesanblue" />
+
+                <View
+                    android:id="@+id/author_ruler"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/greyish" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/author_shortname"
+                        style="@style/p"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/mesanblue"
+                        android:layout_marginEnd="@dimen/padding_m"
+                        tools:text="\@thomasp" />
+
+                    <TextView
+                        android:id="@+id/message_timestamp"
+                        style="@style/subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="5. februar kl 13:30" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </no.mesan.faghelg.view.social.SocialMessageItemView>

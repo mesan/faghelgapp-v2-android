@@ -133,7 +133,6 @@ public class SocialMessageItemView extends SocialItemAuthorInfoView {
         if (!TextUtils.isEmpty(message.getContent())) {
             textViewMessageText.setText(message.getContent());
         } else {
-            textViewMessageText.setVisibility(View.GONE);
             MarginLayoutParams authorViewParams = (MarginLayoutParams) viewAuthorInfo.getLayoutParams();
             authorViewParams.topMargin = (int)
                     getResources().getDimension(R.dimen.social_author_image_half_height);
@@ -174,10 +173,10 @@ public class SocialMessageItemView extends SocialItemAuthorInfoView {
             Picasso.with(getContext()).load(message.getImageUrl())
                     .into(loadtarget);
         } else {
-            MarginLayoutParams textViewMessageParams =
-                    (MarginLayoutParams) textViewMessageText.getLayoutParams();
-            textViewMessageParams.topMargin = (int)
-                    getResources().getDimension(R.dimen.padding_m);
+//            MarginLayoutParams textViewMessageParams =
+//                    (MarginLayoutParams) textViewMessageText.getLayoutParams();
+//            textViewMessageParams.topMargin = (int)
+//                    getResources().getDimension(R.dimen.padding_m);
         }
     }
 
