@@ -6,6 +6,10 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.renderscript.Allocation;
+import android.renderscript.Element;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -36,6 +40,7 @@ public class ImageSocialItemView extends SocialItemAuthorInfoView {
     @BindDimen(R.dimen.social_image_max_height)
     int socialImageMaxHeight;
 
+    private RenderScript rs;
     private Target loadtarget;
 
     private int borderColor;
@@ -63,6 +68,7 @@ public class ImageSocialItemView extends SocialItemAuthorInfoView {
     }
 
     private void init(Context context) {
+        rs = RenderScript.create(context);
         borderColor = context.getResources().getColor(R.color.mesanblue);
         borderSize = context.getResources().getDimensionPixelSize(R.dimen.person_image_border_size);
     }
@@ -115,18 +121,18 @@ public class ImageSocialItemView extends SocialItemAuthorInfoView {
                     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                         int width = bitmap.getWidth();
                         int height = bitmap.getHeight();
+                        imageViewMessageImage.setImageBitmap(bitmap);
+                        imageViewMessageImage.setVisibility(View.VISIBLE);
                         if (height > width) {
                             imageViewMessageImage.setMaxHeight(socialImageMaxHeight);
                             imageViewMessageImageBlurred.setMaxHeight(socialImageMaxHeight);
                             imageViewMessageImageBlurred.setVisibility(VISIBLE);
-                            imageViewMessageImageBlurred.setImageBitmap(bitmap);
-//                            Blurry.with(getContext()).radius(50).async().onto(viewBlur);
-                            Blurry.with(getContext()).radius(50).async().from(bitmap).into(imageViewMessageImageBlurred);
+
+                            Bitmap blurredBitmap = createBlurredBitmap(bitmap);
+                            imageViewMessageImageBlurred.setImageBitmap(blurredBitmap);
                         } else {
                             imageViewMessageImage.setMaxHeight(123456);
                         }
-                        imageViewMessageImage.setImageBitmap(bitmap);
-                        imageViewMessageImage.setVisibility(View.VISIBLE);
                     }
 
                     @Override
@@ -149,6 +155,19 @@ public class ImageSocialItemView extends SocialItemAuthorInfoView {
             String formattedTimestamp = MessageTimestampFormatter.formatTimestamp(message);
             timestampView.setText(formattedTimestamp);
         }
+    }
+
+    private Bitmap createBlurredBitmap(Bitmap bitmap) {
+        Bitmap blurredBitmap = bitmap.copy(bitmap.getConfig(), true);
+
+        final Allocation input = Allocation.createFromBitmap(rs, blurredBitmap);
+        final Allocation output = Allocation.createTyped(rs, input.getType());
+        final ScriptIntrinsicBlur script = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+        script.setRadius(20f);
+        script.setInput(input);
+        script.forEach(output);
+        output.copyTo(blurredBitmap);
+        return blurredBitmap;
     }
 
     @Override
