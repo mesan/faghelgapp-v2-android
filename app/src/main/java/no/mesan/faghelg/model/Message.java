@@ -70,7 +70,36 @@ public class Message {
         this.timestamp = timestamp;
     }
 
-    public String getSenderImageUrl(){
+    public String getSenderImageUrl() {
         return "https://s3-eu-west-1.amazonaws.com/faghelg/" + this.sender + ".png";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Message message = (Message) o;
+
+        if (id != message.id) return false;
+        if (title != null ? !title.equals(message.title) : message.title != null) return false;
+        if (content != null ? !content.equals(message.content) : message.content != null)
+            return false;
+        if (sender != null ? !sender.equals(message.sender) : message.sender != null) return false;
+        if (imageUrl != null ? !imageUrl.equals(message.imageUrl) : message.imageUrl != null)
+            return false;
+        return timestamp != null ? timestamp.equals(message.timestamp) : message.timestamp == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (content != null ? content.hashCode() : 0);
+        result = 31 * result + (sender != null ? sender.hashCode() : 0);
+        result = 31 * result + (imageUrl != null ? imageUrl.hashCode() : 0);
+        result = 31 * result + (timestamp != null ? timestamp.hashCode() : 0);
+        return result;
     }
 }

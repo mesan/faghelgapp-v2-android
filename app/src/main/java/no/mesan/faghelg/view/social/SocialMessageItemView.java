@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.renderscript.Allocation;
 import android.renderscript.Element;
@@ -149,9 +150,7 @@ public class SocialMessageItemView extends SocialItemAuthorInfoView {
                             imageViewMessageImage.setMaxHeight(socialImageMaxHeight);
                             imageViewMessageImageBlurred.setMaxHeight(socialImageMaxHeight);
                             imageViewMessageImageBlurred.setVisibility(VISIBLE);
-
-                            Bitmap blurredBitmap = createBlurredBitmap(bitmap);
-                            imageViewMessageImageBlurred.setImageBitmap(blurredBitmap);
+                            new BlurImageAsyncTask().execute(bitmap);
                         } else {
                             imageViewMessageImage.setMaxHeight(123456);
                         }
@@ -181,17 +180,27 @@ public class SocialMessageItemView extends SocialItemAuthorInfoView {
         }
     }
 
-    private Bitmap createBlurredBitmap(Bitmap bitmap) {
-        Bitmap blurredBitmap = bitmap.copy(bitmap.getConfig(), true);
+    private class BlurImageAsyncTask extends AsyncTask<Bitmap, Void, Bitmap> {
 
-        final Allocation input = Allocation.createFromBitmap(rs, blurredBitmap);
-        final Allocation output = Allocation.createTyped(rs, input.getType());
-        final ScriptIntrinsicBlur script = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
-        script.setRadius(20f);
-        script.setInput(input);
-        script.forEach(output);
-        output.copyTo(blurredBitmap);
-        return blurredBitmap;
+        @Override
+        protected Bitmap doInBackground(Bitmap... bitmaps) {
+            Bitmap blurredBitmap = bitmaps[0].copy(bitmaps[0].getConfig(), true);
+
+            final Allocation input = Allocation.createFromBitmap(rs, blurredBitmap);
+            final Allocation output = Allocation.createTyped(rs, input.getType());
+            final ScriptIntrinsicBlur script = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+            script.setRadius(20f);
+            script.setInput(input);
+            script.forEach(output);
+            output.copyTo(blurredBitmap);
+            return blurredBitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            imageViewMessageImageBlurred.setImageBitmap(bitmap);
+        }
     }
 
     @Override

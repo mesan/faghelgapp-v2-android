@@ -1,7 +1,7 @@
 package no.mesan.faghelg.view.social;
 
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +26,11 @@ public class SocialAdapter extends RecyclerView.Adapter {
     }
 
     public void setMessages(List<Message> messages) {
+        AdapterDiffCallback cb = new AdapterDiffCallback(this.messages, messages);
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(cb);
         this.messages.clear();
         this.messages.addAll(messages);
-        notifyDataSetChanged();
+        diffResult.dispatchUpdatesTo(this);
     }
 
     @Override
