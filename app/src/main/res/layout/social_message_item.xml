@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:cropToPadding="false"
+            android:layout_marginBottom="@dimen/padding_m"
             android:minHeight="@dimen/person_image_size"
             android:scaleType="fitCenter" />
 
@@ -50,6 +51,7 @@
 
         <include
             layout="@layout/social_item_author_info"
+            android:id="@+id/author_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/message_text" />

@@ -13,7 +13,6 @@ import android.renderscript.ScriptIntrinsicBlur;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
@@ -24,7 +23,6 @@ import com.squareup.picasso.Transformation;
 import butterknife.Bind;
 import butterknife.BindDimen;
 import butterknife.ButterKnife;
-import jp.wasabeef.blurry.Blurry;
 import no.mesan.faghelg.model.Message;
 import no.mesan.faghelg.util.MessageTimestampFormatter;
 import no.mesan.faghelgapps.R;

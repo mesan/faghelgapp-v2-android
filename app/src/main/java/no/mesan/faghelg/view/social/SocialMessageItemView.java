@@ -6,6 +6,10 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.renderscript.Allocation;
+import android.renderscript.Element;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -20,12 +24,14 @@ import com.squareup.picasso.Transformation;
 import butterknife.Bind;
 import butterknife.BindDimen;
 import butterknife.ButterKnife;
-import jp.wasabeef.blurry.Blurry;
 import no.mesan.faghelg.model.Message;
 import no.mesan.faghelg.util.MessageTimestampFormatter;
 import no.mesan.faghelgapps.R;
 
 public class SocialMessageItemView extends SocialItemAuthorInfoView {
+
+    @Bind(R.id.author_info)
+    View viewAuthorInfo;
 
     @Bind(R.id.message_text)
     TextView textViewMessageText;
@@ -39,6 +45,7 @@ public class SocialMessageItemView extends SocialItemAuthorInfoView {
     @BindDimen(R.dimen.social_image_max_height)
     int socialImageMaxHeight;
 
+    private RenderScript rs;
     private Target loadtarget;
 
     private int borderColor;
@@ -66,6 +73,7 @@ public class SocialMessageItemView extends SocialItemAuthorInfoView {
     }
 
     private void init(Context context) {
+        rs = RenderScript.create(context);
         borderColor = context.getResources().getColor(R.color.mesanblue);
         borderSize = context.getResources().getDimensionPixelSize(R.dimen.person_image_border_size);
     }
@@ -79,10 +87,14 @@ public class SocialMessageItemView extends SocialItemAuthorInfoView {
         imageViewAuthor.setImageDrawable(null);
         timestampView.setText("");
         textViewMessageText.setText("");
+        textViewMessageText.setVisibility(View.VISIBLE);
         imageViewMessageImage.setImageBitmap(null);
         imageViewMessageImage.setVisibility(View.GONE);
         imageViewMessageImageBlurred.setImageBitmap(null);
         imageViewMessageImageBlurred.setVisibility(View.GONE);
+        MarginLayoutParams autoInfoParamsReset =
+                (MarginLayoutParams) viewAuthorInfo.getLayoutParams();
+        autoInfoParamsReset.topMargin = 0;
 
         if (!TextUtils.isEmpty(message.getSender())) {
             textViewAuthorShortname.setText("@" + message.getSender());
@@ -119,6 +131,11 @@ public class SocialMessageItemView extends SocialItemAuthorInfoView {
 
         if (!TextUtils.isEmpty(message.getContent())) {
             textViewMessageText.setText(message.getContent());
+        } else {
+            textViewMessageText.setVisibility(View.GONE);
+            MarginLayoutParams authorViewParams = (MarginLayoutParams) viewAuthorInfo.getLayoutParams();
+            authorViewParams.topMargin = (int)
+                    getResources().getDimension(R.dimen.social_author_image_half_height);
         }
 
         if (!TextUtils.isEmpty(message.getImageUrl())) {
@@ -133,9 +150,9 @@ public class SocialMessageItemView extends SocialItemAuthorInfoView {
                             imageViewMessageImage.setMaxHeight(socialImageMaxHeight);
                             imageViewMessageImageBlurred.setMaxHeight(socialImageMaxHeight);
                             imageViewMessageImageBlurred.setVisibility(VISIBLE);
-                            imageViewMessageImageBlurred.setImageBitmap(bitmap);
-//                            Blurry.with(getContext()).radius(50).async().onto(viewBlur);
-                            Blurry.with(getContext()).radius(50).async().from(bitmap).into(imageViewMessageImageBlurred);
+
+                            Bitmap blurredBitmap = createBlurredBitmap(bitmap);
+                            imageViewMessageImageBlurred.setImageBitmap(blurredBitmap);
                         } else {
                             imageViewMessageImage.setMaxHeight(123456);
                         }
@@ -157,7 +174,25 @@ public class SocialMessageItemView extends SocialItemAuthorInfoView {
 
             Picasso.with(getContext()).load(message.getImageUrl())
                     .into(loadtarget);
+        } else {
+            MarginLayoutParams textViewMessageParams =
+                    (MarginLayoutParams) textViewMessageText.getLayoutParams();
+            textViewMessageParams.topMargin = (int)
+                    getResources().getDimension(R.dimen.padding_m);
         }
+    }
+
+    private Bitmap createBlurredBitmap(Bitmap bitmap) {
+        Bitmap blurredBitmap = bitmap.copy(bitmap.getConfig(), true);
+
+        final Allocation input = Allocation.createFromBitmap(rs, blurredBitmap);
+        final Allocation output = Allocation.createTyped(rs, input.getType());
+        final ScriptIntrinsicBlur script = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+        script.setRadius(20f);
+        script.setInput(input);
+        script.forEach(output);
+        output.copyTo(blurredBitmap);
+        return blurredBitmap;
     }
 
     @Override
