@@ -104,7 +104,6 @@ dependencies {
     //For images
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.makeramen:roundedimageview:2.2.1'
-    compile 'jp.wasabeef:blurry:2.1.0'
 
     // JodaTime
     compile 'net.danlew:android.joda:2.9.4.2'
