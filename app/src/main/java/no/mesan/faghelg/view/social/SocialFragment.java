@@ -53,6 +53,10 @@ public class SocialFragment extends BaseFragment implements SocialAdapter.ImageL
 
     private SocialAdapter socialAdapter;
 
+    private int MESSAGE_FRAGMENT_REQUEST = 123;
+
+    private boolean scrollToTopAfterGettingMessages = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,6 +116,10 @@ public class SocialFragment extends BaseFragment implements SocialAdapter.ImageL
         progressBarTextView.setVisibility(View.GONE);
         socialAdapter.setMessages(messages);
         swipeRefreshLayout.setRefreshing(false);
+        if(scrollToTopAfterGettingMessages) {
+            recyclerViewSocial.scrollToPosition(0);
+            scrollToTopAfterGettingMessages = false;
+        }
     }
 
     private void handleGetMessagesFailure(Throwable throwable) {
@@ -136,10 +144,19 @@ public class SocialFragment extends BaseFragment implements SocialAdapter.ImageL
         switch (item.getItemId()) {
             case R.id.menu_send:
                 Intent i = new Intent(getApplicationContext(), MessageActivity.class);
-                startActivity(i);
+                startActivityForResult(i, MESSAGE_FRAGMENT_REQUEST);
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MESSAGE_FRAGMENT_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                scrollToTopAfterGettingMessages = true;
+            }
+        }
     }
 
     @Override

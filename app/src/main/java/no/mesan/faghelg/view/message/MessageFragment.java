@@ -208,6 +208,7 @@ public class MessageFragment extends BaseFragment {
     }
 
     private void handlePostMessageSuccess(Void aVoid) {
+        getActivity().setResult(RESULT_OK);
         getActivity().finish();
     }
 
