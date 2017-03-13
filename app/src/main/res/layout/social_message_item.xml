@@ -9,17 +9,6 @@
         android:orientation="vertical"
         android:paddingBottom="@dimen/padding_l">
 
-        <View
-            android:id="@+id/viewLineTop"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="@dimen/padding_l"
-            android:layout_marginEnd="@dimen/social_padding"
-            android:layout_marginStart="@dimen/social_padding"
-            android:layout_marginLeft="@dimen/social_padding"
-            android:layout_marginRight="@dimen/social_padding"
-            android:background="@color/mesanblue" />
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -37,7 +26,6 @@
                 android:id="@+id/message_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/padding_m"
                 android:adjustViewBounds="true"
                 android:cropToPadding="false"
                 android:minHeight="@dimen/person_image_size"

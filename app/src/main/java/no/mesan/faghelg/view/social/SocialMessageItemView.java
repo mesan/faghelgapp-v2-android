@@ -34,9 +34,6 @@ public class SocialMessageItemView extends SocialItemAuthorInfoView {
     @Bind(R.id.author_info)
     View viewAuthorInfo;
 
-    @Bind(R.id.viewLineTop)
-    View viewLineTop;
-
     @Bind(R.id.message_text)
     TextView textViewMessageText;
 
@@ -52,8 +49,8 @@ public class SocialMessageItemView extends SocialItemAuthorInfoView {
     private RenderScript rs;
     private Target loadtarget;
 
-    MarginLayoutParams viewLineTopParams;
     MarginLayoutParams authorInfoParams;
+    MarginLayoutParams textViewParams;
 
     private int borderColor;
     private int borderSize;
@@ -101,12 +98,7 @@ public class SocialMessageItemView extends SocialItemAuthorInfoView {
         imageViewMessageImageBlurred.setVisibility(View.GONE);
         authorInfoParams =
                 (MarginLayoutParams) viewAuthorInfo.getLayoutParams();
-        authorInfoParams.topMargin = 0;
-
-        viewLineTopParams =
-                (MarginLayoutParams) this.viewLineTop.getLayoutParams();
-        viewLineTopParams.bottomMargin = (int)
-                getResources().getDimension(R.dimen.padding_l);
+        authorInfoParams.topMargin = (int)getResources().getDimension(R.dimen.social_padding);
 
         if (!TextUtils.isEmpty(message.getSender())) {
             textViewAuthorShortname.setText("@" + message.getSender());
@@ -183,11 +175,6 @@ public class SocialMessageItemView extends SocialItemAuthorInfoView {
 
             Picasso.with(getContext()).load(message.getImageUrl())
                     .into(loadtarget);
-        } else {
-            viewLineTopParams =
-                    (MarginLayoutParams) this.viewLineTop.getLayoutParams();
-            viewLineTopParams.bottomMargin = (int)
-                    getResources().getDimension(R.dimen.padding_m);
         }
     }
 
