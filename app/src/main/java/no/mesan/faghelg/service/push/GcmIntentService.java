@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -15,7 +16,9 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.util.List;
 
 import no.mesan.faghelg.view.MainActivity;
@@ -46,10 +49,11 @@ public class GcmIntentService extends IntentService {
 			} else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
 				String title = extras.getString("title");
 				String content = extras.getString("content");
+				String imageUrl = extras.getString("imageUrl");
 
-				Log.d(this.getClass().getSimpleName(), "Title: " + title + " -- Content: " + content);
+				Log.d(this.getClass().getSimpleName(), "Title: " + title + " -- Content: " + content + " -- imageUrl: " + imageUrl);
 
-				sendNotification(title, content);
+				sendNotification(title, content, imageUrl);
 			}
 		}
 
@@ -57,7 +61,7 @@ public class GcmIntentService extends IntentService {
 		GcmBroadcastReceiver.completeWakefulIntent(intent);
 	}
 
-	private void sendNotification(String title, String content) {
+	private void sendNotification(String title, String content, String imageUrl) {
 		mNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 
 		Intent intent;
@@ -86,6 +90,13 @@ public class GcmIntentService extends IntentService {
 				.setContentText("@" + content)
 				.setTicker(title)
 				.setAutoCancel(true);
+
+		try {
+			Bitmap bmp = Picasso.with(getApplicationContext()).load(imageUrl).get();
+			mBuilder.setLargeIcon(bmp);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		PendingIntent contentIntent = PendingIntent.getActivity(this, NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 		mBuilder.setContentIntent(contentIntent);
