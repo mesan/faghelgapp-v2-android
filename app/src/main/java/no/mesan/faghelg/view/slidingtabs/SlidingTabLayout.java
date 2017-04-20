@@ -220,10 +220,11 @@ public class SlidingTabLayout extends HorizontalScrollView {
                 tabTitleView = (TextView) tabView;
             }
 
-
-
-            if (adapter.getCount() <= 4) {
-                WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+            // If 3 or less tabs: set each tab's width so that the tabs together fill the parent
+            // Subtract 100 to get some padding
+            if (adapter.getCount() <= 3) {
+                WindowManager wm = (WindowManager) getContext()
+                        .getSystemService(Context.WINDOW_SERVICE);
                 Display display = wm.getDefaultDisplay();
                 Point size = new Point();
                 display.getSize(size);
