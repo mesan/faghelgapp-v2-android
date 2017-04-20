@@ -9,13 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
-import org.joda.time.DateTime;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -23,6 +24,7 @@ import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.faghelg.model.Event;
 import no.mesan.faghelg.model.Person;
 import no.mesan.faghelg.view.BaseFragment;
+import no.mesan.faghelg.view.people.PeopleItemView;
 import no.mesan.faghelgapps.R;
 
 public class EventOverlayFragment extends BaseFragment {
@@ -33,20 +35,11 @@ public class EventOverlayFragment extends BaseFragment {
     @Bind(R.id.event_timestamp)
     TextView txtTimestamp;
 
-    /*@Bind(R.id.txtHosts)
-    TextView txtHosts;*/
-
     @Bind(R.id.imgEvent)
     ImageView imgEvent;
 
-    @Bind(R.id.imgProfile)
-    ImageView imgProfile;
-
-    @Bind(R.id.txtName)
-    TextView txtName;
-
-    @Bind(R.id.txtNick)
-    TextView txtNick;
+    @Bind(R.id.layoutSpeakers)
+    LinearLayout layoutSpeakers;
 
     @Bind(R.id.txtDescription)
     TextView txtDescription;
@@ -92,7 +85,7 @@ public class EventOverlayFragment extends BaseFragment {
 
     private void onClose() {
         Intent data = new Intent();
-        data.putExtra(EventPagerAdapter.ARGS_SCROLLED_EVENT_POSITION, eventDayPosition-1);
+        data.putExtra(EventPagerAdapter.ARGS_SCROLLED_EVENT_POSITION, eventDayPosition - 1);
         getActivity().setResult(Activity.RESULT_OK, data);
         getActivity().finish();
     }
@@ -100,10 +93,7 @@ public class EventOverlayFragment extends BaseFragment {
     private void updateViews(Event event) {
         updateEventViews(event);
 
-        Person responsible = event.getResponsible();
-        if (responsible == null) {
-            updateNoResponsible();
-        } else {
+        if (event.getSpeakers() != null) {
             updateResponsibleViews(event);
         }
     }
@@ -115,31 +105,30 @@ public class EventOverlayFragment extends BaseFragment {
         //txtHosts.setText(event.getHostNames());
         Picasso.with(getApplicationContext()).load(event.getEventImageUrl()).into(imgEvent);
     }
-
-    private void updateNoResponsible() {
-        txtName.setText("");
-        txtNick.setText("");
-        imgProfile.setImageDrawable(null);
-    }
-
     private void updateResponsibleViews(Event event) {
-        txtName.setText(event.getResponsible().getFullName());
-        txtNick.setText(String.format(getString(R.string.nick), event.getResponsible().getShortName()));
+        List<Person> speakers = event.getSpeakers();
+        for(Person speaker : speakers) {
 
-        String profileImageUrl = event.getResponsible().getProfileImageUrl();
-        if (!TextUtils.isEmpty(profileImageUrl)) {
-            int color = getApplicationContext().getResources().getColor(R.color.greyish);
+            PeopleItemView speakerView = new PeopleItemView(getContext());
+            speakerView.bindTo(speaker);
+            layoutSpeakers.addView(speakerView);
 
-            Transformation transformation = new RoundedTransformationBuilder()
-                    .borderColor(color)
-                    .borderWidthDp(1)
-                    .oval(true)
-                    .build();
-
-            Picasso.with(getApplicationContext()).load(profileImageUrl).transform(transformation).into(imgProfile);
-        } else {
-            imgProfile.setImageDrawable(null);
         }
+
+//        String profileImageUrl = event.getResponsible().getProfileImageUrl();
+//        if (!TextUtils.isEmpty(profileImageUrl)) {
+//            int color = getApplicationContext().getResources().getColor(R.color.greyish);
+//
+//            Transformation transformation = new RoundedTransformationBuilder()
+//                    .borderColor(color)
+//                    .borderWidthDp(1)
+//                    .oval(true)
+//                    .build();
+//
+//            Picasso.with(getApplicationContext()).load(profileImageUrl).transform(transformation).into(imgProfile);
+//        } else {
+//            imgProfile.setImageDrawable(null);
+//        }
     }
 
     public void onBackPressed() {

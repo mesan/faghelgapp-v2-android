@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.joda.time.DateTime;
 
+import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Event implements Parcelable {
 
@@ -15,6 +17,7 @@ public class Event implements Parcelable {
     private String description;
     private String eventImageUrl;
     private Person responsible;
+    private List<Person> speakers;
     private long start;
     private long end;
 
@@ -84,19 +87,24 @@ public class Event implements Parcelable {
         return new DateTime(end*1000);
     }
 
+    public List<Person> getSpeakers() {
+        return speakers;
+    }
+
+    public void setSpeakers(List<Person> speakers) {
+        this.speakers = speakers;
+    }
+
+
     protected Event(Parcel in) {
         title = in.readString();
         hostNames = in.readString();
         description = in.readString();
         eventImageUrl = in.readString();
-        responsible = (Person) in.readValue(Person.class.getClassLoader());
+        responsible = in.readParcelable(Person.class.getClassLoader());
+        speakers = in.createTypedArrayList(Person.CREATOR);
         start = in.readLong();
         end = in.readLong();
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
     }
 
     @Override
@@ -105,13 +113,18 @@ public class Event implements Parcelable {
         dest.writeString(hostNames);
         dest.writeString(description);
         dest.writeString(eventImageUrl);
-        dest.writeValue(responsible);
+        dest.writeParcelable(responsible, flags);
+        dest.writeTypedList(speakers);
         dest.writeLong(start);
         dest.writeLong(end);
     }
 
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Event> CREATOR = new Parcelable.Creator<Event>() {
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Event> CREATOR = new Creator<Event>() {
         @Override
         public Event createFromParcel(Parcel in) {
             return new Event(in);
@@ -122,4 +135,6 @@ public class Event implements Parcelable {
             return new Event[size];
         }
     };
+
+
 }

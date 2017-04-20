@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,6 +36,8 @@ public class PeopleItemView extends LinearLayout {
 
     public PeopleItemView(Context context) {
         super(context);
+        LayoutInflater.from(context).inflate(R.layout.people_item, this, true);
+        ButterKnife.bind(this);
         init(context);
     }
 
