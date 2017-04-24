@@ -14,6 +14,7 @@ import android.renderscript.ScriptIntrinsicBlur;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +26,8 @@ import com.squareup.picasso.Transformation;
 import butterknife.Bind;
 import butterknife.BindDimen;
 import butterknife.ButterKnife;
+import eightbitlab.com.blurview.BlurView;
+import eightbitlab.com.blurview.RenderScriptBlur;
 import no.mesan.faghelg.model.Message;
 import no.mesan.faghelg.util.MessageTimestampFormatter;
 import no.mesan.faghelgapps.R;
@@ -42,6 +45,7 @@ public class SocialMessageItemView extends SocialItemAuthorInfoView {
 
     @Bind(R.id.message_image_blurred)
     ImageView imageViewMessageImageBlurred;
+
 
     @BindDimen(R.dimen.social_image_max_height)
     int socialImageMaxHeight;
@@ -143,6 +147,8 @@ public class SocialMessageItemView extends SocialItemAuthorInfoView {
 
         if (!TextUtils.isEmpty(message.getImageUrl())) {
 
+            imageViewMessageImage.setVisibility(VISIBLE);
+
             if (loadtarget == null) {
                 loadtarget = new Target() {
                     @Override
@@ -157,8 +163,9 @@ public class SocialMessageItemView extends SocialItemAuthorInfoView {
                         } else {
                             imageViewMessageImage.setMaxHeight(123456);
                         }
+                        imageViewMessageImage.setAlpha(0f);
                         imageViewMessageImage.setImageBitmap(bitmap);
-                        imageViewMessageImage.setVisibility(View.VISIBLE);
+                        imageViewMessageImage.animate().alpha(1f).setDuration(200);
                     }
 
                     @Override
@@ -197,7 +204,9 @@ public class SocialMessageItemView extends SocialItemAuthorInfoView {
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
+            imageViewMessageImageBlurred.setAlpha(0f);
             imageViewMessageImageBlurred.setImageBitmap(bitmap);
+            imageViewMessageImageBlurred.animate().alpha(1f).setDuration(200);
         }
     }
 

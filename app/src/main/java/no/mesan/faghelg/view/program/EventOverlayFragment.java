@@ -107,6 +107,7 @@ public class EventOverlayFragment extends BaseFragment {
     }
     private void updateResponsibleViews(Event event) {
         List<Person> speakers = event.getSpeakers();
+
         for(Person speaker : speakers) {
 
             PeopleItemView speakerView = new PeopleItemView(getContext());
@@ -115,20 +116,7 @@ public class EventOverlayFragment extends BaseFragment {
 
         }
 
-//        String profileImageUrl = event.getResponsible().getProfileImageUrl();
-//        if (!TextUtils.isEmpty(profileImageUrl)) {
-//            int color = getApplicationContext().getResources().getColor(R.color.greyish);
-//
-//            Transformation transformation = new RoundedTransformationBuilder()
-//                    .borderColor(color)
-//                    .borderWidthDp(1)
-//                    .oval(true)
-//                    .build();
-//
-//            Picasso.with(getApplicationContext()).load(profileImageUrl).transform(transformation).into(imgProfile);
-//        } else {
-//            imgProfile.setImageDrawable(null);
-//        }
+        if(event.get)
     }
 
     public void onBackPressed() {

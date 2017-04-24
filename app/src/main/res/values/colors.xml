@@ -21,5 +21,6 @@
     <color name="dark_grey">#777777</color>
     <color name="scrim">#60000000</color>
     <color name="transparent">#00000000</color>
+    <color name="colorOverlay">#78ffffff</color>
 
 </resources>
