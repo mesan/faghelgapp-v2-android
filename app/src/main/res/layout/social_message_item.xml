@@ -18,7 +18,8 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false">
+            android:clipToPadding="false"
+            android:background="@color/light_greyish">
 
             <ImageView
                 android:id="@+id/message_image_blurred"
