@@ -14,7 +14,6 @@ import android.renderscript.ScriptIntrinsicBlur;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,8 +25,6 @@ import com.squareup.picasso.Transformation;
 import butterknife.Bind;
 import butterknife.BindDimen;
 import butterknife.ButterKnife;
-import eightbitlab.com.blurview.BlurView;
-import eightbitlab.com.blurview.RenderScriptBlur;
 import no.mesan.faghelg.model.Message;
 import no.mesan.faghelg.util.MessageTimestampFormatter;
 import no.mesan.faghelgapps.R;

@@ -93,9 +93,8 @@ public class EventOverlayFragment extends BaseFragment {
     private void updateViews(Event event) {
         updateEventViews(event);
 
-        if (event.getSpeakers() != null) {
-            updateResponsibleViews(event);
-        }
+
+        updateResponsibleViews(event);
     }
 
     private void updateEventViews(Event event) {
@@ -105,18 +104,35 @@ public class EventOverlayFragment extends BaseFragment {
         //txtHosts.setText(event.getHostNames());
         Picasso.with(getApplicationContext()).load(event.getEventImageUrl()).into(imgEvent);
     }
+
     private void updateResponsibleViews(Event event) {
         List<Person> speakers = event.getSpeakers();
 
-        for(Person speaker : speakers) {
+        if (speakers != null && !speakers.isEmpty()) {
+            for (Person speaker : speakers) {
+
+                PeopleItemView speakerView = new PeopleItemView(getContext());
+                speakerView.bindTo(speaker);
+                layoutSpeakers.addView(speakerView);
+
+            }
+        }
+
+        String hostNames = event.getHostNames();
+        if ("faggruppen".equalsIgnoreCase(hostNames)
+                || "party".equalsIgnoreCase(hostNames)
+                || "mat".equalsIgnoreCase(hostNames)
+                || "pause".equalsIgnoreCase(hostNames)) {
+
+            Person speaker = new Person();
+            speaker.setProfileImageUrl(event.getEventImageUrl().replace("2.png", ".png"));
+            speaker.setFullName(hostNames);
+            speaker.setShortName(hostNames);
 
             PeopleItemView speakerView = new PeopleItemView(getContext());
             speakerView.bindTo(speaker);
             layoutSpeakers.addView(speakerView);
-
         }
-
-        if(event.get)
     }
 
     public void onBackPressed() {
