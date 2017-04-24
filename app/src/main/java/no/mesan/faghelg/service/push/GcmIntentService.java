@@ -9,17 +9,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
 import java.util.List;
 
 import no.mesan.faghelg.view.MainActivity;
@@ -93,8 +89,8 @@ public class GcmIntentService extends IntentService {
 				)
 				.setContentText("@" + content)
 				.setTicker(title)
+				.setGroup("faghelgapp-notification-group")
 				.setGroupSummary(true)
-				.setGroup("group1")
 				.setPriority(android.support.v7.app.NotificationCompat.PRIORITY_HIGH)
 				.setAutoCancel(true);
 
@@ -107,10 +103,12 @@ public class GcmIntentService extends IntentService {
 			e.printStackTrace();
 		}
 
-		PendingIntent contentIntent = PendingIntent.getActivity(this, NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		int notificationId = (int) (Math.random()*10000);
+
+		PendingIntent contentIntent = PendingIntent.getActivity(this, notificationId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 		mBuilder.setContentIntent(contentIntent);
 
-		mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+		mNotificationManager.notify(notificationId, mBuilder.build());
 	}
 
 	private Intent getLoginIntent() {
