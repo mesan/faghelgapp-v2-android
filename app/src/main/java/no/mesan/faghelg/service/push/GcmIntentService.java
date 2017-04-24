@@ -89,8 +89,6 @@ public class GcmIntentService extends IntentService {
 				)
 				.setContentText("@" + content)
 				.setTicker(title)
-				.setGroup("faghelgapp-notification-group")
-				.setGroupSummary(true)
 				.setPriority(android.support.v7.app.NotificationCompat.PRIORITY_HIGH)
 				.setAutoCancel(true);
 
@@ -103,12 +101,10 @@ public class GcmIntentService extends IntentService {
 			e.printStackTrace();
 		}
 
-		int notificationId = (int) (Math.random()*10000);
-
-		PendingIntent contentIntent = PendingIntent.getActivity(this, notificationId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		PendingIntent contentIntent = PendingIntent.getActivity(this, NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 		mBuilder.setContentIntent(contentIntent);
 
-		mNotificationManager.notify(notificationId, mBuilder.build());
+		mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
 	}
 
 	private Intent getLoginIntent() {
