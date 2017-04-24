@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -86,15 +87,23 @@ public class GcmIntentService extends IntentService {
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
 				.setSmallIcon(R.mipmap.ic_stat_icon_notif)
 				.setContentTitle(title)
-				.setStyle(new NotificationCompat.BigTextStyle().bigText(content))
+				.setStyle(new NotificationCompat.BigTextStyle()
+						.bigText(title)
+						.setBigContentTitle("@" + content)
+				)
 				.setContentText("@" + content)
 				.setTicker(title)
+				.setGroupSummary(true)
+				.setGroup("group1")
+				.setPriority(android.support.v7.app.NotificationCompat.PRIORITY_HIGH)
 				.setAutoCancel(true);
 
 		try {
-			Bitmap bmp = Picasso.with(getApplicationContext()).load(imageUrl).get();
-			mBuilder.setLargeIcon(bmp);
-		} catch (IOException e) {
+			if (!TextUtils.isEmpty(imageUrl)) {
+				Bitmap bmp = Picasso.with(getApplicationContext()).load(imageUrl).get();
+				mBuilder.setLargeIcon(bmp);
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
