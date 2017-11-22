@@ -16,7 +16,7 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.faghelg.model.Event;
 import no.mesan.faghelg.view.BaseFragment;
@@ -25,7 +25,7 @@ import no.mesan.faghelgapps.R;
 
 public class DailyProgramFragment extends BaseFragment implements EventAdapter.ItemClickListener {
 
-    @Bind(R.id.recyclerviewEvents)
+    @BindView(R.id.recyclerviewEvents)
     RecyclerView recyclerViewEvents;
 
     private List<Event> eventsForDay;

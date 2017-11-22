@@ -12,20 +12,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import no.mesan.faghelgapps.R;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MessageActivity extends AppCompatActivity {
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    @Bind(R.id.imageViewLogo)
+    @BindView(R.id.imageViewLogo)
     ImageView imageViewLogo;
 
-    @Bind(R.id.rootLayout)
+    @BindView(R.id.rootLayout)
     CoordinatorLayout rootLayout;
 
     @Override

@@ -51,7 +51,6 @@
         <activity
             android:name="no.mesan.faghelg.view.program.EventPagerActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Transparent" />
 
         <activity

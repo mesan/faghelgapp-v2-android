@@ -3,14 +3,13 @@ package no.mesan.faghelg.view.common;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import no.mesan.faghelgapps.R;
@@ -19,7 +18,7 @@ public class FullScreenImageActivity extends AppCompatActivity {
 
     public static final String PHOTO_URI = "photo_uri";
 
-    @Bind(R.id.imageViewImage)
+    @BindView(R.id.imageViewImage)
     ImageView imageView;
 
     @Override

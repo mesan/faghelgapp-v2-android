@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +11,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.faghelg.model.Event;
@@ -29,22 +26,22 @@ import no.mesan.faghelgapps.R;
 
 public class EventOverlayFragment extends BaseFragment {
 
-    @Bind(R.id.event_title)
+    @BindView(R.id.event_title)
     TextView txtTitle;
 
-    @Bind(R.id.event_timestamp)
+    @BindView(R.id.event_timestamp)
     TextView txtTimestamp;
 
-    @Bind(R.id.imgEvent)
+    @BindView(R.id.imgEvent)
     ImageView imgEvent;
 
-    @Bind(R.id.layoutSpeakers)
+    @BindView(R.id.layoutSpeakers)
     LinearLayout layoutSpeakers;
 
-    @Bind(R.id.txtDescription)
+    @BindView(R.id.txtDescription)
     TextView txtDescription;
 
-    @Bind(R.id.txtPosition)
+    @BindView(R.id.txtPosition)
     TextView txtPosition;
 
     private int eventDayPosition = 0;

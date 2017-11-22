@@ -15,7 +15,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.faghelg.injector.components.DaggerProgramFragmentComponent;
 import no.mesan.faghelg.model.DailyProgram;
@@ -32,10 +32,10 @@ public class ProgramFragment extends BaseFragment {
     @Inject
     ProgramService programService;
 
-    @Bind(R.id.pager)
+    @BindView(R.id.pager)
     ViewPager viewPager;
 
-    @Bind(R.id.slidingTabLayoutPrograms)
+    @BindView(R.id.slidingTabLayoutPrograms)
     SlidingTabLayout slidingTabLayout;
 
     private Program program;
@@ -65,7 +65,7 @@ public class ProgramFragment extends BaseFragment {
     }
 
     private void handleEventsError(Throwable throwable) {
-        ((MainActivity)getActivity()).showSnackbar(getString(R.string.error_program));
+        ((MainActivity) getActivity()).showSnackbar(getString(R.string.error_program));
     }
 
     @Override

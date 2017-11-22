@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/netcompanyblue"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_xxxl">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/padding_xxxl"
+        android:src="@drawable/ncheader" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/editTextPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/white"
+            android:hint="Fyll inn ditt telefonnummer..."
+            android:padding="@dimen/padding_m" />
+
+        <Button
+            android:id="@+id/buttonSendSmsCode"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginBottom="@dimen/padding_xl"
+            android:background="?selectableItemBackground"
+            android:padding="@dimen/padding_m"
+            android:text="Skaff SMS-kode"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/editTextSmsCode"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/white"
+            android:enabled="false"
+            android:hint="Tilsendt SMS-kode..."
+            android:padding="@dimen/padding_m" />
+
+        <Button
+            android:id="@+id/buttonLoginExcellence"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:background="?selectableItemBackground"
+            android:enabled="false"
+            android:padding="@dimen/padding_m"
+            android:text="Login of Excellence"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</RelativeLayout>

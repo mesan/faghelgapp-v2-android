@@ -13,6 +13,7 @@ import com.trello.rxlifecycle.FragmentEvent;
 import com.trello.rxlifecycle.components.support.RxFragment;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import no.mesan.faghelg.FaghelgApplication;
 import no.mesan.faghelgapps.R;
 import no.mesan.faghelg.injector.components.AppComponent;
@@ -20,6 +21,8 @@ import rx.Observable;
 import timber.log.Timber;
 
 public abstract class BaseFragment extends RxFragment {
+
+    private Unbinder unbinder;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,7 +35,7 @@ public abstract class BaseFragment extends RxFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getContentViewId(), container, false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
 
         return view;
     }
@@ -49,7 +52,7 @@ public abstract class BaseFragment extends RxFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 
     /***

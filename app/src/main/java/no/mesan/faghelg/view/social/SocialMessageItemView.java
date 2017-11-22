@@ -22,8 +22,8 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.squareup.picasso.Transformation;
 
-import butterknife.Bind;
 import butterknife.BindDimen;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import no.mesan.faghelg.model.Message;
 import no.mesan.faghelg.util.MessageTimestampFormatter;
@@ -31,16 +31,16 @@ import no.mesan.faghelgapps.R;
 
 public class SocialMessageItemView extends SocialItemAuthorInfoView {
 
-    @Bind(R.id.author_info)
+    @BindView(R.id.author_info)
     View viewAuthorInfo;
 
-    @Bind(R.id.message_text)
+    @BindView(R.id.message_text)
     TextView textViewMessageText;
 
-    @Bind(R.id.message_image)
+    @BindView(R.id.message_image)
     ImageView imageViewMessageImage;
 
-    @Bind(R.id.message_image_blurred)
+    @BindView(R.id.message_image_blurred)
     ImageView imageViewMessageImageBlurred;
 
 
@@ -99,7 +99,7 @@ public class SocialMessageItemView extends SocialItemAuthorInfoView {
         imageViewMessageImageBlurred.setVisibility(View.GONE);
         authorInfoParams =
                 (MarginLayoutParams) viewAuthorInfo.getLayoutParams();
-        authorInfoParams.topMargin = (int)getResources().getDimension(R.dimen.social_padding);
+        authorInfoParams.topMargin = (int) getResources().getDimension(R.dimen.social_padding);
 
         if (!TextUtils.isEmpty(message.getSender())) {
             textViewAuthorShortname.setText("@" + message.getSender());

@@ -8,17 +8,17 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import no.mesan.faghelgapps.R;
 
 public class SocialItemAuthorInfoView extends RelativeLayout {
-    @Bind(R.id.author_shortname)
+    @BindView(R.id.author_shortname)
     TextView textViewAuthorShortname;
 
-    @Bind(R.id.author_image)
+    @BindView(R.id.author_image)
     ImageView imageViewAuthor;
 
-    @Bind(R.id.message_timestamp)
+    @BindView(R.id.message_timestamp)
     TextView timestampView;
 
     public SocialItemAuthorInfoView(Context context) {

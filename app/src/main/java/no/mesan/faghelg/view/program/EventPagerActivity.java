@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import no.mesan.faghelg.model.Event;
 import no.mesan.faghelgapps.R;
@@ -16,7 +16,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class EventPagerActivity extends AppCompatActivity {
 
-    @Bind(R.id.eventsViewPager)
+    @BindView(R.id.eventsViewPager)
     ViewPager viewPager;
 
     private EventPagerAdapter pagerAdapter;
@@ -54,7 +54,7 @@ public class EventPagerActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        EventOverlayFragment currentFragment = (EventOverlayFragment)pagerAdapter.getCurrentFragment();
+        EventOverlayFragment currentFragment = (EventOverlayFragment) pagerAdapter.getCurrentFragment();
 
         currentFragment.onBackPressed();
     }

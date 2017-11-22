@@ -5,20 +5,20 @@ import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import no.mesan.faghelg.model.Event;
 import no.mesan.faghelgapps.R;
 
 public class EventItemView extends RelativeLayout {
 
-    @Bind(R.id.event_title)
+    @BindView(R.id.event_title)
     TextView txtTitle;
 
-    @Bind(R.id.event_timestamp)
+    @BindView(R.id.event_timestamp)
     TextView txtTimestamp;
 
-    @Bind(R.id.txtHosts)
+    @BindView(R.id.txtHosts)
     TextView txtHosts;
 
     public EventItemView(Context context) {

@@ -20,7 +20,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.faghelg.injector.components.DaggerSocialFragmentComponent;
 import no.mesan.faghelg.model.Message;
@@ -36,16 +36,16 @@ import static android.app.Activity.RESULT_OK;
 
 public class SocialFragment extends BaseFragment implements SocialAdapter.ImageListener {
 
-    @Bind(R.id.social_progress_bar)
+    @BindView(R.id.social_progress_bar)
     ProgressBar progressBarView;
 
-    @Bind(R.id.social_progress_bar_text)
+    @BindView(R.id.social_progress_bar_text)
     TextView progressBarTextView;
 
-    @Bind(R.id.recycler_view_social)
+    @BindView(R.id.recycler_view_social)
     RecyclerView recyclerViewSocial;
 
-    @Bind(R.id.swipeRefreshFeed)
+    @BindView(R.id.swipeRefreshFeed)
     SwipeRefreshLayout swipeRefreshLayout;
 
     @Inject
@@ -116,7 +116,7 @@ public class SocialFragment extends BaseFragment implements SocialAdapter.ImageL
         progressBarTextView.setVisibility(View.GONE);
         socialAdapter.setMessages(messages);
         swipeRefreshLayout.setRefreshing(false);
-        if(scrollToTopAfterGettingMessages) {
+        if (scrollToTopAfterGettingMessages) {
             recyclerViewSocial.scrollToPosition(0);
             scrollToTopAfterGettingMessages = false;
         }

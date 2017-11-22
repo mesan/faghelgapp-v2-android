@@ -14,7 +14,7 @@ import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.faghelg.model.Person;
 import no.mesan.faghelg.view.BaseFragment;
@@ -22,10 +22,10 @@ import no.mesan.faghelgapps.R;
 
 public class ProfileFragment extends BaseFragment {
 
-    @Bind(R.id.textViewProfileFullName)
+    @BindView(R.id.textViewProfileFullName)
     TextView textViewProfileFullName;
 
-    @Bind(R.id.imageViewPerson)
+    @BindView(R.id.imageViewPerson)
     ImageView imageViewPerson;
 
     private Person person;

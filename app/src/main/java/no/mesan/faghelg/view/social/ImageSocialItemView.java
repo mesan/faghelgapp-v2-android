@@ -20,8 +20,8 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.squareup.picasso.Transformation;
 
-import butterknife.Bind;
 import butterknife.BindDimen;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import no.mesan.faghelg.model.Message;
 import no.mesan.faghelg.util.MessageTimestampFormatter;
@@ -29,10 +29,11 @@ import no.mesan.faghelgapps.R;
 
 public class ImageSocialItemView extends SocialItemAuthorInfoView {
 
-    @Bind(R.id.message_image)
+
+    @BindView(R.id.message_image)
     ImageView imageViewMessageImage;
 
-    @Bind(R.id.message_image_blurred)
+    @BindView(R.id.message_image_blurred)
     ImageView imageViewMessageImageBlurred;
 
     @BindDimen(R.dimen.social_image_max_height)

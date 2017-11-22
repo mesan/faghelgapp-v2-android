@@ -7,10 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.transition.ChangeImageTransform;
-import android.transition.Fade;
-import android.transition.Slide;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,20 +15,20 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
-import no.mesan.faghelg.view.MainActivity;
-import no.mesan.faghelgapps.R;
+import butterknife.BindView;
 import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.faghelg.injector.components.DaggerPeopleFragmentComponent;
 import no.mesan.faghelg.injector.modules.PeopleModule;
 import no.mesan.faghelg.model.Person;
 import no.mesan.faghelg.service.PeopleService;
 import no.mesan.faghelg.view.BaseFragment;
+import no.mesan.faghelg.view.MainActivity;
 import no.mesan.faghelg.view.common.DividerItemDecoration;
+import no.mesan.faghelgapps.R;
 
 public class PeopleFragment extends BaseFragment implements PeopleAdapter.PersonClickListener {
 
-    @Bind(R.id.recyclerViewPeople)
+    @BindView(R.id.recyclerViewPeople)
     RecyclerView recyclerViewPeople;
 
     @Inject
@@ -85,7 +81,7 @@ public class PeopleFragment extends BaseFragment implements PeopleAdapter.Person
     }
 
     private void handleGetPeopleFailure(Throwable throwable) {
-        ((MainActivity)getActivity()).showSnackbar(getString(R.string.error_people));
+        ((MainActivity) getActivity()).showSnackbar(getString(R.string.error_people));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

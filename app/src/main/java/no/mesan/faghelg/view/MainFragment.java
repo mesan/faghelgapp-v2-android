@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import butterknife.Bind;
 import butterknife.BindColor;
+import butterknife.BindView;
 import butterknife.OnClick;
 import no.mesan.faghelg.injector.components.AppComponent;
 import no.mesan.faghelg.view.menu.MenuPagerAdapter;
@@ -18,16 +18,16 @@ import no.mesan.faghelgapps.R;
 
 public class MainFragment extends BaseFragment {
 
-    @Bind(R.id.viewPagerMenu)
+    @BindView(R.id.viewPagerMenu)
     ViewPager viewPagerMenu;
 
-    @Bind(R.id.imageViewTabProgram)
+    @BindView(R.id.imageViewTabProgram)
     ImageView imageViewTabProgram;
 
-    @Bind(R.id.imageViewTabSocial)
+    @BindView(R.id.imageViewTabSocial)
     ImageView imageViewTabSocial;
 
-    @Bind(R.id.imageViewTabPeople)
+    @BindView(R.id.imageViewTabPeople)
     ImageView imageViewTabPeople;
 
     @BindColor(R.color.colorPrimary)

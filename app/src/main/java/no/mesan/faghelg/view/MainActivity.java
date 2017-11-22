@@ -24,7 +24,7 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import no.mesan.faghelg.FaghelgApplication;
 import no.mesan.faghelg.injector.components.AppComponent;
@@ -36,10 +36,10 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    @Bind(R.id.rootLayout)
+    @BindView(R.id.rootLayout)
     CoordinatorLayout rootLayout;
 
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     @Inject
     protected PushService pushService;
 
-    @Bind(R.id.imageViewLogo)
+    @BindView(R.id.imageViewLogo)
     ImageView imageViewLogo;
 
     private GoogleCloudMessaging gcm;

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "98704726738",
+    "firebase_url": "https://faghelglogin.firebaseio.com",
+    "project_id": "faghelglogin",
+    "storage_bucket": "faghelglogin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98704726738:android:292d1f902d67dc4a",
+        "android_client_info": {
+          "package_name": "no.mesan.faghelgapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "98704726738-mtb1l6s1oqgv2mcndijmutfmbet2f1hs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSkjBatDTlYB_c9fX5EyOZ-Mx2p935tzM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

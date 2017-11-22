@@ -27,7 +27,7 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import no.mesan.faghelg.injector.components.AppComponent;
@@ -36,7 +36,6 @@ import no.mesan.faghelg.model.MessageOutput;
 import no.mesan.faghelg.service.ImageService;
 import no.mesan.faghelg.service.SocialService;
 import no.mesan.faghelg.view.BaseFragment;
-import no.mesan.faghelg.view.common.FullScreenImageActivity;
 import no.mesan.faghelgapps.R;
 
 import static android.app.Activity.RESULT_OK;
@@ -51,25 +50,25 @@ public class MessageFragment extends BaseFragment {
     @Inject
     SocialService socialService;
 
-    @Bind(R.id.editContent)
+    @BindView(R.id.editContent)
     EditText editContent;
 
-    @Bind(R.id.btnCamera)
+    @BindView(R.id.btnCamera)
     ImageButton btnCamera;
 
-    @Bind(R.id.cameraImage)
+    @BindView(R.id.cameraImage)
     ImageView imageView;
 
-    @Bind(R.id.discardCameraImage)
+    @BindView(R.id.discardCameraImage)
     ImageView discardCameraImageImgView;
 
-    @Bind(R.id.btnSend)
+    @BindView(R.id.btnSend)
     Button sendButton;
 
-    @Bind(R.id.textCharacterCount)
+    @BindView(R.id.textCharacterCount)
     TextView characterCountText;
 //
-//    @Bind(R.id.buttonReset)
+//    @BindView(R.id.buttonReset)
 //    ImageButton resetButton;
 
     @Nullable

@@ -15,20 +15,20 @@ import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import no.mesan.faghelgapps.R;
 import no.mesan.faghelg.model.Person;
+import no.mesan.faghelgapps.R;
 
 public class PeopleItemView extends LinearLayout {
 
-    @Bind(R.id.textViewPersonFullName)
+    @BindView(R.id.textViewPersonFullName)
     TextView textViewPersonFullName;
 
-    @Bind(R.id.textViewPersonShortName)
+    @BindView(R.id.textViewPersonShortName)
     TextView textViewPersonShortName;
 
-    @Bind(R.id.imageViewPerson)
+    @BindView(R.id.imageViewPerson)
     ImageView imageViewPerson;
 
     private int borderColor;
