@@ -22,6 +22,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.microsoft.aad.adal.AuthenticationCallback;
@@ -435,11 +436,14 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             // Signed in
 
-            String idToken = user.getIdToken(false).getResult().getToken();
+            user.getIdToken(false).addOnCompleteListener(task -> {
+                String idToken = task.getResult().getToken();
+                authService.suthenticate(idToken, user.getPhoneNumber()).subscribe(
+                        LoginActivity.this::handleAuthenticateSuccess,
+                        LoginActivity.this::handleAuthenticateError);
+            });
 
-            authService.suthenticate(idToken, user.getPhoneNumber()).subscribe(
-                    this::handleAuthenticateSuccess,
-                    this::handleAuthenticateError);
+
         }
     }
 
